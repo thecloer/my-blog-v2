@@ -1,12 +1,16 @@
 import type { AppProps } from 'next/app';
 import '$/globals.css';
+import { ThemeProvider } from 'next-themes';
 import AppLayout from '@/layouts/AppLayout';
+import siteMetadata from '@/config/siteMetadata';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AppLayout>
-      <Component {...pageProps} />
-    </AppLayout>
+    <ThemeProvider attribute='class' defaultTheme={siteMetadata.theme}>
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </ThemeProvider>
   );
 }
 
