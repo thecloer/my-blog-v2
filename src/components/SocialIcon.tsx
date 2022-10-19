@@ -1,30 +1,18 @@
 import type { FC } from 'react';
-import Mail from './mail.svg';
-import Github from './github.svg';
-import Linkedin from './linkedin.svg';
-import Twitter from './twitter.svg';
-import Instagram from './instagram.svg';
+import { Github, Instagram, Linkedin, Mail, Twitter } from '@/lib/svgs';
 
-// Icons taken from: https://simpleicons.org/
-
-const ICONS_COMPONENTS = {
-  mail: Mail,
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  instagram: Instagram,
-};
+const ICONS = { Github, Instagram, Linkedin, Mail, Twitter };
 
 type Props = {
-  kind: keyof typeof ICONS_COMPONENTS;
+  kind: keyof typeof ICONS;
   href: string;
   size?: number;
 };
 
 const SocialIcon: FC<Props> = ({ kind, href, size = 6 }) => {
-  const SocialSvg = ICONS_COMPONENTS[kind];
+  const SocialSvg = ICONS[kind];
 
-  const specificClassName = kind === 'mail' ? '[&>*]:scale-y-110 [&>*]:scale-x-110' : '';
+  const specificClassName = kind === 'Mail' ? '[&>*]:scale-y-110 [&>*]:scale-x-110' : '';
 
   return (
     <a

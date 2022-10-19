@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  webpack(config) {
+  webpack(config, { defaultLoaders }) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
+      use: [defaultLoaders.babel, { loader: '@svgr/webpack' }],
     });
     return config;
   },
