@@ -16,7 +16,7 @@ const Footer = () => {
 
         <div className='flex flex-wrap justify-center gap-x-3 text-sm text-slate-500'>
           <Link href='/' passHref>
-            <a className='transition-colors hover:text-slate-900'>{siteMetadata.title}</a>
+            <a className='transition-colors hover:text-slate-900 dark:hover:text-slate-300'>{siteMetadata.title}</a>
           </Link>
           <span>{`©${new Date().getFullYear()} ${siteMetadata.author}`}</span>
         </div>

@@ -27,7 +27,12 @@ const SocialIcon: FC<Props> = ({ kind, href, size = 6 }) => {
   const specificClassName = kind === 'mail' ? '[&>*]:scale-y-110 [&>*]:scale-x-110' : '';
 
   return (
-    <a className='text-sm text-slate-600 transition-colors hover:text-slate-900' target='_blank' rel='noopener noreferrer' href={href}>
+    <a
+      className='dark:hover:text-primary-dark-400; text-sm text-slate-600 transition-colors hover:text-primary-light-600 dark:text-slate-200'
+      target='_blank'
+      rel='noopener noreferrer'
+      href={href}
+    >
       <span className='sr-only'>{kind}</span>
       <SocialSvg width={size * 4} height={size * 4} className={`fill-current ${specificClassName}`} />
     </a>
