@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import siteMetadata from '@/config/siteMetadata';
 import HeaderNav from './HeaderNav';
-import ThemeSwitch from './ThemeSwich';
+import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
   return (
