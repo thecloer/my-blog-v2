@@ -9,6 +9,6 @@ const siteMetadata = {
   linkedin: 'https://www.linkedin.com/in/thecloer',
 
   theme: 'system', // system, dark or light
-};
+} as const;
 
 export default siteMetadata;
