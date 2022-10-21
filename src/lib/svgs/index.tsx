@@ -1,9 +1,11 @@
 // Icons taken from: https://simpleicons.org/
 
-import Mail from './mail.svg';
-import Github from './github.svg';
-import Linkedin from './linkedin.svg';
-import Twitter from './twitter.svg';
-import Instagram from './instagram.svg';
+import MailIcon from './mail.svg';
+import GithubIcon from './github.svg';
+import LinkedinIcon from './linkedin.svg';
+import TwitterIcon from './twitter.svg';
+import InstagramIcon from './instagram.svg';
+import HamburgerIcon from './hamburger-menu.svg';
+import xIcon from './x.svg';
 
-export { Mail, Github, Linkedin, Twitter, Instagram };
+export { MailIcon, GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon, HamburgerIcon, xIcon };
