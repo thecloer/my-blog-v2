@@ -13,8 +13,8 @@ module.exports = {
       },
       colors: {
         primary: {
-          dark: colors.indigo,
-          light: colors.orange,
+          100: '#20C997',
+          200: '#12B886',
         },
       },
     },
