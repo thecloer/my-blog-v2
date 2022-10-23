@@ -3,6 +3,7 @@ import Image from 'next/image';
 import siteMetadata from '@/config/siteMetadata';
 import HeaderNav from './HeaderNav';
 import ThemeSwitch from './ThemeSwitch';
+import MobileNav from './MobileNav';
 
 const Header = () => {
   return (
@@ -17,6 +18,7 @@ const Header = () => {
       <div className='flex items-center'>
         <HeaderNav />
         <ThemeSwitch />
+        <MobileNav />
       </div>
     </header>
   );
