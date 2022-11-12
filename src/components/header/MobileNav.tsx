@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
+import { switchBodyOverflow } from '@/lib/dom';
 import { HamburgerIcon, XIcon } from '@/lib/svgs';
-import { switchBodyScroll } from '@/lib/utils/dom';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import headerNavLinks from '@/config/headerNavLinks';
 import siteMetadata from '@/config/siteMetadata';
-import SocialIcon from '../SocialIcon';
+import SocialIcon from '@/components/SocialIcon';
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
@@ -13,14 +13,9 @@ const MobileNav = () => {
 
   const onToggleNav = () => setNavShow((currentNavShow) => !currentNavShow);
 
-  useIntersectionObserver(mobileNavBoardRef, (entries) => {
-    const [mobileNavBoardEntry] = entries;
-    if (mobileNavBoardEntry.isIntersecting && navShow) switchBodyScroll(false);
-    else {
-      switchBodyScroll(true);
-      if (navShow) setNavShow(false);
-    }
-  });
+  useIntersectionObserver(mobileNavBoardRef, ([mobileNavBoardEntry]) =>
+    navShow ? (mobileNavBoardEntry.isIntersecting ? switchBodyOverflow('hidden') : setNavShow(false)) : switchBodyOverflow('auto')
+  );
 
   return (
     <div className='sm:hidden'>
@@ -35,10 +30,10 @@ const MobileNav = () => {
 
       <div
         ref={mobileNavBoardRef}
-        className={`fixed top-0 left-0 z-10 flex h-screen w-screen transform flex-col bg-slate-50 px-4 duration-300 ease-in-out dark:bg-slate-800
+        className={`fixed top-0 -left-4 z-50 flex h-screen w-screen transform flex-col bg-slate-50 px-4 duration-300 ease-in-out dark:bg-slate-800
         ${navShow ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <div className='flex justify-end py-10'>
+        <div className='flex justify-end py-6'>
           <button type='button' onClick={onToggleNav} className='-mr-3 py-3 px-3 hover:text-primary-100 hover:dark:text-primary-200'>
             <XIcon className='h-8 w-8' />
           </button>

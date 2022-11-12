@@ -2,9 +2,9 @@ import { type RefObject, useEffect } from 'react';
 
 export const useIntersectionObserver = <T extends HTMLElement>(ref: RefObject<T>, callback: IntersectionObserverCallback, options?: IntersectionObserverInit | undefined) => {
   useEffect(() => {
-    const mobileNavBoardObserver = new IntersectionObserver(callback, options);
-    if (ref.current !== null) mobileNavBoardObserver.observe(ref.current);
+    const intersectionObserver = new IntersectionObserver(callback, options);
+    if (ref.current !== null) intersectionObserver.observe(ref.current);
 
-    return () => mobileNavBoardObserver.disconnect();
+    return () => intersectionObserver.disconnect();
   }, [ref, callback, options]);
 };
