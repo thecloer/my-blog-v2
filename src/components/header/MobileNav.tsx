@@ -1,21 +1,28 @@
-import { useRef, useState } from 'react';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { switchBodyOverflow } from '@/lib/dom';
 import { HamburgerIcon, XIcon } from '@/lib/svgs';
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import headerNavLinks from '@/config/headerNavLinks';
-import siteMetadata from '@/config/siteMetadata';
-import SocialIcon from '@/components/SocialIcon';
+import Footer from '@/components/Footer';
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
-  const mobileNavBoardRef = useRef<HTMLDivElement>(null);
 
-  const onToggleNav = () => setNavShow((currentNavShow) => !currentNavShow);
+  useEffect(() => {
+    const handler = () => {
+      if (!(navShow && window.innerWidth > 640)) return;
+      switchBodyOverflow('auto');
+      setNavShow(false);
+    };
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, [navShow]);
 
-  useIntersectionObserver(mobileNavBoardRef, ([mobileNavBoardEntry]) =>
-    navShow ? (mobileNavBoardEntry.isIntersecting ? switchBodyOverflow('hidden') : setNavShow(false)) : switchBodyOverflow('auto')
-  );
+  const onToggleNav = () =>
+    setNavShow((currentNavShow) => {
+      switchBodyOverflow(currentNavShow ? 'auto' : 'hidden');
+      return !currentNavShow;
+    });
 
   return (
     <div className='sm:hidden'>
@@ -29,9 +36,8 @@ const MobileNav = () => {
       </button>
 
       <div
-        ref={mobileNavBoardRef}
-        className={`fixed top-0 -left-4 z-50 flex h-screen w-screen transform flex-col bg-slate-50 px-4 duration-300 ease-in-out dark:bg-slate-800
-        ${navShow ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed top-0 left-0 flex h-screen w-screen flex-col bg-slate-50 px-4 duration-300 ease-in-out dark:bg-slate-800
+        ${navShow ? 'translate-x-[0.3px]' : '-translate-x-full'}`}
       >
         <div className='flex justify-end py-6'>
           <button type='button' onClick={onToggleNav} className='-mr-3 py-3 px-3 hover:text-primary-100 hover:dark:text-primary-200'>
@@ -52,24 +58,7 @@ const MobileNav = () => {
           ))}
         </nav>
 
-        <div className='mt-8 mb-10 flex flex-col items-center gap-y-2'>
-          <div className='flex gap-x-4'>
-            <SocialIcon kind='mail' href={`mailto:${siteMetadata.email}`} onClick={onToggleNav} />
-            <SocialIcon kind='github' href={siteMetadata.github} onClick={onToggleNav} />
-            <SocialIcon kind='instagram' href={siteMetadata.instagram} onClick={onToggleNav} />
-            <SocialIcon kind='linkedin' href={siteMetadata.linkedin} onClick={onToggleNav} />
-            <SocialIcon kind='twitter' href={siteMetadata.twitter} onClick={onToggleNav} />
-          </div>
-
-          <div className='flex flex-wrap justify-center gap-x-3 text-sm text-slate-500'>
-            <Link href='/' passHref>
-              <a className='transition-colors hover:text-slate-900 dark:hover:text-slate-300' onClick={onToggleNav}>
-                {siteMetadata.title}
-              </a>
-            </Link>
-            <span>{`©${new Date().getFullYear()} ${siteMetadata.author}`}</span>
-          </div>
-        </div>
+        <Footer />
       </div>
     </div>
   );
