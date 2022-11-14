@@ -5,7 +5,7 @@ import { POSTS_PER_PAGE } from '@/config/layoutConfig';
 import { Blog } from '@/repositories/blog';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import PostList from '@/components/PostList';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/pagination/Pagination';
 import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
 
 interface Props {
@@ -19,17 +19,16 @@ interface Params extends ParsedUrlQuery {
 }
 
 const BlogPage: NextPage<Props> = ({ displayPosts, currentPage, lastPage }) => {
-  const paginationAction = (index: number) => {};
   return (
     <div className='flex grow'>
       <BlogSidebar />
-      <main className='grow'>
+      <main className='mt-6 mb-8 grow'>
         <div className=''>
-          <h1 className='text-5xl font-extrabold'>All Posts: {displayPosts.length}</h1>
+          <h1 className='mb-10 text-5xl font-extrabold'>All Posts: {displayPosts.length}</h1>
         </div>
         <BlogInlineSidebar />
         <PostList posts={displayPosts} />
-        <Pagination currentPageIndex={currentPage - 1} lastPageIndex={lastPage - 1} action={paginationAction} />
+        <Pagination currentPage={currentPage} lastPage={lastPage} />
       </main>
     </div>
   );
