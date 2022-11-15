@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import siteMetadata from '@/config/siteMetadata';
+import AppWidthContainer from '@/containers/AppWidthContainer';
 import HeaderNav from './HeaderNav';
 import ThemeSwitch from './ThemeSwitch';
 import MobileNav from './MobileNav';
-import AppWidthContainer from '@/containers/AppWidthContainer';
 
 const Header = () => {
   return (

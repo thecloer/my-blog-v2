@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import type { FC } from 'react';
 import { getPaginationNumbers } from '@/lib/utils/helper';
 import PaginationButton from './PaginationButton';
 

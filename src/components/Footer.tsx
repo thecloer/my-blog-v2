@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import siteMetadata from '@/config/siteMetadata';
 import AppWidthContainer from '@/containers/AppWidthContainer';
-import Link from 'next/link';
 import SocialIcon from './SocialIcon';
 
 const Footer = () => {

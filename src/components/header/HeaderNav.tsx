@@ -1,5 +1,5 @@
-import headerNavLinks from '@/config/headerNavLinks';
 import Link from 'next/link';
+import headerNavLinks from '@/config/headerNavLinks';
 
 const HeaderNav = () => {
   return (
