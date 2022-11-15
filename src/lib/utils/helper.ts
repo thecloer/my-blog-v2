@@ -1,4 +1,5 @@
 import { PAGINATION_LENGTH } from '@/config/layoutConfig';
+import { BlogFrontMatterWithSlug } from '@/types/types';
 
 interface RangeFunction {
   (start: number, end: number): number[];
@@ -43,4 +44,11 @@ export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
     hasPriviousButton: start > 1,
     hasNextButton: end < lastPage,
   };
+};
+
+export const blogSearchFilter = (searchTerm: string) => (frontMatter: BlogFrontMatterWithSlug) => {
+  const targetKeys: Extract<keyof BlogFrontMatterWithSlug, 'title' | 'description' | 'tags' | 'series'>[] = ['description', 'title', 'series', 'tags'];
+  return targetKeys.some((key) =>
+    key === 'tags' ? frontMatter.tags?.some((tag) => tag.toLowerCase().includes(searchTerm)) : frontMatter[key]?.toLowerCase().includes(searchTerm)
+  );
 };

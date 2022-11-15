@@ -1,9 +1,10 @@
 import SidebarContainer from '@/containers/SidebarContainer';
+import SearchBar from '@/components/SearchBar';
 
 const BlogSidebar = () => {
   return (
     <SidebarContainer>
-      <div>search bar</div>
+      <SearchBar />
       <nav>navigation</nav>
     </SidebarContainer>
   );
