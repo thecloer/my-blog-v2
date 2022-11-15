@@ -1,7 +1,8 @@
-import { type FC } from 'react';
+import type { FC } from 'react';
 import type { BlogFrontMatterWithSlug } from '@/types/types';
 import Link from 'next/link';
 import Image from 'next/image';
+import urlPath from '@/config/urlPath';
 import { generateSlug } from '@/lib/utils/formater';
 
 type Props = {
@@ -16,7 +17,7 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, th
     <li>
       <article className='flex flex-col py-8 md:flex-row'>
         <div className='flex justify-center'>
-          <Link href={`/blog/${slug}`} passHref>
+          <Link href={urlPath.blogPost(slug)} passHref>
             <div
               className='relative mb-4 h-36 w-36 shrink-0
                     cursor-pointer overflow-hidden rounded-xl
@@ -35,14 +36,14 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, th
 
         <div className='flex grow flex-col'>
           {series && (
-            <Link href={`/blog/search/series/${generateSlug(series)}`} passHref>
+            <Link href={urlPath.blogSeries(generateSlug(series))} passHref>
               <div>
                 <a className='cursor-pointer text-sm font-medium text-slate-600'>{series}</a>
               </div>
             </Link>
           )}
 
-          <Link href={`/blog/${slug}`} passHref>
+          <Link href={urlPath.blogPost(slug)} passHref>
             <a className='flex'>
               <h2 className='mb-2 max-h-14 cursor-pointer overflow-hidden text-xl font-medium md:max-h-16 md:text-2xl '>{title}</h2>
             </a>
