@@ -1,20 +1,16 @@
+import type { BlogFrontMatterWithSlug, RangeFunction } from '@/types/types';
 import { PAGINATION_LENGTH } from '@/config/layoutConfig';
-import { BlogFrontMatterWithSlug } from '@/types/types';
 
-interface RangeFunction {
-  (start: number, end: number): number[];
-  (start: number, end: number, length: number): number[];
-}
 /**
  * Create an array of numbers includes `start` and `end`.
  * If a sequence from `start` to `end` is longer than `length`, it would be limited by `length`.
  * If a sequence from `start` to `end` is shorter than `length`, it would be limited by `end`.
- * @param start - The start number of the sequence
- * @param end - The end number of the sequence
- * @param length - Limit length of the sequence
- * @returns A sequence of numbers from start to end
+ * @param {number} start - The start number of the sequence
+ * @param {number} end - The end number of the sequence
+ * @param {number} length - Limit length of the sequence
+ * @returns  A sequence of numbers from start to end
  */
-export const range: RangeFunction = (start: number, end: number, length?: number) =>
+const range: RangeFunction = (start: number, end: number, length?: number) =>
   end > start && (length === undefined || length > 0)
     ? Array.from({ length: length === undefined ? end - start + 1 : Math.min(length, end - start + 1) }, (_, i) => start + i)
     : [];
@@ -24,7 +20,7 @@ export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
     return {
       paginationNumbers: range(1, lastPage),
       hasPriviousButton: false,
-      isNextButton: false,
+      hasNextButton: false,
     };
 
   const gap = Math.floor(PAGINATION_LENGTH / 2);
