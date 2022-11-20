@@ -1,12 +1,6 @@
-// import { GlobalProvider, useGlobalContext } from '@/contexts/globalContext';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
-  // const { globalState } = useGlobalContext();
-  // <GlobalProvider>
-  //   `${globalState.bodyScroll ? 'overflow-auto' : 'overflow-hidden'}`
-  // </GlobalProvider>
-
   return (
     <Html lang='en' className='scroll-smooth'>
       <Head>
