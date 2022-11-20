@@ -12,6 +12,11 @@ export type CommonFrontMatter = {
 };
 
 export type BlogFrontMatter = CommonFrontMatter & { series: string | null };
+
+/**
+ * @property `slug` - file name in `data/blog/` without extention include nested paths.
+ * full path = `${process.cwd()}/data/blog/${slug}.${extention}`
+ */
 export type BlogFrontMatterWithSlug = BlogFrontMatter & { slug: string };
 
 // common
