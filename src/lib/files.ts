@@ -3,7 +3,7 @@ import { type PathLike, readdirSync, statSync, readFileSync } from 'fs';
 import { extname, join } from 'path';
 import matter from 'gray-matter';
 import { flattenArray, map, pipe } from './utils/currying';
-import dataPath from '@/config/dataPath';
+import DATA_PATH from '@/config/dataPath';
 
 const readdirSyncUtf8 = (path: PathLike) => readdirSync(path, 'utf-8');
 const pathJoinPrefix = (prefix: string) => (path: string) => join(prefix, path);
@@ -14,6 +14,6 @@ export const getAllFilePathsRecursively = (folderPath: string) => pipe(readdirSy
 export const getBlogFrontMatterFromPath = (filePath: string): BlogFrontMatterWithSlug => {
   const { data } = matter(readFileSync(filePath, 'utf-8'));
   const frontMatter = data as BlogFrontMatter;
-  const slug = filePath.slice(dataPath.blog.length + 1).replace(extname(filePath), '');
+  const slug = filePath.slice(DATA_PATH.BLOG.length + 1).replace(extname(filePath), '');
   return { ...frontMatter, slug };
 };

@@ -2,8 +2,10 @@ import { join } from 'path';
 
 const getDataPath = (folder: string) => join(process.cwd(), 'data', folder);
 
-const dataPath = {
-  blog: getDataPath('blog'),
+const DATA_PATH = {
+  ROOT: join(process.cwd(), 'data'),
+  BLOG: getDataPath('blog'),
+  COMPONENTS: getDataPath('components'),
 } as const;
 
-export default dataPath;
+export default DATA_PATH;
