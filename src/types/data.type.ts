@@ -1,3 +1,5 @@
+import type { Node } from 'unist';
+import type { BlockContent } from 'mdast';
 import dataPath from '@/config/dataPath';
 
 export type DataPath = keyof typeof dataPath;
@@ -19,11 +21,9 @@ export type BlogFrontMatter = CommonFrontMatter & { series: string | null };
  */
 export type BlogFrontMatterWithSlug = BlogFrontMatter & { slug: string };
 
-// common
-export type SortFunc<T> = (a: T, b: T) => number;
-
 //
-export interface RangeFunction {
-  (start: number, end: number): number[];
-  (start: number, end: number, length: number): number[];
-}
+export type Toc = {
+  value: string;
+  url: string;
+  depth: number;
+}[];

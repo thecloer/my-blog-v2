@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
-import type { BlogFrontMatterWithSlug } from '@/types/types';
+import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import { POSTS_PER_PAGE } from '@/config/layoutConfig';
 import { Blog } from '@/repositories/blog';
 import BlogPostListLayout from '@/layouts/BlogPostListLayout';

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { BlogFrontMatterWithSlug } from '@/types/types';
+import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import PostItem from './PostItem';
 
 // TODO: <No Posts>

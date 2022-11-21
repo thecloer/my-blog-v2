@@ -1,4 +1,5 @@
-import type { BlogFrontMatter, BlogFrontMatterWithSlug, SortFunc } from '@/types/types';
+import type { BlogFrontMatter, BlogFrontMatterWithSlug, Toc } from '@/types/data.type';
+import type { SortFunc } from '@/types/utils.type';
 import path from 'path';
 import DATA_PATH from '@/config/dataPath';
 import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/files';
@@ -44,7 +45,7 @@ export class Blog {
 
     const { code: mdxSource, frontmatter } = await bundleMDX<BlogFrontMatter>({
       source,
-      // mdx imports can be automatically source from the components directory
+      // mdx imports can be automatically source from the components cwd directory.
       cwd: DATA_PATH.COMPONENTS,
       mdxOptions(options, frontmatter) {
         options.remarkPlugins = [...(options.remarkPlugins ?? [])];

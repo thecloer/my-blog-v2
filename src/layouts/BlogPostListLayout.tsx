@@ -1,4 +1,4 @@
-import type { BlogFrontMatterWithSlug } from '@/types/types';
+import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import { type FC, useEffect, useState } from 'react';
 import { useSearchContext } from '@/contexts/searchContext';
 import useDebounce from '@/hooks/useDebounce';

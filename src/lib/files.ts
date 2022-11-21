@@ -1,4 +1,4 @@
-import type { BlogFrontMatter, BlogFrontMatterWithSlug } from '@/types/types';
+import type { BlogFrontMatter, BlogFrontMatterWithSlug } from '@/types/data.type';
 import { type PathLike, readdirSync, statSync, readFileSync } from 'fs';
 import { extname, join } from 'path';
 import matter from 'gray-matter';

@@ -1,4 +1,5 @@
-import type { BlogFrontMatterWithSlug, RangeFunction } from '@/types/types';
+import type { BlogFrontMatterWithSlug } from '@/types/data.type';
+import type { RangeFunction } from '@/types/utils.type';
 import { PAGINATION_LENGTH } from '@/config/layoutConfig';
 
 /**
