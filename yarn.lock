@@ -2549,6 +2549,11 @@
     "call-bind" "^1.0.2"
     "get-intrinsic" "^1.1.1"
 
+"github-slugger@^2.0.0":
+  "integrity" "sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw=="
+  "resolved" "https://registry.npmjs.org/github-slugger/-/github-slugger-2.0.0.tgz"
+  "version" "2.0.0"
+
 "glob-parent@^5.1.2":
   "integrity" "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="
   "resolved" "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz"
@@ -4498,7 +4503,7 @@
     "@types/unist" "^2.0.0"
     "unist-util-is" "^5.0.0"
 
-"unist-util-visit@^4.0.0":
+"unist-util-visit@^4.0.0", "unist-util-visit@^4.1.1":
   "integrity" "sha512-n9KN3WV9k4h1DxYR1LoajgN93wpEi/7ZplVe02IoB4gH5ctI1AaF2670BLHQYbwj+pY83gFtyeySFiyMHJklrg=="
   "resolved" "https://registry.npmjs.org/unist-util-visit/-/unist-util-visit-4.1.1.tgz"
   "version" "4.1.1"

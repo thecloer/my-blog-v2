@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "esbuild": "^0.14.54",
+    "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
+    "mdast-util-to-string": "^3.1.0",
     "mdx-bundler": "^9.0.1",
     "next": "12.3.1",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "reading-time": "^1.5.0"
+    "reading-time": "^1.5.0",
+    "unist-util-visit": "^4.1.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.4.0",

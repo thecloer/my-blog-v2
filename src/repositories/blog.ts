@@ -1,13 +1,14 @@
 import type { BlogFrontMatter, BlogFrontMatterWithSlug, Toc } from '@/types/data.type';
 import type { SortFunc } from '@/types/utils.type';
+import { readFileSync } from 'fs';
 import path from 'path';
+import { bundleMDX } from 'mdx-bundler';
+import readingTime from 'reading-time';
 import DATA_PATH from '@/config/dataPath';
 import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/files';
 import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter } from '@/lib/utils/helper';
-import { readFileSync } from 'fs';
-import { bundleMDX } from 'mdx-bundler';
-import readingTime from 'reading-time';
+import remarkTocExtractor from '@/lib/remark-plugins/remark-extract-toc';
 
 export class Blog {
   private static _instance: Blog;
@@ -43,12 +44,17 @@ export class Blog {
     process.env.ESBUILD_BINARY_PATH =
       process.platform === 'win32' ? path.join(process.cwd(), 'node_modules', 'esbuild', 'esbuild.exe') : path.join(process.cwd(), 'node_modules', 'esbuild', 'bin', 'esbuild');
 
+    const toc: Toc = [];
     const { code: mdxSource, frontmatter } = await bundleMDX<BlogFrontMatter>({
       source,
       // mdx imports can be automatically source from the components cwd directory.
       cwd: DATA_PATH.COMPONENTS,
       mdxOptions(options, frontmatter) {
-        options.remarkPlugins = [...(options.remarkPlugins ?? [])];
+        options.remarkPlugins = [
+          ...(options.remarkPlugins ?? []), //
+          // TODO: Plugin types 'unified'.Plugin vs 'unist-util-visit/complex-types.d.ts'.Visitor
+          [remarkTocExtractor, { toc }],
+        ];
         options.rehypePlugins = [...(options.rehypePlugins ?? [])];
         return options;
       },
@@ -58,6 +64,7 @@ export class Blog {
       mdxSource,
       mdxMeta: {
         ...frontmatter,
+        toc,
         readingTime: readingTime(mdxSource),
       },
     };
