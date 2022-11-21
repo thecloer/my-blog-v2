@@ -8,7 +8,9 @@ import DATA_PATH from '@/config/dataPath';
 import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/files';
 import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter } from '@/lib/utils/helper';
+// remark plugins
 import remarkTocExtractor from '@/lib/remark-plugins/remark-extract-toc';
+import remarkGfm from 'remark-gfm';
 
 export class Blog {
   private static _instance: Blog;
@@ -54,6 +56,7 @@ export class Blog {
           ...(options.remarkPlugins ?? []), //
           // TODO: Plugin types 'unified'.Plugin vs 'unist-util-visit/complex-types.d.ts'.Visitor
           [remarkTocExtractor, { toc }],
+          remarkGfm,
         ];
         options.rehypePlugins = [...(options.rehypePlugins ?? [])];
         return options;
