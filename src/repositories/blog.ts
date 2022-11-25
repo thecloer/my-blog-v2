@@ -9,7 +9,7 @@ import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/fi
 import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter } from '@/lib/utils/helper';
 // remark plugins
-import remarkTocExtractor from '@/lib/remark-plugins/remark-extract-toc';
+import remarkExtractToc from '@/lib/remark-plugins/remark-extract-toc';
 import remarkGfm from 'remark-gfm';
 
 export class Blog {
@@ -55,10 +55,12 @@ export class Blog {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []), //
           // TODO: Plugin types 'unified'.Plugin vs 'unist-util-visit/complex-types.d.ts'.Visitor
-          [remarkTocExtractor, { toc }],
+          [remarkExtractToc, { toc }],
           remarkGfm,
         ];
-        options.rehypePlugins = [...(options.rehypePlugins ?? [])];
+        options.rehypePlugins = [
+          ...(options.rehypePlugins ?? []), //
+        ];
         return options;
       },
     });

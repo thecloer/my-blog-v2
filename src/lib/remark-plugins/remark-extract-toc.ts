@@ -4,7 +4,7 @@ import { visit } from 'unist-util-visit';
 import { slug } from 'github-slugger';
 import { toString } from 'mdast-util-to-string';
 
-const remarkTocExtractor =
+const remarkExtractToc =
   ({ toc }: { toc: Toc }) =>
   (tree: Content) =>
     visit(tree, 'heading', (node, index, parent) => {
@@ -16,4 +16,4 @@ const remarkTocExtractor =
       });
     });
 
-export default remarkTocExtractor;
+export default remarkExtractToc;
