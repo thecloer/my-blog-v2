@@ -10,7 +10,7 @@ type Props = {
 };
 
 // dummy button
-const BlogTagButton = ({ tag }: { tag: string }) => <button className='mr-1 rounded bg-primary-100 px-1 dark:bg-primary-200'>{tag}</button>;
+const BlogTagButton = ({ tag }: { tag: string }) => <button className='mr-1 rounded bg-primary-500 px-1 dark:bg-primary-500'>{tag}</button>;
 
 const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, thumbnail, title } }) => {
   return (

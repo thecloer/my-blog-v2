@@ -28,7 +28,7 @@ const MobileNav = () => {
     <div className='sm:hidden'>
       <button
         type='button'
-        className='-mr-4 flex items-center py-3 pl-2 pr-4 text-slate-600 transition-colors hover:text-primary-100 dark:text-slate-200 hover:dark:text-primary-200'
+        className='-mr-4 flex items-center py-3 pl-2 pr-4 text-slate-600 transition-colors hover:text-primary-500 dark:text-slate-200 hover:dark:text-primary-400'
         aria-label='Toggle Menu'
         onClick={onToggleNav}
       >
@@ -40,7 +40,7 @@ const MobileNav = () => {
         ${navShow ? 'translate-x-[0.3px]' : '-translate-x-full'}`}
       >
         <div className='flex justify-end py-6'>
-          <button type='button' onClick={onToggleNav} className='-mr-3 py-3 px-3 hover:text-primary-100 hover:dark:text-primary-200'>
+          <button type='button' onClick={onToggleNav} className='-mr-3 py-3 px-3 hover:text-primary-500 hover:dark:text-primary-400'>
             <XIcon className='h-8 w-8' />
           </button>
         </div>
@@ -49,7 +49,7 @@ const MobileNav = () => {
           {headerNavLinks.map((link) => (
             <Link key={link.title} href={link.href} passHref>
               <a
-                className='p-4 text-2xl font-bold capitalize text-slate-600 transition-colors hover:text-primary-100 dark:text-slate-200 hover:dark:text-primary-200'
+                className='p-4 text-2xl font-bold capitalize text-slate-600 transition-colors hover:text-primary-500 dark:text-slate-200 hover:dark:text-primary-400'
                 onClick={onToggleNav}
               >
                 {link.title}

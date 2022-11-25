@@ -23,7 +23,7 @@ const SocialIcon: FC<Props> = ({ kind, href, size = 6, onClick }) => {
 
   return (
     <a
-      className='text-sm text-slate-600 transition-colors hover:text-primary-100 dark:text-slate-200 dark:hover:text-primary-200'
+      className='text-sm text-slate-600 transition-colors hover:text-primary-500 dark:text-slate-200 dark:hover:text-primary-400'
       target='_blank'
       rel='noopener noreferrer'
       href={href}
