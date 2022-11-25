@@ -12,7 +12,11 @@ type Props = {
 const MdxComponent: FC<Props> = ({ mdxSource }) => {
   const Component = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
 
-  return <Component />;
+  return (
+    <div className='prose mx-auto dark:prose-dark'>
+      <Component />
+    </div>
+  );
 };
 
 export default MdxComponent;
