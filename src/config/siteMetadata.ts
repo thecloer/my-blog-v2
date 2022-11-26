@@ -1,5 +1,5 @@
 const siteMetadata = {
-  author: 'Seokgyu Choi',
+  author: 'thecloer',
   title: "Thecloer's blog",
 
   email: 'chltjrrb97@gmail.com',

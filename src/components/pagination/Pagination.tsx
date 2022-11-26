@@ -8,13 +8,13 @@ type Props = {
 };
 
 const Pagination: FC<Props> = ({ currentPage, lastPage }) => {
-  const { paginationNumbers, hasNextButton, hasPriviousButton } = getPaginationNumbers(currentPage, lastPage);
+  const { paginationNumbers, hasNextButton, hasPreviousButton } = getPaginationNumbers(currentPage, lastPage);
 
   return (
     <nav aria-label='Page navigation' className='mt-12 flex w-full cursor-pointer justify-center'>
       <ul
         className={`flex items-center divide-x-[1px] border dark:divide-slate-800 dark:border-slate-800
-        ${hasPriviousButton ? 'rounded-l-lg' : ''}
+        ${hasPreviousButton ? 'rounded-l-lg' : ''}
         ${hasNextButton ? 'rounded-r-lg' : ''}
         `}
       >
@@ -22,7 +22,7 @@ const Pagination: FC<Props> = ({ currentPage, lastPage }) => {
           <PaginationButton
             key={i}
             pageNum={pageNum}
-            type={i === 0 && hasPriviousButton ? 'Previous' : i === paginationNumbers.length - 1 && hasNextButton ? 'Next' : pageNum === currentPage ? 'current' : 'nomal'}
+            type={i === 0 && hasPreviousButton ? 'Previous' : i === paginationNumbers.length - 1 && hasNextButton ? 'Next' : pageNum === currentPage ? 'current' : 'normal'}
           />
         ))}
       </ul>
@@ -40,5 +40,5 @@ export default Pagination;
 //   else if (sides.right < gap) sides.left++;
 // }
 // const paginationNumbers = range(currentPageIndex - sides.left + 1, currentPageIndex + sides.right + 2);
-// const isleftButton = PAGINATION_LENGTH <= lastPageIndex && sides.left > gap - 1;
-// const isrightButton = PAGINATION_LENGTH <= lastPageIndex && sides.right > gap - 1;
+// const isLeftButton = PAGINATION_LENGTH <= lastPageIndex && sides.left > gap - 1;
+// const isRightButton = PAGINATION_LENGTH <= lastPageIndex && sides.right > gap - 1;

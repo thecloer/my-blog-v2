@@ -3,14 +3,14 @@ import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import Link from 'next/link';
 import Image from 'next/image';
 import urlPath from '@/config/urlPath';
-import { generateSlug } from '@/lib/utils/formater';
+import { generateSlug } from '@/lib/utils/formatter';
 
 type Props = {
   post: BlogFrontMatterWithSlug;
 };
 
 // dummy button
-const BlogTagButton = ({ tag }: { tag: string }) => <button className='mr-1 rounded bg-primary-500 px-1 dark:bg-primary-500'>{tag}</button>;
+const BlogTagButton = ({ tag }: { tag: string }) => <button className='mr-1 rounded bg-primary-400 px-1 hover:bg-primary-500 hover:dark:bg-primary-600'>{tag}</button>;
 
 const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, thumbnail, title } }) => {
   return (

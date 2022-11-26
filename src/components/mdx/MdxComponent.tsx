@@ -2,8 +2,8 @@ import { type FC, useMemo } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
 
 // FIXME: custom MDXcomponents
-// import mdxCostumComponents from './mdxCostumComponents';
-// return <Component components={mdxCostumComponents} />;
+// import mdxCustomComponents from './mdxCustomComponents';
+// return <Component components={mdxCustomComponents} />;
 
 type Props = {
   mdxSource: string;
@@ -11,7 +11,7 @@ type Props = {
 
 const MdxComponent: FC<Props> = ({ mdxSource }) => {
   const Component = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
-
+  //TODO: layout
   return (
     <div className='prose mx-auto dark:prose-dark'>
       <Component />

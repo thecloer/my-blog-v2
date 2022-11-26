@@ -20,7 +20,7 @@ export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
   if (lastPage <= PAGINATION_LENGTH)
     return {
       paginationNumbers: range(1, lastPage),
-      hasPriviousButton: false,
+      hasPreviousButton: false,
       hasNextButton: false,
     };
 
@@ -38,7 +38,7 @@ export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
 
   return {
     paginationNumbers: range(start, end),
-    hasPriviousButton: start > 1,
+    hasPreviousButton: start > 1,
     hasNextButton: end < lastPage,
   };
 };
