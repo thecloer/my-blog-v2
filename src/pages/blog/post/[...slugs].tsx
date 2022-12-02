@@ -1,14 +1,13 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
-import type { ReadTimeResults } from 'reading-time';
-import type { BlogFrontMatter } from '@/types/data.type';
+import type { BlogMdxMetaData } from '@/types/data.type';
 import { Blog } from '@/repositories/blog';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import MdxComponent from '@/components/mdx/MdxComponent';
 
 interface Props {
   mdxSource: string;
-  mdxMeta: BlogFrontMatter & { readingTime: ReadTimeResults };
+  mdxMeta: BlogMdxMetaData;
 }
 interface Params extends ParsedUrlQuery {
   slugs: string[];

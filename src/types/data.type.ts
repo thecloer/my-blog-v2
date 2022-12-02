@@ -1,8 +1,13 @@
-import type { Node } from 'unist';
-import type { BlockContent } from 'mdast';
+import type { ReadTimeResults } from 'reading-time';
 import dataPath from '@/config/dataPath';
 
 export type DataPath = keyof typeof dataPath;
+
+export type Toc = {
+  value: string;
+  url: string;
+  depth: number;
+}[];
 
 // frontMatter
 export type CommonFrontMatter = {
@@ -21,9 +26,6 @@ export type BlogFrontMatter = CommonFrontMatter & { series: string | null };
  */
 export type BlogFrontMatterWithSlug = BlogFrontMatter & { slug: string };
 
-//
-export type Toc = {
-  value: string;
-  url: string;
-  depth: number;
-}[];
+// MdxData
+export type MdxMetaData<T extends CommonFrontMatter> = T & { toc: Toc; readingTime: ReadTimeResults };
+export type BlogMdxMetaData = MdxMetaData<BlogFrontMatter>;

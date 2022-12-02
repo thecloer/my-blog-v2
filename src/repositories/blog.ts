@@ -1,16 +1,11 @@
-import type { BlogFrontMatter, BlogFrontMatterWithSlug, Toc } from '@/types/data.type';
+import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import type { SortFunc } from '@/types/utils.type';
-import { readFileSync } from 'fs';
 import path from 'path';
-import { bundleMDX } from 'mdx-bundler';
-import readingTime from 'reading-time';
 import DATA_PATH from '@/config/dataPath';
 import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/files';
 import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter } from '@/lib/utils/helper';
-// remark plugins
-import remarkExtractToc from '@/lib/remark-plugins/remark-extract-toc';
-import remarkGfm from 'remark-gfm';
+import { getMdxDataByPath } from '@/lib/mdx/mdx';
 
 export class Blog {
   private static _instance: Blog;
@@ -35,44 +30,9 @@ export class Blog {
 
   async getMdxDataBySlug(slug: string) {
     const filePath = this._filePaths.find((path) => ['.md', '.mdx'].some((ext) => path.includes(slug + ext)));
-    if (filePath === undefined) {
-      console.error(`There is no file: ${filePath}`);
-      return null;
-    }
+    if (filePath === undefined) return null; //TODO: Error handling -> error dummy data
 
-    const source = readFileSync(filePath, 'utf8');
-
-    // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
-    process.env.ESBUILD_BINARY_PATH =
-      process.platform === 'win32' ? path.join(process.cwd(), 'node_modules', 'esbuild', 'esbuild.exe') : path.join(process.cwd(), 'node_modules', 'esbuild', 'bin', 'esbuild');
-
-    const toc: Toc = [];
-    const { code: mdxSource, frontmatter } = await bundleMDX<BlogFrontMatter>({
-      source,
-      // mdx imports can be automatically source from the components cwd directory.
-      cwd: DATA_PATH.COMPONENTS,
-      mdxOptions(options, frontmatter) {
-        options.remarkPlugins = [
-          ...(options.remarkPlugins ?? []), //
-          // TODO: Plugin types 'unified'.Plugin vs 'unist-util-visit/complex-types.d.ts'.Visitor
-          [remarkExtractToc, { toc }],
-          remarkGfm,
-        ];
-        options.rehypePlugins = [
-          ...(options.rehypePlugins ?? []), //
-        ];
-        return options;
-      },
-    });
-
-    return {
-      mdxSource,
-      mdxMeta: {
-        ...frontmatter,
-        toc,
-        readingTime: readingTime(mdxSource),
-      },
-    };
+    return await getMdxDataByPath(filePath);
   }
 
   search(term: string): BlogFrontMatterWithSlug[];
