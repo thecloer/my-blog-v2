@@ -2,6 +2,7 @@ import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import { type FC, useEffect, useState } from 'react';
 import { useSearchContext } from '@/contexts/searchContext';
 import useDebounce from '@/hooks/useDebounce';
+import SidebarLayout from '@/layouts/SidebarLayout';
 import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
@@ -37,15 +38,12 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
   }, [isInitialPage, debouncedSearchTerm]);
 
   return (
-    <div className='flex'>
-      <BlogSidebar />
-      <section className='mt-6 mb-8 grow'>
-        <h1 className='mb-10 text-5xl font-extrabold'>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}</h1>
-        <BlogInlineSidebar />
-        <PostList posts={displayPosts} />
-        {isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} /> : null}
-      </section>
-    </div>
+    <SidebarLayout sidebar={<BlogSidebar />}>
+      <h1 className='mb-10 text-5xl font-extrabold'>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}</h1>
+      <BlogInlineSidebar />
+      <PostList posts={displayPosts} />
+      {isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} /> : null}
+    </SidebarLayout>
   );
 };
 

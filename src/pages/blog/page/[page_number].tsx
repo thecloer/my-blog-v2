@@ -1,11 +1,11 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
-import { POSTS_PER_PAGE } from '@/config/layoutConfig';
-import { Blog } from '@/repositories/blog';
 import BlogPostListLayout from '@/layouts/BlogPostListLayout';
 import { SearchProvider } from '@/contexts/searchContext';
 import AppWidthContainer from '@/containers/AppWidthContainer';
+import { POSTS_PER_PAGE } from '@/config/layoutConfig';
+import { Blog } from '@/repositories/blog';
 
 type Props = {
   allPostNumber: number;
