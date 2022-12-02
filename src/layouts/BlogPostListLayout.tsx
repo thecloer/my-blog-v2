@@ -29,7 +29,7 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
     if (isInitialPage) return;
 
     const searchPosts = async () => {
-      const res = await fetch(urlPath.apiBlogSearch(encodeURIComponent(debouncedSearchTerm)));
+      const res = await fetch(urlPath.apiBlogSearch(debouncedSearchTerm));
       const { result } = await res.json();
       setSearchResult(result);
     };

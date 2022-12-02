@@ -1,5 +1,5 @@
 const urlPath = {
-  apiBlogSearch: (query: string) => `/api/blog/search?q=${query}`,
+  apiBlogSearch: (query: string) => `/api/blog/search?q=${encodeURIComponent(query)}`,
   blogPage: (page_number: number) => `/blog/page/${page_number}`,
   blogPost: (slug: string) => `/blog/post/${slug}`,
   blogTag: (tag: string) => `/blog/tag/${tag}`,
