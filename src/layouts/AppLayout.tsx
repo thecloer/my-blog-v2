@@ -6,7 +6,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
   return (
     <div className='flex min-h-screen flex-col justify-between'>
       <Header />
-      <div className='grow'>{children}</div>
+      <main className='grow'>{children}</main>
       <Footer />
     </div>
   );

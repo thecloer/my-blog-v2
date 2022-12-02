@@ -39,12 +39,12 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
   return (
     <div className='flex'>
       <BlogSidebar />
-      <main className='mt-6 mb-8 grow'>
+      <section className='mt-6 mb-8 grow'>
         <h1 className='mb-10 text-5xl font-extrabold'>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}</h1>
         <BlogInlineSidebar />
         <PostList posts={displayPosts} />
         {isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} /> : null}
-      </main>
+      </section>
     </div>
   );
 };
