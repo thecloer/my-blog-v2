@@ -7,6 +7,9 @@ import readingTime from 'reading-time';
 // remark plugins
 import remarkGfm from 'remark-gfm';
 import remarkExtractToc from './remark-extract-toc';
+// rehype plugins
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 export const getMdxDataByPath = async (filePath: string) => {
   const source = readFileSync(filePath, 'utf8');
@@ -29,6 +32,8 @@ export const getMdxDataByPath = async (filePath: string) => {
       ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []), //
+        rehypeSlug,
+        rehypeAutolinkHeadings,
       ];
       return options;
     },
