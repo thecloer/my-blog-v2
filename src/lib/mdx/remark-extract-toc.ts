@@ -1,19 +1,23 @@
 import type { Content } from 'mdast';
-import type { Toc } from '@/types/data.type';
+import type { Toc, TocRaw } from '@/types/data.type';
 import { visit } from 'unist-util-visit';
 import { slug } from 'github-slugger';
 import { toString } from 'mdast-util-to-string';
+import { makeNestedToc } from '../converter';
 
 const remarkExtractToc =
   ({ toc }: { toc: Toc }) =>
-  (tree: Content) =>
+  (tree: Content) => {
+    const tocRaw: TocRaw = [];
     visit(tree, 'heading', (node, index, parent) => {
       const textContent = toString(node);
-      toc.push({
-        value: textContent,
+      tocRaw.push({
+        text: textContent,
         url: '#' + slug(textContent),
         depth: node.depth,
       });
     });
+    toc.push(...makeNestedToc(tocRaw));
+  };
 
 export default remarkExtractToc;

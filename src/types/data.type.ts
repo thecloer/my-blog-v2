@@ -3,11 +3,14 @@ import dataPath from '@/config/dataPath';
 
 export type DataPath = keyof typeof dataPath;
 
-export type Toc = {
-  value: string;
+type TocRawData = {
+  text: string;
   url: string;
   depth: number;
-}[];
+};
+export type TocRaw = TocRawData[];
+export type TocData = TocRawData & { children: TocData[] };
+export type Toc = TocData[];
 
 // frontMatter
 export type CommonFrontMatter = {
@@ -21,8 +24,8 @@ export type CommonFrontMatter = {
 export type BlogFrontMatter = CommonFrontMatter & { series: string | null };
 
 /**
- * @property `slug` - file name in `data/blog/` without extention include nested paths.
- * full path = `${process.cwd()}/data/blog/${slug}.${extention}`
+ * @property `slug` - file name in `data/blog/` without extension include nested paths.
+ * full path = `${process.cwd()}/data/blog/${slug}.${extension}`
  */
 export type BlogFrontMatterWithSlug = BlogFrontMatter & { slug: string };
 
