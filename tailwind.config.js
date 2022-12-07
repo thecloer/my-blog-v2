@@ -42,6 +42,9 @@ module.exports = {
             'h4,h5,h6': {
               color: theme('colors.gray.900'),
             },
+            'h1,h2,h3,h4,h5,h6': {
+              scrollMarginTop: '6.5rem',
+            },
             pre: {
               backgroundColor: theme('colors.gray.800'),
             },

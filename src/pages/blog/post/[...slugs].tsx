@@ -2,8 +2,10 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogMdxMetaData } from '@/types/data.type';
 import { Blog } from '@/repositories/blog';
+import SidebarLayout from '@/layouts/SidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import MdxComponent from '@/components/mdx/MdxComponent';
+import PostSidebar from '@/components/sidebar/PostSidebar';
 
 interface Props {
   mdxSource: string;
@@ -16,7 +18,9 @@ interface Params extends ParsedUrlQuery {
 const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
   return (
     <AppWidthContainer>
-      <MdxComponent mdxSource={mdxSource} />
+      <SidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
+        <MdxComponent mdxSource={mdxSource} />
+      </SidebarLayout>
     </AppWidthContainer>
   );
 };
@@ -33,21 +37,19 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   };
 };
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
-  const slug = params!.slugs.join('/'); // FIXME: parmas!.slugs
+  const slug = params!.slugs.join('/'); // FIXME: params!.slugs
   const MdxData = await Blog.instance.getMdxDataBySlug(slug);
 
-  if (MdxData === null) {
-    console.error(`Error in getStaticProps in [...slug].tsx: ${slug} doesn't exist.`);
-    return {
-      redirect: {
-        destination: '/blog',
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: MdxData,
-  };
+  return MdxData === null
+    ? {
+        redirect: {
+          destination: '/blog',
+          permanent: false,
+        },
+      }
+    : {
+        props: MdxData,
+      };
 };
 
 export default BlogPostPage;

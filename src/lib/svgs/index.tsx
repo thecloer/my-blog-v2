@@ -10,5 +10,20 @@ import XIcon from './x.svg';
 import Magnifier from './magnifier.svg';
 import PreviousArrow from './previousArrow.svg';
 import NextArrow from './nextArrow.svg';
+import DownArrow from './downArrow.svg';
+import RightArrow from './rightArrow.svg';
 
-export { MailIcon, GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon, HamburgerIcon, XIcon, Magnifier, PreviousArrow, NextArrow };
+export {
+  MailIcon,
+  GithubIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  InstagramIcon,
+  HamburgerIcon,
+  XIcon,
+  Magnifier,
+  PreviousArrow,
+  NextArrow,
+  DownArrow,
+  RightArrow,
+};
