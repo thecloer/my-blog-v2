@@ -1,6 +1,6 @@
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import { type FC, useEffect, useState } from 'react';
-import { useSearchContext } from '@/contexts/searchContext';
+import { useSearchContext } from '@/contexts/SearchContext';
 import useDebounce from '@/hooks/useDebounce';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
@@ -39,7 +39,9 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
 
   return (
     <SidebarLayout sidebar={<BlogSidebar />}>
-      <h1 className='mb-10 text-5xl font-extrabold'>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}</h1>
+      <h1 className='mb-10 text-5xl font-extrabold'>
+        {isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}
+      </h1>
       <BlogInlineSidebar />
       <PostList posts={displayPosts} />
       {isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} /> : null}

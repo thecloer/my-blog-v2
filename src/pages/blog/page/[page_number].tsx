@@ -2,7 +2,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import BlogPostListLayout from '@/layouts/BlogPostListLayout';
-import { SearchProvider } from '@/contexts/searchContext';
+import { SearchProvider } from '@/contexts/SearchContext';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import { POSTS_PER_PAGE } from '@/config/layoutConfig';
 import { Blog } from '@/repositories/blog';
@@ -22,7 +22,12 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, initialDisplayPosts, current
   return (
     <AppWidthContainer>
       <SearchProvider>
-        <BlogPostListLayout allPostNumber={allPostNumber} initialDisplayPosts={initialDisplayPosts} currentPage={currentPage} lastPage={lastPage} />
+        <BlogPostListLayout
+          allPostNumber={allPostNumber}
+          initialDisplayPosts={initialDisplayPosts}
+          currentPage={currentPage}
+          lastPage={lastPage}
+        />
       </SearchProvider>
     </AppWidthContainer>
   );
