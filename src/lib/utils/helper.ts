@@ -1,6 +1,7 @@
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import type { RangeFunction } from '@/types/utils.type';
 import { PAGINATION_LENGTH } from '@/config/layoutConfig';
+import path from 'path';
 
 /**
  * Create an array of numbers includes `start` and `end`.
@@ -13,7 +14,10 @@ import { PAGINATION_LENGTH } from '@/config/layoutConfig';
  */
 const range: RangeFunction = (start: number, end: number, length?: number) =>
   end > start && (length === undefined || length > 0)
-    ? Array.from({ length: length === undefined ? end - start + 1 : Math.min(length, end - start + 1) }, (_, i) => start + i)
+    ? Array.from(
+        { length: length === undefined ? end - start + 1 : Math.min(length, end - start + 1) },
+        (_, i) => start + i
+      )
     : [];
 
 export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
@@ -44,8 +48,17 @@ export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
 };
 
 export const blogSearchFilter = (searchTerm: string) => (frontMatter: BlogFrontMatterWithSlug) => {
-  const targetKeys: Extract<keyof BlogFrontMatterWithSlug, 'title' | 'description' | 'tags' | 'series'>[] = ['description', 'title', 'series', 'tags'];
+  const targetKeys: Extract<keyof BlogFrontMatterWithSlug, 'title' | 'description' | 'tags' | 'series'>[] = [
+    'description',
+    'title',
+    'series',
+    'tags',
+  ];
   return targetKeys.some((key) =>
-    key === 'tags' ? frontMatter.tags?.some((tag) => tag.toLowerCase().includes(searchTerm)) : frontMatter[key]?.toLowerCase().includes(searchTerm)
+    key === 'tags'
+      ? frontMatter.tags?.some((tag) => tag.toLowerCase().includes(searchTerm))
+      : frontMatter[key]?.toLowerCase().includes(searchTerm)
   );
 };
+
+export const isMdxFile = (filePath: string) => path.extname(filePath) === '.md' || path.extname(filePath) === '.mdx';

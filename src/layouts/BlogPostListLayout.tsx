@@ -17,9 +17,11 @@ type Props = {
   initialDisplayPosts: BlogFrontMatterWithSlug[];
   currentPage: number;
   lastPage: number;
+  tags: string[];
+  series: string[];
 };
 
-const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage }) => {
+const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage, tags, series }) => {
   const router = useRouter();
   const { searchString } = useSearchContext();
   const [searchResult, setSearchResult] = useState<BlogFrontMatterWithSlug[]>([]);
@@ -43,7 +45,7 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
   const navigateBlogPage = (pageNum: number) => router.push(urlPath.blogPage(pageNum));
 
   return (
-    <SidebarLayout sidebar={<BlogSidebar />}>
+    <SidebarLayout sidebar={<BlogSidebar tags={tags} series={series} />}>
       <h1 className='mb-10 text-5xl font-extrabold'>
         {isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}
       </h1>

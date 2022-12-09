@@ -12,13 +12,15 @@ type Props = {
   initialDisplayPosts: BlogFrontMatterWithSlug[];
   currentPage: number;
   lastPage: number;
+  tags: string[];
+  series: string[];
 };
 
 interface Params extends ParsedUrlQuery {
   page_number: string;
 }
 
-const BlogPage: NextPage<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage }) => {
+const BlogPage: NextPage<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage, tags, series }) => {
   return (
     <AppWidthContainer>
       <SearchProvider>
@@ -27,6 +29,8 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, initialDisplayPosts, current
           initialDisplayPosts={initialDisplayPosts}
           currentPage={currentPage}
           lastPage={lastPage}
+          tags={tags}
+          series={series}
         />
       </SearchProvider>
     </AppWidthContainer>
@@ -34,7 +38,7 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, initialDisplayPosts, current
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const allPostNumber = Blog.instance.getAllFrontMatters().length;
+  const allPostNumber = Blog.getAllFrontMatters().length;
   const totalPages = Math.ceil(allPostNumber / POSTS_PER_PAGE);
   const paths = Array.from({ length: totalPages }, (_, i) => ({ params: { page_number: (i + 1).toString() } }));
   return {
@@ -45,13 +49,23 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
   const currentPage = params ? parseInt(params.page_number) : 1;
-  const allPosts = Blog.instance.getAllFrontMatters();
+  const allPosts = Blog.getAllFrontMatters();
   const allPostNumber = allPosts.length;
   const initialDisplayPosts = allPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage);
   const lastPage = Math.ceil(allPostNumber / POSTS_PER_PAGE);
 
+  const tags = Blog.getTags();
+  const series = Blog.getSeries();
+
   return {
-    props: { allPostNumber, initialDisplayPosts, currentPage, lastPage },
+    props: {
+      allPostNumber,
+      initialDisplayPosts,
+      currentPage,
+      lastPage,
+      tags,
+      series,
+    },
   };
 };
 

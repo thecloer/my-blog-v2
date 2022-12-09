@@ -26,7 +26,7 @@ const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const paths = Blog.instance.getAllFrontMatters().map((frontMatter) => ({
+  const paths = Blog.getAllFrontMatters().map((frontMatter) => ({
     params: {
       slugs: frontMatter.slug.split('/'),
     },
@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 };
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
   const slug = params!.slugs.join('/'); // FIXME: params!.slugs
-  const MdxData = await Blog.instance.getMdxDataBySlug(slug);
+  const MdxData = await Blog.getMdxDataBySlug(slug); //TODO: getMdxDataBySlug: No File Error
 
   return MdxData === null
     ? {
