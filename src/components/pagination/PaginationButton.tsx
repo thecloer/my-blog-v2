@@ -15,7 +15,7 @@ const PaginationButton: FC<Props> = ({ type, pageNum, onClick }) => {
       className={`flex h-9 w-9 items-center justify-center text-lg leading-none hover:bg-primary-400 dark:hover:bg-primary-500
           ${
             type === 'current'
-              ? ' bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-white'
+              ? ' bg-bgDark-200 text-slate-700 dark:bg-bgDark-800 dark:text-white'
               : type === 'Previous'
               ? `rounded-l-lg`
               : type === 'Next'

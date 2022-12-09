@@ -12,7 +12,7 @@ const PostList: FC<Props> = ({ posts }) => {
   return (
     <section>
       {posts.length > 0 ? (
-        <ul className='-my-8 divide-y-2 divide-slate-100 dark:divide-slate-800'>
+        <ul className='-my-8 divide-y-2 divide-slate-100 dark:divide-bgDark-800'>
           {posts.map((post, i) => (
             <PostItem key={i} post={post} />
           ))}

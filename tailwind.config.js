@@ -13,6 +13,7 @@ module.exports = {
       },
       colors: {
         primary: colors.teal,
+        bgDark: colors.slate,
       },
       typography: (theme) => ({
         DEFAULT: {

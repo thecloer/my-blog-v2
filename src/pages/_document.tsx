@@ -7,7 +7,7 @@ export default function Document() {
         <meta name='theme-color' media='(prefers-color-scheme: light)' content='#fff' />
         <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#000' />
       </Head>
-      <body className='bg-white text-black antialiased dark:bg-slate-900 dark:text-white'>
+      <body className='bg-white text-black antialiased dark:bg-bgDark-900 dark:text-white'>
         <Main />
         <NextScript />
       </body>

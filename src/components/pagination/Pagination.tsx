@@ -15,7 +15,7 @@ const Pagination: FC<Props> = ({ currentPage, lastPage, onClick }) => {
   return (
     <nav aria-label='Page navigation' className='mt-12 flex w-full cursor-pointer justify-center'>
       <div
-        className={`flex items-center divide-x-[1px] border dark:divide-slate-800 dark:border-slate-800
+        className={`flex items-center divide-x-[1px] border dark:divide-bgDark-800 dark:border-bgDark-800
         ${hasPreviousButton ? 'rounded-l-lg' : ''}
         ${hasNextButton ? 'rounded-r-lg' : ''}
         `}
