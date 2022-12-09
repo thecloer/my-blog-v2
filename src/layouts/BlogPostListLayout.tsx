@@ -1,5 +1,6 @@
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import { type FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useSearchContext } from '@/contexts/SearchContext';
 import useDebounce from '@/hooks/useDebounce';
 import SidebarLayout from '@/layouts/SidebarLayout';
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage }) => {
+  const router = useRouter();
   const { searchString } = useSearchContext();
   const [searchResult, setSearchResult] = useState<BlogFrontMatterWithSlug[]>([]);
 
@@ -29,6 +31,7 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
   useEffect(() => {
     if (isInitialPage) return;
 
+    // TODO: API call
     const searchPosts = async () => {
       const res = await fetch(urlPath.apiBlogSearch(debouncedSearchTerm));
       const { result } = await res.json();
@@ -37,6 +40,8 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
     searchPosts();
   }, [isInitialPage, debouncedSearchTerm]);
 
+  const navigateBlogPage = (pageNum: number) => router.push(urlPath.blogPage(pageNum));
+
   return (
     <SidebarLayout sidebar={<BlogSidebar />}>
       <h1 className='mb-10 text-5xl font-extrabold'>
@@ -44,7 +49,10 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
       </h1>
       <BlogInlineSidebar />
       <PostList posts={displayPosts} />
-      {isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} /> : null}
+      {
+        // TODO: if (!isInitialPage), show pagination for searchResult
+        isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateBlogPage} /> : null
+      }
     </SidebarLayout>
   );
 };

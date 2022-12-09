@@ -1,33 +1,38 @@
 import type { FC } from 'react';
-import Link from 'next/link';
+import type { PaginationButtonType } from '@/types/utils.type';
 import { NextArrow, PreviousArrow } from '@/lib/svgs';
-import urlPath from '@/config/urlPath';
 
 interface Props {
-  type: 'current' | 'normal' | 'Previous' | 'Next';
+  type: PaginationButtonType;
   pageNum: number;
+  onClick: (pageNum: number, type: PaginationButtonType) => void;
 }
 
-const PaginationButton: FC<Props> = ({ type, pageNum }) => {
+const PaginationButton: FC<Props> = ({ type, pageNum, onClick }) => {
   return (
-    <li>
-      <Link href={urlPath.blogPage(pageNum)} passHref>
-        <a
-          className={`flex h-9 w-9 items-center justify-center text-lg leading-none hover:bg-primary-400 dark:hover:bg-primary-500
-          ${type === 'current' ? ' bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-white' : type === 'Previous' ? `rounded-l-lg` : type === 'Next' ? `rounded-r-lg` : ''}
+    <button
+      onClick={() => onClick(pageNum, type)}
+      className={`flex h-9 w-9 items-center justify-center text-lg leading-none hover:bg-primary-400 dark:hover:bg-primary-500
+          ${
+            type === 'current'
+              ? ' bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-white'
+              : type === 'Previous'
+              ? `rounded-l-lg`
+              : type === 'Next'
+              ? `rounded-r-lg`
+              : ''
+          }
           `}
-        >
-          {type === 'current' || type === 'normal' ? (
-            pageNum
-          ) : (
-            <>
-              <span className='sr-only'>{type}</span>
-              {type === 'Previous' ? <PreviousArrow className='h-5 w-5' /> : <NextArrow className='h-5 w-5' />}
-            </>
-          )}
-        </a>
-      </Link>
-    </li>
+    >
+      {type === 'current' || type === 'normal' ? (
+        pageNum
+      ) : (
+        <>
+          <span className='sr-only'>{`pagination ${type} button`}</span>
+          {type === 'Previous' ? <PreviousArrow className='h-5 w-5' /> : <NextArrow className='h-5 w-5' />}
+        </>
+      )}
+    </button>
   );
 };
 
