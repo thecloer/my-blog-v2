@@ -1,6 +1,5 @@
-import type { BlogFrontMatterWithSlug } from '@/types/data.type';
+import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import type { SortFunc } from '@/types/utils.type';
-import path from 'path';
 import DATA_PATH from '@/config/dataPath';
 import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/files';
 import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
@@ -24,8 +23,8 @@ export class Blog {
         this._tagMap.has(tag) ? this._tagMap.get(tag)!.push(frontMatter) : this._tagMap.set(tag, [frontMatter])
       );
       // SeriesMap
-      const series = frontMatter.series;
-      if (series !== null)
+      const series = frontMatter.series; // if no series in mdx file, series is undefined but typescript doesn't know that
+      if (series !== null && series !== undefined)
         this._seriesMap.has(series)
           ? this._seriesMap.get(series)!.push(frontMatter)
           : this._seriesMap.set(series, [frontMatter]);
@@ -41,17 +40,25 @@ export class Blog {
     return sortFunc === undefined ? Blog.instance._frontMatters : Blog.instance._frontMatters.sort(sortFunc);
   }
   static getFrontMattersByTag(tag: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
-    return sortFunc === undefined ? Blog.instance._tagMap.get(tag) : Blog.instance._tagMap.get(tag)?.sort(sortFunc);
+    return (
+      (sortFunc === undefined ? Blog.instance._tagMap.get(tag) : Blog.instance._tagMap.get(tag)?.sort(sortFunc)) ?? []
+    );
   }
   static getFrontMattersBySeries(series: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
-    return sortFunc === undefined
-      ? Blog.instance._seriesMap.get(series)
-      : Blog.instance._seriesMap.get(series)?.sort(sortFunc);
+    return (
+      (sortFunc === undefined
+        ? Blog.instance._seriesMap.get(series)
+        : Blog.instance._seriesMap.get(series)?.sort(sortFunc)) ?? []
+    );
   }
-  static getTags() {
-    return Array.from(Blog.instance._tagMap.keys());
+  static getAllTags() {
+    const tags: TagInfo[] = [];
+    for (const [tagName, frontMatters] of Blog.instance._tagMap) {
+      tags.push({ name: tagName, count: frontMatters.length });
+    }
+    return tags;
   }
-  static getSeries() {
+  static getAllSeries() {
     return Array.from(Blog.instance._seriesMap.keys());
   }
 

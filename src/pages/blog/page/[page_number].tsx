@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
-import type { BlogFrontMatterWithSlug } from '@/types/data.type';
+import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import BlogPostListLayout from '@/layouts/BlogPostListLayout';
 import { SearchProvider } from '@/contexts/SearchContext';
 import AppWidthContainer from '@/containers/AppWidthContainer';
@@ -9,10 +9,10 @@ import { Blog } from '@/repositories/blog';
 
 type Props = {
   allPostNumber: number;
-  initialDisplayPosts: BlogFrontMatterWithSlug[];
+  posts: BlogFrontMatterWithSlug[];
   currentPage: number;
   lastPage: number;
-  tags: string[];
+  tags: TagInfo[];
   series: string[];
 };
 
@@ -20,13 +20,13 @@ interface Params extends ParsedUrlQuery {
   page_number: string;
 }
 
-const BlogPage: NextPage<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage, tags, series }) => {
+const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage, tags, series }) => {
   return (
     <AppWidthContainer>
       <SearchProvider>
         <BlogPostListLayout
           allPostNumber={allPostNumber}
-          initialDisplayPosts={initialDisplayPosts}
+          initialDisplayPosts={posts}
           currentPage={currentPage}
           lastPage={lastPage}
           tags={tags}
@@ -51,16 +51,16 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
   const currentPage = params ? parseInt(params.page_number) : 1;
   const allPosts = Blog.getAllFrontMatters();
   const allPostNumber = allPosts.length;
-  const initialDisplayPosts = allPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage);
+  const posts = allPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage);
   const lastPage = Math.ceil(allPostNumber / POSTS_PER_PAGE);
 
-  const tags = Blog.getTags();
-  const series = Blog.getSeries();
+  const tags = Blog.getAllTags();
+  const series = Blog.getAllSeries();
 
   return {
     props: {
       allPostNumber,
-      initialDisplayPosts,
+      posts,
       currentPage,
       lastPage,
       tags,

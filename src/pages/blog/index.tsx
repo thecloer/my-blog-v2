@@ -1,1 +1,1 @@
-export { default, getStaticProps } from './page/[page_number]';
+export { default, getStaticProps } from '@/pages/blog/page/[page_number]';

@@ -17,7 +17,7 @@ const TocHeading: FC<Props> = ({ heading }) => {
     return (
       <>
         <Link href={heading.url} scroll={false} replace>
-          <a className='mb-4 block text-xl font-semibold text-primary-500 hover:text-primary-600 dark:hover:text-primary-400'>
+          <a className='mb-2 block text-xl font-semibold text-primary-500 hover:text-primary-600 dark:hover:text-primary-400'>
             {heading.text}
           </a>
         </Link>

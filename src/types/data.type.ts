@@ -20,6 +20,10 @@ export type CommonFrontMatter = {
   thumbnail: string;
   tags: string[] | null;
 };
+export type TagInfo = {
+  name: string;
+  count: number;
+};
 
 export type BlogFrontMatter = CommonFrontMatter & { series: string | null };
 
