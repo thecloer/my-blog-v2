@@ -1,24 +1,22 @@
-import type { Dispatch, PropsWithChildren, SetStateAction } from 'react';
+import type { Context, Dispatch, PropsWithChildren, Provider, SetStateAction } from 'react';
 import { createContext, useContext, useState } from 'react';
 
-type SearchContext = {
-  searchString: string;
-  setSearchString: Dispatch<SetStateAction<string>>;
+type SearchContext<T = unknown> = {
+  value: T | null;
+  setValue: Dispatch<SetStateAction<T | null>>;
 };
 
-const initialState = '';
-const initialContext: SearchContext = {
-  searchString: initialState,
-  setSearchString: () => {},
+const initialContext = {
+  value: null,
+  setValue: () => {},
 };
 
 const SearchContext = createContext<SearchContext>(initialContext);
 
-export const SearchProvider = ({ children }: PropsWithChildren) => {
-  const [searchString, setSearchString] = useState(initialState);
-  return <SearchContext.Provider value={{ searchString, setSearchString }}>{children}</SearchContext.Provider>;
+export const SearchProvider = <T,>({ children }: PropsWithChildren) => {
+  const [value, setValue] = useState<SearchContext<T>['value']>(null);
+  const Provider = SearchContext.Provider as Provider<SearchContext<T>>;
+  return <Provider value={{ value, setValue }}>{children}</Provider>;
 };
 
-export const useSearchContext = () => useContext(SearchContext);
-
-export default SearchContext;
+export const useSearchContext = <T,>() => useContext<SearchContext<T>>(SearchContext as Context<SearchContext<T>>);

@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import type { TagInfo } from '@/types/data.type';
+import Link from 'next/link';
 import SearchBar from '@/components/SearchBar';
 import TagContainer from '@/components/TagContainer';
-import Link from 'next/link';
 import urlPath from '@/config/urlPath';
+import { useSearchContext } from '@/contexts/SearchContext';
 
 // TODO: blog tags, blog series
 type Props = {
@@ -12,9 +13,10 @@ type Props = {
 };
 
 const BlogSidebar: FC<Props> = ({ tags, series }) => {
+  const { setValue } = useSearchContext<string>();
   return (
     <>
-      <SearchBar />
+      <SearchBar onChange={setValue} />
       <section className='mb-6'>
         <h3 className='mb-2 text-xl font-semibold'>Series</h3>
         <ul>

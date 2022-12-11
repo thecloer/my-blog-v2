@@ -22,10 +22,10 @@ type Props = {
 
 const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, currentPage, lastPage, tags, series }) => {
   const router = useRouter();
-  const { searchString } = useSearchContext();
+  const { value: searchString } = useSearchContext<string>();
   const [searchResult, setSearchResult] = useState<BlogFrontMatterWithSlug[]>([]);
 
-  const isInitialPage = searchString.length < 2;
+  const isInitialPage = searchString === null || searchString.length < 2;
   const displayPosts = isInitialPage ? initialDisplayPosts : searchResult;
 
   useEffect(() => {
