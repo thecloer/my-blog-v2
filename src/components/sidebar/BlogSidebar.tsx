@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import type { TagInfo } from '@/types/data.type';
-import SidebarContainer from '@/containers/SidebarContainer';
 import SearchBar from '@/components/SearchBar';
 import TagContainer from '@/components/TagContainer';
 import Link from 'next/link';
@@ -14,7 +13,7 @@ type Props = {
 
 const BlogSidebar: FC<Props> = ({ tags, series }) => {
   return (
-    <SidebarContainer>
+    <>
       <SearchBar />
       <section className='mb-6'>
         <h3 className='mb-2 text-xl font-semibold'>Series</h3>
@@ -33,7 +32,7 @@ const BlogSidebar: FC<Props> = ({ tags, series }) => {
         <h3 className='mb-2 text-xl font-semibold'>Tags</h3>
         <TagContainer tags={tags} />
       </section>
-    </SidebarContainer>
+    </>
   );
 };
 

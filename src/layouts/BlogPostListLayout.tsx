@@ -2,7 +2,7 @@ import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import React, { type FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSearchContext } from '@/contexts/SearchContext';
-import SidebarLayout from '@/layouts/SidebarLayout';
+import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
@@ -43,7 +43,7 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
   const navigateBlogPage = (pageNum: number) => router.push(urlPath.blogPage(pageNum));
 
   return (
-    <SidebarLayout sidebar={<MemorizedSidebar tags={tags} series={series} />}>
+    <ContentWithSidebarLayout sidebar={<MemorizedSidebar tags={tags} series={series} />}>
       <h1 className='mb-10 text-5xl font-extrabold'>
         {isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${searchResult.length}`}
       </h1>
@@ -53,7 +53,7 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
         // TODO: if (!isInitialPage), show pagination for searchResult
         isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateBlogPage} /> : null
       }
-    </SidebarLayout>
+    </ContentWithSidebarLayout>
   );
 };
 

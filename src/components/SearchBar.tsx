@@ -6,7 +6,7 @@ import useDebounce from '@/hooks/useDebounce';
 // TODO: form(to='/blog/search/[searchString]')
 
 const SearchBar = () => {
-  const { setSearchString } = useSearchContext();
+  const { setSearchString } = useSearchContext(); // SearchBar should be in SearchContextProvider
   const [inputValue, setInputValue] = useState('');
   const debouncedInputValue = useDebounce(inputValue);
 
@@ -16,7 +16,7 @@ const SearchBar = () => {
   }, [debouncedInputValue, setSearchString]);
 
   return (
-    <div className='relative my-6 max-w-lg'>
+    <div className='relative mb-6 max-w-lg'>
       <input
         aria-label='Search articles'
         type='text'

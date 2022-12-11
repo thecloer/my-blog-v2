@@ -2,7 +2,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogMdxMetaData } from '@/types/data.type';
 import { Blog } from '@/repositories/blog';
-import SidebarLayout from '@/layouts/SidebarLayout';
+import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import MdxComponent from '@/components/mdx/MdxComponent';
 import PostSidebar from '@/components/sidebar/PostSidebar';
@@ -18,9 +18,9 @@ interface Params extends ParsedUrlQuery {
 const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
   return (
     <AppWidthContainer>
-      <SidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
+      <ContentWithSidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
         <MdxComponent mdxSource={mdxSource} />
-      </SidebarLayout>
+      </ContentWithSidebarLayout>
     </AppWidthContainer>
   );
 };
