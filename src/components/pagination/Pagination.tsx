@@ -12,6 +12,11 @@ type Props = {
 const Pagination: FC<Props> = ({ currentPage, lastPage, onClick }) => {
   const { paginationNumbers, hasNextButton, hasPreviousButton } = getPaginationNumbers(currentPage, lastPage);
 
+  const onClickPaginationButton = (pageNum: number, type: PaginationButtonType) => {
+    if (pageNum === currentPage || pageNum > lastPage) return;
+    onClick(pageNum, type);
+  };
+
   return (
     <nav aria-label='Page navigation' className='mt-12 flex w-full cursor-pointer justify-center'>
       <div
@@ -29,7 +34,7 @@ const Pagination: FC<Props> = ({ currentPage, lastPage, onClick }) => {
               : pageNum === currentPage
               ? 'current'
               : 'normal';
-          return <PaginationButton key={i} pageNum={pageNum} type={type} onClick={onClick} />;
+          return <PaginationButton key={i} pageNum={pageNum} type={type} onClick={onClickPaginationButton} />;
         })}
       </div>
     </nav>
