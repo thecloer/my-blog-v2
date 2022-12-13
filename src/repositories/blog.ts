@@ -39,10 +39,14 @@ export class Blog {
   static getAllFrontMatters(sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
     return sortFunc === undefined ? Blog.instance._frontMatters : Blog.instance._frontMatters.sort(sortFunc);
   }
-  static getFrontMattersByTag(tag: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
-    return (
-      (sortFunc === undefined ? Blog.instance._tagMap.get(tag) : Blog.instance._tagMap.get(tag)?.sort(sortFunc)) ?? []
-    );
+  static getFrontMattersByTag(tag: string | string[], sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
+    if (typeof tag === 'string')
+      return (
+        (sortFunc === undefined ? Blog.instance._tagMap.get(tag) : Blog.instance._tagMap.get(tag)?.sort(sortFunc)) ?? []
+      );
+
+    const frontMatters = [...new Set(tag.map((t) => Blog.instance._tagMap.get(t) ?? []).flat())];
+    return sortFunc === undefined ? frontMatters : frontMatters?.sort(sortFunc);
   }
   static getFrontMattersBySeries(series: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
     return (
