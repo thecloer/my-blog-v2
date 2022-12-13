@@ -1,10 +1,11 @@
 import type { FC } from 'react';
 import type { GetStaticProps } from 'next';
 import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import urlPath from '@/config/urlPath';
 import { Blog } from '@/repositories/blog';
+import { decodeURISlug } from '@/lib/utils/formatter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import MultiTagSelect from '@/components/MultiTagSelect';
@@ -12,18 +13,22 @@ import PostList from '@/components/PostList';
 import NoTag from '@/components/SimpleView/NoTag';
 
 type Props = {
-  tags: TagInfo[];
+  allTags: TagInfo[];
 };
 
-const TagsPage: FC<Props> = ({ tags }) => {
+const TagsPage: FC<Props> = ({ allTags }) => {
   const router = useRouter();
-  const [selectedTags, setSelectedTags] = useState(() => {
-    const searchedTagsRaw = router.query.tags;
-    const searchedTags = typeof searchedTagsRaw === 'string' ? [searchedTagsRaw] : searchedTagsRaw ?? [];
-    return tags.filter((t) => searchedTags.includes(t.name));
-  });
-
+  const searchedTags = useMemo(() => {
+    const rawTags = router.query.tags;
+    const searchedTagNames = typeof rawTags === 'string' ? [decodeURISlug(rawTags)] : rawTags?.map(decodeURISlug) ?? [];
+    return allTags.filter((t) => searchedTagNames.includes(t.name));
+  }, [allTags, router.query.tags]);
+  const [selectedTags, setSelectedTags] = useState(searchedTags);
   const [displayPosts, setDisplayPosts] = useState<BlogFrontMatterWithSlug[]>([]);
+
+  useEffect(() => {
+    setSelectedTags(searchedTags);
+  }, [searchedTags]);
 
   useEffect(() => {
     if (selectedTags.length === 0) {
@@ -43,7 +48,7 @@ const TagsPage: FC<Props> = ({ tags }) => {
   return (
     <AppWidthContainer>
       <ContentWithSidebarLayout
-        sidebar={<MultiTagSelect options={tags} selectedTags={selectedTags} onChange={setSelectedTags} />}
+        sidebar={<MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />}
       >
         <PostList posts={displayPosts} NoItemView={<NoTag />} />
       </ContentWithSidebarLayout>
@@ -52,11 +57,11 @@ const TagsPage: FC<Props> = ({ tags }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const tags = Blog.getAllTags();
+  const allTags = Blog.getAllTags();
 
   return {
     props: {
-      tags,
+      allTags,
     },
   };
 };
