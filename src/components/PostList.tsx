@@ -1,16 +1,15 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import PostItem from './PostItem';
 
-// TODO: <No Posts>
-
 type Props = {
   posts: BlogFrontMatterWithSlug[];
+  NoItemView?: ReactNode;
 };
 
-const PostList: FC<Props> = ({ posts }) => {
+const PostList: FC<Props> = ({ posts, NoItemView = null }) => {
   return (
-    <section>
+    <>
       {posts.length > 0 ? (
         <ul className='-my-8 divide-y-2 divide-slate-100 dark:divide-bgDark-800'>
           {posts.map((post, i) => (
@@ -18,9 +17,9 @@ const PostList: FC<Props> = ({ posts }) => {
           ))}
         </ul>
       ) : (
-        <h1>No Posts</h1>
+        NoItemView
       )}
-    </section>
+    </>
   );
 };
 

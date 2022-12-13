@@ -4,19 +4,18 @@ import Link from 'next/link';
 import SearchBar from '@/components/SearchBar';
 import TagContainer from '@/components/TagContainer';
 import urlPath from '@/config/urlPath';
-import { useSearchContext } from '@/contexts/SearchContext';
 
 // TODO: blog tags, blog series
 type Props = {
   tags: TagInfo[];
   series: string[];
+  onChange: (value: string) => void;
 };
 
-const BlogSidebar: FC<Props> = ({ tags, series }) => {
-  const { setValue } = useSearchContext<string>();
+const BlogSidebar: FC<Props> = ({ tags, series, onChange }) => {
   return (
     <>
-      <SearchBar onChange={setValue} />
+      <SearchBar onChange={onChange} />
       <section className='mb-6'>
         <h3 className='mb-2 text-xl font-semibold'>Series</h3>
         <ul>
