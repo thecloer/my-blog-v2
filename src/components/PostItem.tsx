@@ -16,7 +16,7 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, th
     <li>
       <article className='flex flex-col py-8 md:flex-row'>
         <div className='flex justify-center'>
-          <Link href={urlPath.blogPost(slug)} passHref>
+          <Link href={urlPath.blog.posts(slug)} passHref>
             <div
               className='relative mb-4 h-36 w-36 shrink-0
                     cursor-pointer overflow-hidden rounded-xl
@@ -35,14 +35,14 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, th
 
         <div className='flex grow flex-col'>
           {series && (
-            <Link href={urlPath.blogSeries(series)} passHref>
+            <Link href={urlPath.blog.series(series)} passHref>
               <div>
                 <a className='cursor-pointer text-sm font-medium text-bgDark-500'>{series}</a>
               </div>
             </Link>
           )}
 
-          <Link href={urlPath.blogPost(slug)} passHref>
+          <Link href={urlPath.blog.posts(slug)} passHref>
             <a className='flex'>
               <h2 className='mb-2 max-h-14 cursor-pointer overflow-hidden text-xl font-medium md:max-h-16 md:text-2xl '>
                 {title}

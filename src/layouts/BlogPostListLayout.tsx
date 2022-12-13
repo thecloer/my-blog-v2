@@ -33,14 +33,14 @@ const BlogPostListLayout: FC<Props> = ({ allPostNumber, initialDisplayPosts, cur
 
     // TODO: API call
     const searchPosts = async () => {
-      const res = await fetch(urlPath.apiBlogSearch(searchString));
+      const res = await fetch(urlPath.api.blog.search.query(searchString));
       const { result } = await res.json();
       setSearchResult(result);
     };
     searchPosts();
   }, [isInitialPage, searchString]);
 
-  const navigateBlogPage = (pageNum: number) => router.push(urlPath.blogPage(pageNum));
+  const navigateBlogPage = (pageNum: number) => router.push(urlPath.blog.page(pageNum));
 
   return (
     <ContentWithSidebarLayout sidebar={<MemorizedSidebar tags={tags} series={series} />}>

@@ -21,7 +21,7 @@ const BlogSidebar: FC<Props> = ({ tags, series }) => {
         <h3 className='mb-2 text-xl font-semibold'>Series</h3>
         <ul>
           {series.map((seriesName) => (
-            <Link key={seriesName} href={urlPath.blogSeries(seriesName)}>
+            <Link key={seriesName} href={urlPath.blog.series(seriesName)}>
               <a className='mb-1 flex text-lg last:mb-0'>
                 <span className='mr-1 flex h-7 w-4 shrink-0 items-center justify-center text-xs'>&bull;</span>
                 <span className='font-medium hover:text-primary-500'>{seriesName}</span>
