@@ -11,6 +11,7 @@ type Props = {
 
 const Pagination: FC<Props> = ({ currentPage, lastPage, onClick }) => {
   const { paginationNumbers, hasNextButton, hasPreviousButton } = getPaginationNumbers(currentPage, lastPage);
+  if (paginationNumbers.length < 2) return null;
 
   const onClickPaginationButton = (pageNum: number, type: PaginationButtonType) => {
     if (pageNum === currentPage || pageNum > lastPage) return;
