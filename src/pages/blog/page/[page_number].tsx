@@ -14,6 +14,7 @@ import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
 import PostList from '@/components/PostList';
 import NoPost from '@/components/SimpleView/NoPost';
+import PageTitle from '@/components/PageTitle';
 
 const MemorizedSidebar = memo(BlogSidebar);
 
@@ -22,7 +23,7 @@ type Props = {
   posts: BlogFrontMatterWithSlug[];
   currentPage: number;
   lastPage: number;
-  tags: TagInfo[];
+  allTags: TagInfo[];
   series: string[];
 };
 
@@ -30,7 +31,7 @@ interface Params extends ParsedUrlQuery {
   page_number: string;
 }
 
-const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage, tags, series }) => {
+const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage, allTags, series }) => {
   const router = useRouter();
   const [isInitialPage, setIsInitialPage] = useState(true);
   const [searchString, setSearchString] = useState<string>('');
@@ -57,10 +58,11 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
 
   return (
     <AppWidthContainer>
-      <ContentWithSidebarLayout sidebar={<MemorizedSidebar tags={tags} series={series} onChange={setSearchString} />}>
-        <h1 className='mb-10 text-5xl font-extrabold'>
-          {isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}
-        </h1>
+      <ContentWithSidebarLayout
+        sidebar={<MemorizedSidebar allTags={allTags} series={series} onSearchChange={setSearchString} />}
+      >
+        <PageTitle>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}</PageTitle>
+
         <BlogInlineSidebar />
 
         {isInitialPage ? (
@@ -95,7 +97,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
   const posts = allPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage);
   const lastPage = Math.ceil(allPostNumber / POSTS_PER_PAGE);
 
-  const tags = Blog.getAllTags();
+  const allTags = Blog.getAllTags();
   const series = Blog.getAllSeries();
 
   return {
@@ -104,7 +106,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
       posts,
       currentPage,
       lastPage,
-      tags,
+      allTags,
       series,
     },
   };

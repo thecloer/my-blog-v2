@@ -7,15 +7,17 @@ import urlPath from '@/config/urlPath';
 
 // TODO: blog tags, blog series
 type Props = {
-  tags: TagInfo[];
+  allTags: TagInfo[];
   series: string[];
-  onChange: (value: string) => void;
+  onSearchChange: (value: string) => void;
 };
 
-const BlogSidebar: FC<Props> = ({ tags, series, onChange }) => {
+const BlogSidebar: FC<Props> = ({ allTags, series, onSearchChange }) => {
   return (
     <>
-      <SearchBar onChange={onChange} />
+      <section className='mb-6'>
+        <SearchBar onChange={onSearchChange} />
+      </section>
       <section className='mb-6'>
         <h3 className='mb-2 text-xl font-semibold'>Series</h3>
         <ul>
@@ -31,7 +33,7 @@ const BlogSidebar: FC<Props> = ({ tags, series, onChange }) => {
       </section>
       <section>
         <h3 className='mb-2 text-xl font-semibold'>Tags</h3>
-        <TagContainer tags={tags} />
+        <TagContainer tags={allTags} />
       </section>
     </>
   );
