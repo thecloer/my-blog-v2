@@ -9,18 +9,16 @@ type Props = {
   post: BlogFrontMatterWithSlug;
 };
 
-// dummy button
-
 const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, thumbnail, title } }) => {
   return (
     <li>
-      <article className='flex flex-col py-8 md:flex-row'>
-        <div className='flex justify-center'>
+      <article className='flex flex-col gap-y-4 gap-x-6 py-8 md:flex-row'>
+        <div className='flex items-center justify-center'>
           <Link href={urlPath.blog.posts(slug)} passHref>
             <div
-              className='relative mb-4 h-36 w-36 shrink-0
+              className='relative h-36 w-36
                     cursor-pointer overflow-hidden rounded-xl
-                    md:mb-0 md:mr-6 md:h-48 md:w-48'
+                    md:h-48 md:w-48'
             >
               {thumbnail ? (
                 <Image alt={title} src={`/${thumbnail}`} layout='fill' objectPosition='center' objectFit='cover' />
@@ -36,26 +34,20 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, th
         <div className='flex grow flex-col'>
           {series && (
             <Link href={urlPath.blog.series(series)} passHref>
-              <div>
-                <a className='cursor-pointer text-sm font-medium text-bgDark-500'>{series}</a>
-              </div>
+              <a className='cursor-pointer text-sm font-medium text-bgDark-400 dark:text-bgDark-500'>{series}</a>
             </Link>
           )}
 
           <Link href={urlPath.blog.posts(slug)} passHref>
-            <a className='flex'>
-              <h2 className='mb-2 max-h-14 cursor-pointer overflow-hidden text-xl font-medium md:max-h-16 md:text-2xl '>
-                {title}
-              </h2>
-            </a>
+            <h2 className='mb-2 cursor-pointer text-xl font-medium line-clamp-2'>{title}</h2>
           </Link>
 
-          <div className='mb-4 grow'>
-            <p className='max-h-20 overflow-hidden break-words leading-relaxed'>{description}</p>
+          <div className='grow'>
+            <p className='mb-4 text-bgDark-800 line-clamp-3 dark:text-bgDark-300'>{description}</p>
           </div>
 
           <TagContainer tags={tags} />
-          <span className='text-sm'>{date}</span>
+          <span className='mt-1 text-sm text-bgDark-500 dark:text-bgDark-400'>{date}</span>
         </div>
       </article>
     </li>
