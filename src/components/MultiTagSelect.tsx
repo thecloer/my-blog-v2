@@ -4,7 +4,7 @@ import type { FC } from 'react';
 type Props = {
   options: TagInfo[];
   selectedTags?: TagInfo[];
-  onChange: (tags: TagInfo[]) => void;
+  onChange: (newSelectedTags: TagInfo[]) => void;
 };
 
 const MultiTagSelect: FC<Props> = ({ options, selectedTags = [], onChange }) => {

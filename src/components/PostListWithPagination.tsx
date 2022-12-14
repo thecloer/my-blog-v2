@@ -11,6 +11,7 @@ type Props = {
   NoItemView: ReactNode;
   onClick?: (pageNum: number, type: PaginationButtonType) => void;
 };
+
 const PostListWithPagination: FC<Props> = ({ posts, NoItemView, onClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const lastPage = Math.ceil(posts.length / POSTS_PER_PAGE);
