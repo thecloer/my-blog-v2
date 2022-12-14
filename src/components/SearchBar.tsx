@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { Magnifier } from '@/lib/svgs';
 import useDebounce from '@/hooks/useDebounce';
 
-// TODO: form(to='/blog/search/[searchString]')
-
 type Props = {
   delay?: number;
   onChange: (value: string) => void;
@@ -16,7 +14,6 @@ const SearchBar: FC<Props> = ({ delay, onChange }) => {
 
   useEffect(() => {
     onChange(debouncedInputValue);
-    return () => onChange('');
   }, [debouncedInputValue, onChange]);
 
   return (
