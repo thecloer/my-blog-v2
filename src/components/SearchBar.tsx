@@ -17,7 +17,7 @@ const SearchBar: FC<Props> = ({ delay, onChange }) => {
   }, [debouncedInputValue, onChange]);
 
   return (
-    <div className='relative mb-6 p-1'>
+    <div className='relative p-1'>
       <input
         aria-label='Search articles'
         type='text'
@@ -26,7 +26,7 @@ const SearchBar: FC<Props> = ({ delay, onChange }) => {
         placeholder='Search articles'
         className='block w-full rounded-md border border-gray-300 bg-white py-2 pl-4 pr-8 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-bgDark-900 dark:bg-bgDark-800 dark:text-gray-100'
       />
-      <Magnifier className='absolute top-4 right-2 h-5 w-5 text-gray-400 dark:text-gray-300' />
+      <Magnifier className='absolute top-4 right-4 h-5 w-5 text-gray-400 dark:text-gray-300' />
     </div>
   );
 };
