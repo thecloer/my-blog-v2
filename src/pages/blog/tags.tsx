@@ -8,8 +8,8 @@ import { Blog } from '@/repositories/blog';
 import { decodeURISlug } from '@/lib/utils/formatter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
+import PostListWithPagination from '@/components/PostListWithPagination';
 import MultiTagSelect from '@/components/MultiTagSelect';
-import PostList from '@/components/PostList';
 import NoTag from '@/components/SimpleView/NoTag';
 
 type Props = {
@@ -50,7 +50,7 @@ const TagsPage: FC<Props> = ({ allTags }) => {
       <ContentWithSidebarLayout
         sidebar={<MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />}
       >
-        <PostList posts={displayPosts} NoItemView={<NoTag />} />
+        <PostListWithPagination posts={displayPosts} NoItemView={<NoTag />} />
       </ContentWithSidebarLayout>
     </AppWidthContainer>
   );

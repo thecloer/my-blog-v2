@@ -9,6 +9,7 @@ import { Blog } from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
+import PostListWithPagination from '@/components/PostListWithPagination';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
 import PostList from '@/components/PostList';
@@ -61,8 +62,15 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
           {isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}
         </h1>
         <BlogInlineSidebar />
-        <PostList posts={displayPosts} NoItemView={<NoPost />} />
-        {isInitialPage ? <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateBlogPage} /> : null}
+
+        {isInitialPage ? (
+          <>
+            <PostList posts={displayPosts} NoItemView={<NoPost />} />
+            <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateBlogPage} />
+          </>
+        ) : (
+          <PostListWithPagination posts={displayPosts} NoItemView={<NoPost />} />
+        )}
       </ContentWithSidebarLayout>
     </AppWidthContainer>
   );
