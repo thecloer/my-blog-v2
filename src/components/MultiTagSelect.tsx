@@ -15,7 +15,7 @@ const MultiTagSelect: FC<Props> = ({ options, selectedTags = [], onChange }) => 
 
   return (
     <section className='text-sm'>
-      <div className='flex items-center rounded border border-bgDark-300 bg-white p-2 dark:border-bgDark-700 dark:bg-bgDark-800'>
+      <div className='flex items-center rounded-md border border-bgDark-300 bg-white p-2 dark:border-bgDark-700 dark:bg-bgDark-800'>
         <div className='flex grow flex-wrap gap-2 '>
           {selectedTags.map((v, i) => (
             <button
