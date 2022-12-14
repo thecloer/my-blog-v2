@@ -15,10 +15,10 @@ const MultiTagSelect: FC<Props> = ({ options, selectedTags = [], onChange }) => 
 
   return (
     <div className='p-1 text-sm'>
-      <div className='flex items-center rounded-md border border-gray-300 bg-white p-2 dark:bg-bgDark-800'>
+      <div className='flex items-center rounded-md border border-bgDark-300 bg-white p-2 dark:border-bgDark-700 dark:bg-bgDark-800'>
         <div className='flex grow flex-wrap gap-2'>
           {selectedTags.length === 0 ? (
-            <span className='cursor-default pl-2 text-base text-gray-400'>Select Tags</span>
+            <span className='cursor-default pl-2 text-base text-bgDark-400'>Select Tags</span>
           ) : (
             selectedTags.map((v, i) => (
               <button
