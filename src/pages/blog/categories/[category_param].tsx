@@ -1,5 +1,4 @@
-import type { FC } from 'react';
-import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import { Blog } from '@/repositories/blog';
@@ -18,7 +17,7 @@ interface Params extends ParsedUrlQuery {
   category_param: string;
 }
 
-const CategoryPage: FC<Props> = ({ posts, category }) => {
+const CategoryPage: NextPage<Props> = ({ posts, category }) => {
   return (
     <AppWidthContainer>
       <PageTitle>{category}</PageTitle>

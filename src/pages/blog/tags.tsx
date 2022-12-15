@@ -1,5 +1,4 @@
-import type { FC } from 'react';
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
@@ -16,7 +15,7 @@ type Props = {
   allTags: TagInfo[];
 };
 
-const TagsPage: FC<Props> = ({ allTags }) => {
+const TagsPage: NextPage<Props> = ({ allTags }) => {
   const router = useRouter();
   const searchedTags = useMemo(() => {
     const rawTags = router.query.tags;

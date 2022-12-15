@@ -4,7 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import AppLayout from '@/layouts/AppLayout';
 import siteMetadata from '@/config/siteMetadata';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider attribute='class' defaultTheme={siteMetadata.theme}>
       <AppLayout>
@@ -12,6 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </AppLayout>
     </ThemeProvider>
   );
-}
+};
 
 export default MyApp;
