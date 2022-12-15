@@ -6,6 +6,8 @@ import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter, isMdxFile } from '@/lib/utils/helper';
 import { getMdxDataByPath } from '@/lib/mdx/mdx';
 
+export const UNCATEGORIZED_POSTS = 'Uncategorized Posts';
+
 export class Blog {
   private static _staticInstance: Blog;
   private readonly _prefixPath = DATA_PATH.BLOG;
@@ -24,8 +26,11 @@ export class Blog {
       );
       // CategoryMap
       const category = frontMatter.category; // if no category in mdx file, category is undefined but typescript doesn't know that
-      // TODO: null => uncategorized
-      if (category !== null && category !== undefined)
+      if (category === null || category === undefined)
+        this._categoryMap.has(UNCATEGORIZED_POSTS)
+          ? this._categoryMap.get(UNCATEGORIZED_POSTS)!.push(frontMatter)
+          : this._categoryMap.set(UNCATEGORIZED_POSTS, [frontMatter]);
+      else
         this._categoryMap.has(category)
           ? this._categoryMap.get(category)!.push(frontMatter)
           : this._categoryMap.set(category, [frontMatter]);
@@ -37,25 +42,27 @@ export class Blog {
     return this._staticInstance ?? (this._staticInstance = new this());
   }
 
-  static getAllFrontMatters(sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
-    return sortFunc === undefined ? Blog.instance._frontMatters : Blog.instance._frontMatters.sort(sortFunc);
+  static getAllFrontMatters(sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC) {
+    return Blog.instance._frontMatters.sort(sortFunc);
   }
-  static getFrontMattersByTag(tag: string | string[], sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
-    if (typeof tag === 'string')
-      return (
-        (sortFunc === undefined ? Blog.instance._tagMap.get(tag) : Blog.instance._tagMap.get(tag)?.sort(sortFunc)) ?? []
-      );
+
+  static getFrontMattersByTag(
+    tag: string | string[],
+    sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC
+  ) {
+    if (typeof tag === 'string') return Blog.instance._tagMap.get(tag)?.sort(sortFunc) ?? [];
 
     const frontMatters = [...new Set(tag.map((t) => Blog.instance._tagMap.get(t) ?? []).flat())];
-    return sortFunc === undefined ? frontMatters : frontMatters?.sort(sortFunc);
+    return frontMatters.sort(sortFunc);
   }
-  static getFrontMattersByCategory(category: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
-    return (
-      (sortFunc === undefined
-        ? Blog.instance._categoryMap.get(category)
-        : Blog.instance._categoryMap.get(category)?.sort(sortFunc)) ?? []
-    );
+
+  static getFrontMattersByCategory(
+    category: string,
+    sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC
+  ) {
+    return Blog.instance._categoryMap.get(category)?.sort(sortFunc) ?? [];
   }
+
   static getAllTags() {
     const tags: TagInfo[] = [];
     for (const [tagName, frontMatters] of Blog.instance._tagMap) {
@@ -63,6 +70,7 @@ export class Blog {
     }
     return tags;
   }
+
   static getAllCategories() {
     return Array.from(Blog.instance._categoryMap.keys());
   }
