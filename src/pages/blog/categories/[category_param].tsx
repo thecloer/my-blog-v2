@@ -15,10 +15,10 @@ type Props = {
 };
 
 interface Params extends ParsedUrlQuery {
-  category_name: string;
+  category_param: string;
 }
 
-const CategoryNamePage: FC<Props> = ({ posts, category }) => {
+const CategoryPage: FC<Props> = ({ posts, category }) => {
   return (
     <AppWidthContainer>
       <PageTitle>{category}</PageTitle>
@@ -28,7 +28,7 @@ const CategoryNamePage: FC<Props> = ({ posts, category }) => {
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const paths = Blog.getAllCategories().map((category) => ({ params: { category_name: encodeURISlug(category) } }));
+  const paths = Blog.getAllCategories().map((category) => ({ params: { category_param: encodeURISlug(category) } }));
   return {
     paths,
     fallback: false,
@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
         permanent: false,
       },
     };
-  const category = decodeURISlug(params.category_name);
+  const category = decodeURISlug(params.category_param);
 
   const posts = Blog.getFrontMattersByCategory(category);
 
@@ -55,4 +55,4 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
   };
 };
 
-export default CategoryNamePage;
+export default CategoryPage;
