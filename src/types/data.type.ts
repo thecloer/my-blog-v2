@@ -25,7 +25,7 @@ export type TagInfo = {
   count: number;
 };
 
-export type BlogFrontMatter = CommonFrontMatter & { series: string | null };
+export type BlogFrontMatter = CommonFrontMatter & { category: string | null };
 
 /**
  * @property `slug` - file name in `data/blog/` without extension include nested paths.

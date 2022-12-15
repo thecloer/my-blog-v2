@@ -12,7 +12,7 @@ export class Blog {
   private readonly _filePaths: string[];
   private readonly _frontMatters: BlogFrontMatterWithSlug[];
   private readonly _tagMap: Map<string, BlogFrontMatterWithSlug[]> = new Map();
-  private readonly _seriesMap: Map<string, BlogFrontMatterWithSlug[]> = new Map();
+  private readonly _categoryMap: Map<string, BlogFrontMatterWithSlug[]> = new Map();
 
   private constructor() {
     this._filePaths = getAllFilePathsRecursively(this._prefixPath).filter(isMdxFile);
@@ -22,12 +22,13 @@ export class Blog {
       frontMatter.tags?.forEach((tag) =>
         this._tagMap.has(tag) ? this._tagMap.get(tag)!.push(frontMatter) : this._tagMap.set(tag, [frontMatter])
       );
-      // SeriesMap
-      const series = frontMatter.series; // if no series in mdx file, series is undefined but typescript doesn't know that
-      if (series !== null && series !== undefined)
-        this._seriesMap.has(series)
-          ? this._seriesMap.get(series)!.push(frontMatter)
-          : this._seriesMap.set(series, [frontMatter]);
+      // CategoryMap
+      const category = frontMatter.category; // if no category in mdx file, category is undefined but typescript doesn't know that
+      // TODO: null => uncategorized
+      if (category !== null && category !== undefined)
+        this._categoryMap.has(category)
+          ? this._categoryMap.get(category)!.push(frontMatter)
+          : this._categoryMap.set(category, [frontMatter]);
     });
 
     // TODO: RSS
@@ -48,11 +49,11 @@ export class Blog {
     const frontMatters = [...new Set(tag.map((t) => Blog.instance._tagMap.get(t) ?? []).flat())];
     return sortFunc === undefined ? frontMatters : frontMatters?.sort(sortFunc);
   }
-  static getFrontMattersBySeries(series: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
+  static getFrontMattersByCategory(category: string, sortFunc?: SortFunc<BlogFrontMatterWithSlug>) {
     return (
       (sortFunc === undefined
-        ? Blog.instance._seriesMap.get(series)
-        : Blog.instance._seriesMap.get(series)?.sort(sortFunc)) ?? []
+        ? Blog.instance._categoryMap.get(category)
+        : Blog.instance._categoryMap.get(category)?.sort(sortFunc)) ?? []
     );
   }
   static getAllTags() {
@@ -62,8 +63,8 @@ export class Blog {
     }
     return tags;
   }
-  static getAllSeries() {
-    return Array.from(Blog.instance._seriesMap.keys());
+  static getAllCategories() {
+    return Array.from(Blog.instance._categoryMap.keys());
   }
 
   static async getMdxDataBySlug(slug: string) {

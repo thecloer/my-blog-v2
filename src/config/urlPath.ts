@@ -6,8 +6,14 @@ const urlPath = {
     index: '/blog',
     page: (pageNumber: number) => `/blog/page/${pageNumber}`,
     posts: (slug: string) => `/blog/posts/${slug}`,
-    tags: (tags: string[]) => `/blog/tags?${tags.map((tag) => `tags=${encodeURISlug(tag)}`).join('&')}`,
-    series: (series: string) => `/blog/series/${encodeURISlug(series)}`,
+    tags: {
+      index: '/blog/tags',
+      query: (tags: string[]) => `/blog/tags?${tags.map((tag) => `tags=${encodeURISlug(tag)}`).join('&')}`,
+    },
+    categories: {
+      index: '/blog/categories',
+      param: (category: string) => `/blog/categories/${encodeURISlug(category)}`,
+    },
   },
   api: {
     blog: {

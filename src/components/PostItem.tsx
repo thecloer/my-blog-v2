@@ -9,7 +9,7 @@ type Props = {
   post: BlogFrontMatterWithSlug;
 };
 
-const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, thumbnail, title } }) => {
+const PostItem: FC<Props> = ({ post: { slug, date, description, category, tags, thumbnail, title } }) => {
   return (
     <li>
       <article className='flex flex-col gap-y-4 gap-x-6 py-8 md:flex-row'>
@@ -32,9 +32,9 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, series, tags, th
         </div>
 
         <div className='flex grow flex-col'>
-          {series && (
-            <Link href={urlPath.blog.series(series)} passHref>
-              <a className='cursor-pointer text-sm font-medium text-bgDark-400 dark:text-bgDark-500'>{series}</a>
+          {category && (
+            <Link href={urlPath.blog.categories.param(category)} passHref>
+              <a className='cursor-pointer text-sm font-medium text-bgDark-400 dark:text-bgDark-500'>{category}</a>
             </Link>
           )}
 

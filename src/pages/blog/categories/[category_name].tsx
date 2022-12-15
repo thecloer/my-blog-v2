@@ -10,25 +10,25 @@ import PostListWithPagination from '@/components/PostListWithPagination';
 import NoPost from '@/components/SimpleView/NoPost';
 
 type Props = {
-  seriesName: string;
+  category: string;
   posts: BlogFrontMatterWithSlug[];
 };
 
 interface Params extends ParsedUrlQuery {
-  series_name: string;
+  category_name: string;
 }
 
-const SeriesNamePage: FC<Props> = ({ posts, seriesName }) => {
+const CategoryNamePage: FC<Props> = ({ posts, category }) => {
   return (
     <AppWidthContainer>
-      <PageTitle>{seriesName}</PageTitle>
+      <PageTitle>{category}</PageTitle>
       <PostListWithPagination posts={posts} NoItemView={<NoPost />} />
     </AppWidthContainer>
   );
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const paths = Blog.getAllSeries().map((series) => ({ params: { series_name: encodeURISlug(series) } }));
+  const paths = Blog.getAllCategories().map((category) => ({ params: { category_name: encodeURISlug(category) } }));
   return {
     paths,
     fallback: false,
@@ -43,16 +43,16 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
         permanent: false,
       },
     };
-  const seriesName = decodeURISlug(params.series_name);
+  const category = decodeURISlug(params.category_name);
 
-  const posts = Blog.getFrontMattersBySeries(seriesName);
+  const posts = Blog.getFrontMattersByCategory(category);
 
   return {
     props: {
-      seriesName,
+      category,
       posts,
     },
   };
 };
 
-export default SeriesNamePage;
+export default CategoryNamePage;

@@ -48,10 +48,10 @@ export const getPaginationNumbers = (currentPage: number, lastPage: number) => {
 };
 
 export const blogSearchFilter = (searchTerm: string) => (frontMatter: BlogFrontMatterWithSlug) => {
-  const targetKeys: Extract<keyof BlogFrontMatterWithSlug, 'title' | 'description' | 'tags' | 'series'>[] = [
+  const targetKeys: Extract<keyof BlogFrontMatterWithSlug, 'title' | 'description' | 'tags' | 'category'>[] = [
     'description',
     'title',
-    'series',
+    'category',
     'tags',
   ];
   return targetKeys.some((key) =>

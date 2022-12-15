@@ -24,14 +24,14 @@ type Props = {
   currentPage: number;
   lastPage: number;
   allTags: TagInfo[];
-  series: string[];
+  categories: string[];
 };
 
 interface Params extends ParsedUrlQuery {
   page_number: string;
 }
 
-const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage, allTags, series }) => {
+const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage, allTags, categories }) => {
   const router = useRouter();
   const [isInitialPage, setIsInitialPage] = useState(true);
   const [searchString, setSearchString] = useState<string>('');
@@ -59,7 +59,7 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
   return (
     <AppWidthContainer>
       <ContentWithSidebarLayout
-        sidebar={<MemorizedSidebar allTags={allTags} series={series} onSearchChange={setSearchString} />}
+        sidebar={<MemorizedSidebar allTags={allTags} categories={categories} onSearchChange={setSearchString} />}
       >
         <PageTitle>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}</PageTitle>
 
@@ -98,7 +98,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
   const lastPage = Math.ceil(allPostNumber / POSTS_PER_PAGE);
 
   const allTags = Blog.getAllTags();
-  const series = Blog.getAllSeries();
+  const categories = Blog.getAllCategories();
 
   return {
     props: {
@@ -107,7 +107,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
       currentPage,
       lastPage,
       allTags,
-      series,
+      categories,
     },
   };
 };
