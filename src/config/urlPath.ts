@@ -19,7 +19,8 @@ const urlPath = {
     blog: {
       search: {
         query: (query: string) => `/api/blog/search/query?q=${encodeURIComponent(query)}`,
-        tags: (tags: string[]) => `/api/blog/search/tags?${tags.map((tag) => `tags=${encodeURISlug(tag)}`).join('&')}`,
+        tags: (tags: string[]) =>
+          `/api/blog/search/tags?${tags.map((tag) => `tags=${encodeURIComponent(tag)}`).join('&')}`,
       },
     },
   },
