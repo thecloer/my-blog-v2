@@ -1,31 +1,29 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { switchBodyOverflow } from '@/lib/dom';
 import { HamburgerIcon, XIcon } from '@/lib/svgs';
 import headerNavLinks from '@/config/headerNavLinks';
+import useIntersection from '@/hooks/useIntersection';
 import Footer from '@/components/Footer';
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+  const isIntersecting = useIntersection(mobileNavRef);
 
   useEffect(() => {
-    const handler = () => {
-      if (!(navShow && window.innerWidth > 640)) return;
-      switchBodyOverflow('auto');
-      setNavShow(false);
-    };
-    window.addEventListener('resize', handler);
-    return () => window.removeEventListener('resize', handler);
+    if (!isIntersecting) setNavShow(false);
+  }, [isIntersecting]);
+
+  useEffect(() => {
+    switchBodyOverflow(navShow ? 'hidden' : 'auto');
+    return () => switchBodyOverflow('auto');
   }, [navShow]);
 
-  const onToggleNav = () =>
-    setNavShow((currentNavShow) => {
-      switchBodyOverflow(currentNavShow ? 'auto' : 'hidden');
-      return !currentNavShow;
-    });
+  const onToggleNav = () => setNavShow((currentNavShow) => !currentNavShow);
 
   return (
-    <div className='sm:hidden'>
+    <div className='sm:hidden' ref={mobileNavRef}>
       <button
         type='button'
         className='-mr-4 flex items-center py-3 pl-2 pr-4 text-slate-600 transition-colors hover:text-primary-500 dark:text-slate-200 hover:dark:text-primary-400'
