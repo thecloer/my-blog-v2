@@ -9,7 +9,7 @@ type Props = {
 const TagButton: FC<Props> = ({ name, count, onClick }) => {
   return (
     <button
-      className='flex items-center gap-1 rounded bg-bgDark-100 px-1 py-[1px] text-sm hover:bg-primary-400 dark:bg-bgDark-600 dark:hover:bg-primary-500 hover:dark:text-bgDark-800'
+      className='flex items-center gap-1 rounded bg-bgDark-100 px-1 py-[2px] text-sm hover:bg-primary-400 dark:bg-bgDark-600 dark:hover:bg-primary-500 hover:dark:text-bgDark-800'
       onClick={() => onClick?.(name, count)}
     >
       {name}
