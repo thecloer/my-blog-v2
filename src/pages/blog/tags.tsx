@@ -8,7 +8,7 @@ import { decodeURISlug } from '@/lib/utils/formatter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import PostListWithPagination from '@/components/PostListWithPagination';
-import MultiTagSelect from '@/components/MultiTagSelect';
+import MultiTagSelect from '@/components/tag/MultiTagSelect';
 import NoTag from '@/components/SimpleView/NoTag';
 
 type Props = {
