@@ -9,12 +9,12 @@ import { Blog } from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
+import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
 import PostList from '@/components/PostList';
 import NoPost from '@/components/SimpleView/NoPost';
-import PageTitle from '@/components/PageTitle';
 
 type Props = {
   allPostNumber: number;

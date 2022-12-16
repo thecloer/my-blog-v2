@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { memo } from 'react';
-import SidebarSection from '@/components/SidebarSection';
+import SidebarSection from '@/containers/SidebarSection';
 import CategoryList from '@/components/CategoryList';
 
 type Props = {

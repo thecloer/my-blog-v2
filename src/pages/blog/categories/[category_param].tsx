@@ -7,9 +7,9 @@ import { decodeURISlug, encodeURISlug } from '@/lib/utils/formatter';
 import { hoistItem } from '@/lib/utils/sorter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
+import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import CategoriesSidebar from '@/components/sidebar/CategoriesSidebar';
-import PageTitle from '@/components/PageTitle';
 import NoPost from '@/components/SimpleView/NoPost';
 
 type Props = {

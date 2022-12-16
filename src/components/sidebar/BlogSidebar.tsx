@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { TagInfo } from '@/types/data.type';
 import { memo } from 'react';
-import SidebarSection from '@/components/SidebarSection';
+import SidebarSection from '@/containers/SidebarSection';
 import TagContainer from '@/components/tag/TagContainer';
 import CategoryList from '@/components/CategoryList';
 import SearchBar from '@/components/SearchBar';
