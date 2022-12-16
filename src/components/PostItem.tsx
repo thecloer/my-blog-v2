@@ -3,7 +3,7 @@ import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import Link from 'next/link';
 import Image from 'next/image';
 import urlPath from '@/config/urlPath';
-import TagContainer from './TagContainer';
+import TagContainer from '@/components/tag/TagContainer';
 
 type Props = {
   post: BlogFrontMatterWithSlug;
@@ -46,7 +46,7 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, category, tags, 
             <p className='mb-4 text-bgDark-800 line-clamp-3 dark:text-bgDark-300'>{description}</p>
           </div>
 
-          <TagContainer tags={tags} />
+          <TagContainer tags={tags} type='link' />
           <span className='mt-1 text-sm text-bgDark-500 dark:text-bgDark-400'>{date}</span>
         </div>
       </article>
