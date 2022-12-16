@@ -6,6 +6,7 @@ import { Blog, UNCATEGORIZED_POSTS } from '@/repositories/blog';
 import { decodeURISlug, encodeURISlug } from '@/lib/utils/formatter';
 import { hoistItem } from '@/lib/utils/sorter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
+import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
@@ -27,6 +28,9 @@ const CategoryPage: NextPage<Props> = ({ category, posts, categories }) => {
     <AppWidthContainer>
       <ContentWithSidebarLayout sidebar={<CategoriesSidebar categories={categories} selectedCategory={category} />}>
         <PageTitle>{category}</PageTitle>
+        <InlineSidebarWrapper>
+          <CategoriesSidebar categories={categories} selectedCategory={category} />
+        </InlineSidebarWrapper>
         <PostListWithPagination posts={posts} NoItemView={<NoPost />} />
       </ContentWithSidebarLayout>
     </AppWidthContainer>

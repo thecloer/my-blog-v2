@@ -6,6 +6,7 @@ import urlPath from '@/config/urlPath';
 import { Blog } from '@/repositories/blog';
 import { decodeURISlug } from '@/lib/utils/formatter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
+import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import MultiTagSelect from '@/components/tag/MultiTagSelect';
@@ -49,6 +50,9 @@ const TagsPage: NextPage<Props> = ({ allTags }) => {
       <ContentWithSidebarLayout
         sidebar={<MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />}
       >
+        <InlineSidebarWrapper>
+          <MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />
+        </InlineSidebarWrapper>
         <PostListWithPagination posts={displayPosts} NoItemView={<NoTag />} />
       </ContentWithSidebarLayout>
     </AppWidthContainer>

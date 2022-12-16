@@ -8,7 +8,7 @@ import MobileNav from './MobileNav';
 
 const Header = () => {
   return (
-    <header className='sticky top-0 z-10 bg-white/80 py-6 backdrop-blur dark:bg-bgDark-900/80'>
+    <header className='sticky top-0 z-20 bg-white/80 py-6 backdrop-blur dark:bg-bgDark-900/80'>
       <AppWidthContainer>
         <div className='flex items-center justify-between'>
           <Link href='/' aria-label={siteMetadata.title} passHref>

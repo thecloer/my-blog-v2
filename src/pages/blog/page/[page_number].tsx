@@ -7,8 +7,8 @@ import { POSTS_PER_PAGE } from '@/config/layoutConfig';
 import urlPath from '@/config/urlPath';
 import { Blog } from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
+import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
-import BlogInlineSidebar from '@/components/sidebar/BlogInlineSidebar';
 import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
@@ -69,7 +69,14 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
       >
         <PageTitle>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}</PageTitle>
 
-        <BlogInlineSidebar />
+        <InlineSidebarWrapper>
+          <BlogSidebar
+            allTags={allTags}
+            categories={categories}
+            onSearchChange={setSearchString}
+            onTagClick={navigateToTagPage}
+          />
+        </InlineSidebarWrapper>
 
         {isInitialPage ? (
           <>
