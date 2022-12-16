@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { memo } from 'react';
 import SidebarSection from '@/components/SidebarSection';
 import CategoryList from '@/components/CategoryList';
 
@@ -15,4 +16,4 @@ const CategoriesSidebar: FC<Props> = ({ categories, selectedCategory }) => {
   );
 };
 
-export default CategoriesSidebar;
+export default memo(CategoriesSidebar);
