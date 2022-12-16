@@ -39,7 +39,7 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, category, tags, 
           )}
 
           <Link href={urlPath.blog.posts(slug)} passHref>
-            <h2 className='mb-2 cursor-pointer text-xl font-medium line-clamp-2'>{title}</h2>
+            <h2 className='mb-2 cursor-pointer text-xl font-semibold line-clamp-2'>{title}</h2>
           </Link>
 
           <div className='grow'>
