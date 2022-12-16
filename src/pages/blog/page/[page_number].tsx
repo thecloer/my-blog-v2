@@ -16,8 +16,6 @@ import PostList from '@/components/PostList';
 import NoPost from '@/components/SimpleView/NoPost';
 import PageTitle from '@/components/PageTitle';
 
-const MemorizedSidebar = memo(BlogSidebar);
-
 type Props = {
   allPostNumber: number;
   posts: BlogFrontMatterWithSlug[];
@@ -54,12 +52,20 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
     searchPosts();
   }, [isInitialPage, searchString, posts]);
 
-  const navigateBlogPage = (pageNum: number) => router.push(urlPath.blog.page(pageNum));
+  const navigateToBlogPage = (pageNum: number) => router.push(urlPath.blog.page(pageNum));
+  const navigateToTagPage = (tagName: string) => router.push(urlPath.blog.tags.query([tagName]));
 
   return (
     <AppWidthContainer>
       <ContentWithSidebarLayout
-        sidebar={<MemorizedSidebar allTags={allTags} categories={categories} onSearchChange={setSearchString} />}
+        sidebar={
+          <BlogSidebar
+            allTags={allTags}
+            categories={categories}
+            onSearchChange={setSearchString}
+            onTagClick={navigateToTagPage}
+          />
+        }
       >
         <PageTitle>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}</PageTitle>
 
@@ -68,7 +74,7 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
         {isInitialPage ? (
           <>
             <PostList posts={displayPosts} NoItemView={<NoPost />} />
-            <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateBlogPage} />
+            <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateToBlogPage} />
           </>
         ) : (
           <PostListWithPagination posts={displayPosts} NoItemView={<NoPost />} />
@@ -77,8 +83,6 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
     </AppWidthContainer>
   );
 };
-// TODO: if (!isInitialPage), show pagination for DisplayPosts
-// TODO: No Posts View
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const allPostNumber = Blog.getAllFrontMatters().length;

@@ -7,7 +7,7 @@ type Props = {
   count?: number;
 };
 
-const TagButton: FC<Props> = ({ name, count }) => {
+const TagLink: FC<Props> = ({ name, count }) => {
   return (
     <Link href={urlPath.blog.tags.query([name])}>
       <a className='rounded bg-primary-400 px-1 py-[1px] text-sm hover:bg-primary-300 dark:bg-primary-500 dark:text-bgDark-800 hover:dark:bg-primary-400'>
@@ -18,4 +18,4 @@ const TagButton: FC<Props> = ({ name, count }) => {
   );
 };
 
-export default TagButton;
+export default TagLink;
