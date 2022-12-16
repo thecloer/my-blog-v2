@@ -13,10 +13,11 @@ import MultiTagSelect from '@/components/tag/MultiTagSelect';
 import NoTag from '@/components/SimpleView/NoTag';
 
 type Props = {
+  allPosts: BlogFrontMatterWithSlug[];
   allTags: TagInfo[];
 };
 
-const TagsPage: NextPage<Props> = ({ allTags }) => {
+const TagsPage: NextPage<Props> = ({ allPosts, allTags }) => {
   const router = useRouter();
   const searchedTags = useMemo(() => {
     const rawTags = router.query.tags;
@@ -24,17 +25,14 @@ const TagsPage: NextPage<Props> = ({ allTags }) => {
     return allTags.filter((t) => searchedTagNames.includes(t.name));
   }, [allTags, router.query.tags]);
   const [selectedTags, setSelectedTags] = useState(searchedTags);
-  const [displayPosts, setDisplayPosts] = useState<BlogFrontMatterWithSlug[]>([]);
+  const [displayPosts, setDisplayPosts] = useState<BlogFrontMatterWithSlug[]>(allPosts);
 
   useEffect(() => {
     setSelectedTags(searchedTags);
   }, [searchedTags]);
 
   useEffect(() => {
-    if (selectedTags.length === 0) {
-      setDisplayPosts([]);
-      return;
-    }
+    if (selectedTags.length === 0) return setDisplayPosts(allPosts);
 
     // TODO: API call
     const searchPosts = async () => {
@@ -43,7 +41,7 @@ const TagsPage: NextPage<Props> = ({ allTags }) => {
       setDisplayPosts(result);
     };
     searchPosts();
-  }, [selectedTags]);
+  }, [selectedTags, allPosts]);
 
   return (
     <AppWidthContainer>
@@ -60,10 +58,12 @@ const TagsPage: NextPage<Props> = ({ allTags }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
+  const allPosts = Blog.getAllFrontMatters();
   const allTags = Blog.getAllTags();
 
   return {
     props: {
+      allPosts,
       allTags,
     },
   };
