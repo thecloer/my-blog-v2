@@ -24,10 +24,7 @@ const MultiTagSelect: FC<Props> = ({ options, selectedTags = [], onChange }) => 
               <button
                 key={i}
                 className='group flex items-center rounded bg-primary-300 px-1 py-[2px] hover:bg-red-200 dark:bg-primary-600 dark:hover:bg-red-400'
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectOption(v);
-                }}
+                onClick={() => selectOption(v)}
               >
                 {v.name}
                 <span className='ml-1 font-medium text-bgDark-500 group-hover:text-red-500 dark:text-bgDark-50 dark:group-hover:text-red-600'>
@@ -39,10 +36,7 @@ const MultiTagSelect: FC<Props> = ({ options, selectedTags = [], onChange }) => 
         </div>
         <button
           className='flex h-6 w-7 items-center justify-center text-xl font-medium text-bgDark-500 hover:text-red-500'
-          onClick={(e) => {
-            e.stopPropagation();
-            clearOptions();
-          }}
+          onClick={clearOptions}
         >
           &times;
         </button>
@@ -53,10 +47,7 @@ const MultiTagSelect: FC<Props> = ({ options, selectedTags = [], onChange }) => 
             <button
               className={`flex items-center rounded px-1 py-[2px] hover:bg-primary-400 dark:hover:bg-primary-700
               ${isOptionSelected(option) ? 'bg-primary-300 dark:bg-primary-600' : 'bg-bgDark-100 dark:bg-bgDark-600'}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                selectOption(option);
-              }}
+              onClick={() => selectOption(option)}
             >{`${option.name} (${option.count})`}</button>
           </li>
         ))}
