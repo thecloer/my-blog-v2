@@ -2,7 +2,7 @@ import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import type { SortFunc } from '@/types/utils.type';
 import DATA_PATH from '@/config/dataPath';
 import { getAllFilePathsRecursively, getBlogFrontMatterFromPath } from '@/lib/files';
-import { sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
+import { hoistItem, sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter, isMdxFile } from '@/lib/utils/helper';
 import { getMdxDataByPath } from '@/lib/mdx/mdx';
 
@@ -72,7 +72,7 @@ export class Blog {
   }
 
   static getAllCategories() {
-    return Array.from(Blog.instance._categoryMap.keys());
+    return hoistItem(Array.from(Blog.instance._categoryMap.keys()), UNCATEGORIZED_POSTS);
   }
 
   static async getMdxDataBySlug(slug: string) {

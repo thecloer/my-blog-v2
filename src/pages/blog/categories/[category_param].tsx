@@ -4,7 +4,6 @@ import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import urlPath from '@/config/urlPath';
 import { Blog, UNCATEGORIZED_POSTS } from '@/repositories/blog';
 import { decodeURISlug, encodeURISlug } from '@/lib/utils/formatter';
-import { hoistItem } from '@/lib/utils/sorter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
@@ -55,9 +54,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
     };
 
   const category = decodeURISlug(params.category_param);
-  const allCategories = Blog.getAllCategories();
-  const categories = hoistItem(allCategories, UNCATEGORIZED_POSTS);
   const posts = Blog.getFrontMattersByCategory(category);
+  const categories = Blog.getAllCategories();
 
   return {
     props: {
