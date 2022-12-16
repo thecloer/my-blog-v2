@@ -2,9 +2,9 @@ import type { FC, ReactNode } from 'react';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import type { PaginationButtonType } from '@/types/utils.type';
 import { useState } from 'react';
-import Pagination from './pagination/Pagination';
-import PostList from './PostList';
 import { POSTS_PER_PAGE } from '@/config/layoutConfig';
+import Pagination from '@/components/pagination/Pagination';
+import PostList from '@/components/PostList';
 
 type Props = {
   posts: BlogFrontMatterWithSlug[];

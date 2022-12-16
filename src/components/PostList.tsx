@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
-import PostItem from './PostItem';
+import PostItem from '@/components/PostItem';
 
 type Props = {
   posts: BlogFrontMatterWithSlug[];

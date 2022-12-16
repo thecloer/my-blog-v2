@@ -2,8 +2,8 @@ import type { BlogFrontMatter, BlogFrontMatterWithSlug } from '@/types/data.type
 import { type PathLike, readdirSync, statSync, readFileSync } from 'fs';
 import { extname, join } from 'path';
 import matter from 'gray-matter';
-import { flattenArray, map, pipe } from './utils/currying';
 import DATA_PATH from '@/config/dataPath';
+import { flattenArray, map, pipe } from '@/lib/utils/currying';
 
 const readdirSyncUtf8 = (path: PathLike) => readdirSync(path, 'utf-8');
 const pathJoinPrefix = (prefix: string) => (path: string) => join(prefix, path);
