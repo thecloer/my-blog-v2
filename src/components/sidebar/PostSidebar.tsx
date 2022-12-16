@@ -1,14 +1,19 @@
 import type { FC } from 'react';
 import type { Toc } from '@/types/data.type';
-import NestedToc from '../nestedToc/NestedToc';
+import { memo } from 'react';
+import SidebarSection from '@/components/SidebarSection';
+import NestedToc from '@/components/nestedToc/NestedToc';
 
 type Props = {
   toc: Toc;
 };
 
-// TODO: blog tags, blog categories
 const PostSidebar: FC<Props> = ({ toc }) => {
-  return <NestedToc toc={toc} />;
+  return (
+    <SidebarSection>
+      <NestedToc toc={toc} />
+    </SidebarSection>
+  );
 };
 
-export default PostSidebar;
+export default memo(PostSidebar);
