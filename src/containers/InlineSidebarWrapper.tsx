@@ -26,11 +26,14 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
         </div>
         Menu
       </button>
-      {showChildren && (
-        <div className='absolute top-4 -z-10 w-full rounded-b-md bg-bgDark-200 px-5 pt-10 pb-5 dark:bg-bgDark-700'>
-          {children}
-        </div>
-      )}
+
+      <div
+        className={`absolute top-4 -z-10 w-full rounded-b-md bg-bgDark-200 px-5 pt-10 pb-5 dark:bg-bgDark-700 ${
+          showChildren ? 'visible' : 'invisible'
+        }`}
+      >
+        {children}
+      </div>
     </div>
   );
 };
