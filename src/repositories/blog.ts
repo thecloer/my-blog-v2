@@ -8,7 +8,7 @@ import { getMdxDataByPath } from '@/lib/mdx/mdx';
 
 export const UNCATEGORIZED_POSTS = 'Uncategorized Posts';
 
-export class Blog {
+class Blog {
   private static _staticInstance: Blog;
   private readonly _prefixPath = DATA_PATH.BLOG;
   private readonly _filePaths: string[];
@@ -93,3 +93,5 @@ export class Blog {
         );
   }
 }
+
+export default Blog;

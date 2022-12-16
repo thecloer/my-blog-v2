@@ -3,7 +3,7 @@ import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import urlPath from '@/config/urlPath';
-import { Blog } from '@/repositories/blog';
+import Blog from '@/repositories/blog';
 import { decodeURISlug } from '@/lib/utils/formatter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';

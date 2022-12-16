@@ -2,7 +2,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import urlPath from '@/config/urlPath';
-import { Blog, UNCATEGORIZED_POSTS } from '@/repositories/blog';
+import Blog, { UNCATEGORIZED_POSTS } from '@/repositories/blog';
 import { decodeURISlug, encodeURISlug } from '@/lib/utils/formatter';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';

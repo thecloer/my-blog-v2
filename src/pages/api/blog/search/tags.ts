@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Blog } from '@/repositories/blog';
+import Blog from '@/repositories/blog';
 
 export default async function tagsHandler(req: NextApiRequest, res: NextApiResponse) {
   const searchQuery = req.query.tags;
