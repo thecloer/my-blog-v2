@@ -1,15 +1,17 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
+import siteMetadata from '@/config/siteMetadata';
 import urlPath from '@/config/urlPath';
-import Blog, { UNCATEGORIZED_POSTS } from '@/repositories/blog';
 import { decodeURISlug, encodeURISlug } from '@/lib/utils/formatter';
+import Blog, { UNCATEGORIZED_POSTS } from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import CategoriesSidebar from '@/components/sidebar/CategoriesSidebar';
+import { PageSEO } from '@/components/SEO';
 import NoPost from '@/components/SimpleView/NoPost';
 
 type Props = {
@@ -24,15 +26,22 @@ interface Params extends ParsedUrlQuery {
 
 const CategoryPage: NextPage<Props> = ({ category, posts, categories }) => {
   return (
-    <AppWidthContainer>
-      <ContentWithSidebarLayout sidebar={<CategoriesSidebar categories={categories} selectedCategory={category} />}>
-        <PageTitle>{category}</PageTitle>
-        <InlineSidebarWrapper>
-          <CategoriesSidebar categories={categories} selectedCategory={category} />
-        </InlineSidebarWrapper>
-        <PostListWithPagination posts={posts} NoItemView={<NoPost />} />
-      </ContentWithSidebarLayout>
-    </AppWidthContainer>
+    <>
+      <PageSEO
+        title={`${category} | ${siteMetadata.title} | ${siteMetadata.author}`}
+        description={`Blog category ${category}`}
+      />
+
+      <AppWidthContainer>
+        <ContentWithSidebarLayout sidebar={<CategoriesSidebar categories={categories} selectedCategory={category} />}>
+          <PageTitle>{category}</PageTitle>
+          <InlineSidebarWrapper>
+            <CategoriesSidebar categories={categories} selectedCategory={category} />
+          </InlineSidebarWrapper>
+          <PostListWithPagination posts={posts} NoItemView={<NoPost />} />
+        </ContentWithSidebarLayout>
+      </AppWidthContainer>
+    </>
   );
 };
 

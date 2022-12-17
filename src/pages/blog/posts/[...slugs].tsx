@@ -1,12 +1,13 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogMdxMetaData } from '@/types/data.type';
+import siteMetadata from '@/config/siteMetadata';
 import Blog from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import MdxPostLayout from '@/components/mdx/MdxLayouts/MdxPostLayout';
 import PostSidebar from '@/components/sidebar/PostSidebar';
-import MdxRenderer from '@/components/mdx/MdxRenderer';
+import { PostSEO } from '@/components/SEO';
 
 interface Props {
   mdxSource: string;
@@ -18,11 +19,19 @@ interface Params extends ParsedUrlQuery {
 
 const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
   return (
-    <AppWidthContainer>
-      <ContentWithSidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
-        <MdxPostLayout mdxSource={mdxSource} mdxMeta={mdxMeta} />
-      </ContentWithSidebarLayout>
-    </AppWidthContainer>
+    <>
+      <PostSEO
+        title={`${mdxMeta.title} | ${siteMetadata.title} | ${siteMetadata.author}`}
+        tags={mdxMeta.tags}
+        ogImage={mdxMeta.thumbnail}
+        description={mdxMeta.description}
+      />
+      <AppWidthContainer>
+        <ContentWithSidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
+          <MdxPostLayout mdxSource={mdxSource} mdxMeta={mdxMeta} />
+        </ContentWithSidebarLayout>
+      </AppWidthContainer>
+    </>
   );
 };
 

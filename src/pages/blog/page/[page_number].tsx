@@ -4,6 +4,7 @@ import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { POSTS_PER_PAGE } from '@/config/layoutConfig';
+import siteMetadata from '@/config/siteMetadata';
 import urlPath from '@/config/urlPath';
 import Blog from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
@@ -11,6 +12,7 @@ import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
+import { PageSEO } from '@/components/SEO';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
 import PostList from '@/components/PostList';
@@ -56,38 +58,42 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
   const navigateToTagPage = (tagName: string) => router.push(urlPath.blog.tags.query([tagName]));
 
   return (
-    <AppWidthContainer>
-      <ContentWithSidebarLayout
-        sidebar={
-          <BlogSidebar
-            allTags={allTags}
-            categories={categories}
-            onSearchChange={setSearchString}
-            onTagClick={navigateToTagPage}
-          />
-        }
-      >
-        <PageTitle>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}</PageTitle>
+    <>
+      <PageSEO title={`All Posts | ${siteMetadata.title} | ${siteMetadata.author}`} description='Blog posts' />
 
-        <InlineSidebarWrapper>
-          <BlogSidebar
-            allTags={allTags}
-            categories={categories}
-            onSearchChange={setSearchString}
-            onTagClick={navigateToTagPage}
-          />
-        </InlineSidebarWrapper>
+      <AppWidthContainer>
+        <ContentWithSidebarLayout
+          sidebar={
+            <BlogSidebar
+              allTags={allTags}
+              categories={categories}
+              onSearchChange={setSearchString}
+              onTagClick={navigateToTagPage}
+            />
+          }
+        >
+          <PageTitle>{isInitialPage ? `All Posts: ${allPostNumber}` : `Results: ${displayPosts.length}`}</PageTitle>
 
-        {isInitialPage ? (
-          <>
-            <PostList posts={displayPosts} NoItemView={<NoPost />} />
-            <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateToBlogPage} />
-          </>
-        ) : (
-          <PostListWithPagination posts={displayPosts} NoItemView={<NoPost />} />
-        )}
-      </ContentWithSidebarLayout>
-    </AppWidthContainer>
+          <InlineSidebarWrapper>
+            <BlogSidebar
+              allTags={allTags}
+              categories={categories}
+              onSearchChange={setSearchString}
+              onTagClick={navigateToTagPage}
+            />
+          </InlineSidebarWrapper>
+
+          {isInitialPage ? (
+            <>
+              <PostList posts={displayPosts} NoItemView={<NoPost />} />
+              <Pagination currentPage={currentPage} lastPage={lastPage} onClick={navigateToBlogPage} />
+            </>
+          ) : (
+            <PostListWithPagination posts={displayPosts} NoItemView={<NoPost />} />
+          )}
+        </ContentWithSidebarLayout>
+      </AppWidthContainer>
+    </>
   );
 };
 

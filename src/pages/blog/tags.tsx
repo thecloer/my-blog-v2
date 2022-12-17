@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import type { BlogFrontMatterWithSlug, TagInfo } from '@/types/data.type';
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
+import siteMetadata from '@/config/siteMetadata';
 import urlPath from '@/config/urlPath';
 import Blog from '@/repositories/blog';
 import { decodeURISlug } from '@/lib/utils/formatter';
@@ -10,6 +11,7 @@ import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import MultiTagSelect from '@/components/tag/MultiTagSelect';
+import { PageSEO } from '@/components/SEO';
 import NoTag from '@/components/SimpleView/NoTag';
 
 type Props = {
@@ -44,16 +46,19 @@ const TagsPage: NextPage<Props> = ({ allPosts, allTags }) => {
   }, [selectedTags, allPosts]);
 
   return (
-    <AppWidthContainer>
-      <ContentWithSidebarLayout
-        sidebar={<MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />}
-      >
-        <InlineSidebarWrapper>
-          <MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />
-        </InlineSidebarWrapper>
-        <PostListWithPagination posts={displayPosts} NoItemView={<NoTag />} />
-      </ContentWithSidebarLayout>
-    </AppWidthContainer>
+    <>
+      <PageSEO title={`Tags | ${siteMetadata.title} | ${siteMetadata.author}`} description='Blog posts tags' />
+      <AppWidthContainer>
+        <ContentWithSidebarLayout
+          sidebar={<MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />}
+        >
+          <InlineSidebarWrapper>
+            <MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />
+          </InlineSidebarWrapper>
+          <PostListWithPagination posts={displayPosts} NoItemView={<NoTag />} />
+        </ContentWithSidebarLayout>
+      </AppWidthContainer>
+    </>
   );
 };
 
