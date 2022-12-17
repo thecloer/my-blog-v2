@@ -9,7 +9,7 @@ const UtterancesComment = () => {
   useEffect(() => {
     if (wrapperRef.current === null || wrapperRef.current.children.length > 0) return;
     const script = document.createElement('script');
-    script.defer = true;
+    script.async = true;
     script.src = 'https://utteranc.es/client.js';
     script.crossOrigin = 'anonymous';
     script.setAttribute('repo', siteMetadata.comment.repo);
