@@ -1,8 +1,13 @@
+import type { FC } from 'react';
 import { useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 import siteMetadata from '@/config/siteMetadata';
 
-const UtterancesComment = () => {
+type Props = {
+  className?: string;
+};
+
+const UtterancesComment: FC<Props> = ({ className }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const commentTheme = theme === 'dark' ? siteMetadata.comment.theme.dark : siteMetadata.comment.theme.light;
@@ -23,7 +28,7 @@ const UtterancesComment = () => {
     utterances?.contentWindow?.postMessage({ type: 'set-theme', theme: commentTheme }, 'https://utteranc.es/client.js');
   }, [commentTheme]);
 
-  return <div ref={wrapperRef}></div>;
+  return <div ref={wrapperRef} className={className}></div>;
 };
 
 export default UtterancesComment;
