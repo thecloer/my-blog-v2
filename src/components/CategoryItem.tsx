@@ -11,13 +11,13 @@ const CategoryItem: FC<Props> = ({ category, selected = false }) => {
   return (
     <li className='mb-1 text-lg font-medium last:mb-0'>
       {selected ? (
-        <a className='flex cursor-default text-primary-500'>
+        <a className='flex cursor-default text-primary-500' aria-label={`current category ${category}`}>
           <span className='mr-1 flex h-7 w-4 shrink-0 items-center justify-center'>-</span>
           {category}
         </a>
       ) : (
         <Link key={category} href={urlPath.blog.categories.param(category)}>
-          <a className='flex hover:text-primary-500'>
+          <a className='flex hover:text-primary-500' aria-label={`link to ${category} posts`}>
             <span className='mr-1 flex h-7 w-4 shrink-0 items-center justify-center text-xs'>&bull;</span>
             {category}
           </a>

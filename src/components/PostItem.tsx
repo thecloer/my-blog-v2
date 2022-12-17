@@ -23,7 +23,7 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, category, tags, 
               {thumbnail ? (
                 <Image alt={title} src={`/${thumbnail}`} layout='fill' objectPosition='center' objectFit='cover' />
               ) : (
-                <div className='flex h-full w-full items-center justify-center bg-bgDark-400 dark:bg-bgDark-500'>
+                <div className='flex h-full w-full items-center justify-center bg-bgDark-300 dark:bg-bgDark-600'>
                   <h3 className='text-white'>No Image</h3>
                 </div>
               )}
