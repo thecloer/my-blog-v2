@@ -16,9 +16,9 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className='relative z-10 mb-8 block lg:hidden' ref={inlineSidebarRef}>
       <button
-        className={`flex h-10 w-full items-center gap-2 rounded-md px-3 text-lg font-medium ${
-          showChildren ? 'bg-bgDark-200 dark:bg-bgDark-700' : 'bg-bgDark-300 dark:bg-bgDark-800'
-        }`}
+        className={
+          'flex h-10 w-full items-center gap-2 rounded-md border-2 border-bgDark-400 bg-bgDark-300 px-3 text-lg font-medium dark:border-bgDark-600 dark:bg-bgDark-800'
+        }
         onClick={toggleShowChildren}
       >
         <div className='flex h-full w-3 shrink-0 items-center justify-center'>
@@ -28,7 +28,7 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
       </button>
 
       <div
-        className={`absolute top-4 -z-10 w-full rounded-b-md bg-bgDark-200 px-5 pt-10 pb-5 dark:bg-bgDark-700 ${
+        className={`absolute top-0 -z-10 w-full rounded-md border-2 border-bgDark-400 bg-bgDark-100 px-5 pt-14 pb-5 shadow-lg dark:border-bgDark-600 dark:bg-bgDark-700 ${
           showChildren ? 'visible' : 'invisible'
         }`}
       >
