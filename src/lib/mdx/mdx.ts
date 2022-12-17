@@ -16,13 +16,15 @@ export const getMdxDataByPath = async (filePath: string) => {
 
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
   process.env.ESBUILD_BINARY_PATH =
-    process.platform === 'win32' ? path.join(process.cwd(), 'node_modules', 'esbuild', 'esbuild.exe') : path.join(process.cwd(), 'node_modules', 'esbuild', 'bin', 'esbuild');
+    process.platform === 'win32'
+      ? path.join(process.cwd(), 'node_modules', 'esbuild', 'esbuild.exe')
+      : path.join(process.cwd(), 'node_modules', 'esbuild', 'bin', 'esbuild');
 
   const toc: Toc = [];
   const { code: mdxSource, frontmatter } = await bundleMDX<BlogFrontMatter>({
     source,
     // mdx imports can be automatically source from the components cwd directory.
-    cwd: DATA_PATH.COMPONENTS,
+    cwd: DATA_PATH.MDX_COMPONENTS_ROOT,
     mdxOptions(options, frontmatter) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []), //
