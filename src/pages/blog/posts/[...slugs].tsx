@@ -5,8 +5,8 @@ import Blog from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
 import UtterancesComment from '@/components/UtterancesComment';
-import MdxComponent from '@/components/mdx/MdxComponent';
 import PostSidebar from '@/components/sidebar/PostSidebar';
+import MdxRenderer from '@/components/mdx/MdxRenderer';
 
 interface Props {
   mdxSource: string;
@@ -20,7 +20,7 @@ const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
   return (
     <AppWidthContainer>
       <ContentWithSidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
-        <MdxComponent mdxSource={mdxSource} />
+        <MdxRenderer mdxSource={mdxSource} />
         <UtterancesComment />
       </ContentWithSidebarLayout>
     </AppWidthContainer>

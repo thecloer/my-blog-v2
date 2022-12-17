@@ -9,14 +9,14 @@ type Props = {
   mdxSource: string;
 };
 
-const MdxComponent: FC<Props> = ({ mdxSource }) => {
-  const Component = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
+const MdxRenderer: FC<Props> = ({ mdxSource }) => {
+  const MDXComponent = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   //TODO: layout
   return (
     <div className='prose mx-auto pb-8 dark:prose-dark'>
-      <Component />
+      <MDXComponent />
     </div>
   );
 };
 
-export default MdxComponent;
+export default MdxRenderer;
