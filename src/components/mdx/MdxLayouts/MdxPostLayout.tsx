@@ -27,7 +27,7 @@ const MdxPostLayout: FC<PropsWithChildren<Props>> = ({
 
   return (
     <article className='mx-auto max-w-[650px]'>
-      <div className='mb-12 border-b-2 border-gray-200 pb-5 dark:border-gray-700'>
+      <div className='mb-12 border-b-2 border-gray-200 pb-8 dark:border-gray-700'>
         {category === null || (
           <Link href={urlPath.blog.categories.param(category)}>
             <a className='cursor-pointer font-medium text-bgDark-500 hover:text-bgDark-600 dark:text-bgDark-400 hover:dark:text-bgDark-300'>
@@ -36,15 +36,13 @@ const MdxPostLayout: FC<PropsWithChildren<Props>> = ({
           </Link>
         )}
         <h1 className='mb-4 text-4xl font-extrabold'>{title}</h1>
-        <div className='mb-3 flex gap-1 text-bgDark-500 dark:text-bgDark-400'>
+        <div className='mb-2 flex gap-1 text-bgDark-500 dark:text-bgDark-400'>
           <span>{formattedDate}</span>
           <span className='flex items-center justify-center font-thin'>&bull;</span>
           <span>{formattedReadingTime}</span>
         </div>
 
-        <div className='mt-3 flex flex-wrap '>
-          <TagContainer tags={tags} type='link' />
-        </div>
+        <TagContainer tags={tags} type='link' />
       </div>
 
       <InlineSidebarWrapper>
