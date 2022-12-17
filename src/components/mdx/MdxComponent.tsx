@@ -13,7 +13,7 @@ const MdxComponent: FC<Props> = ({ mdxSource }) => {
   const Component = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   //TODO: layout
   return (
-    <div className='prose mx-auto dark:prose-dark'>
+    <div className='prose mx-auto pb-8 dark:prose-dark'>
       <Component />
     </div>
   );

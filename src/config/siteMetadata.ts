@@ -9,6 +9,14 @@ const siteMetadata = {
   linkedin: 'https://www.linkedin.com/in/thecloer',
 
   theme: 'system', // system, dark or light
+
+  comment: {
+    repo: 'thecloer/my-blog-v2-comment',
+    theme: {
+      light: 'github-light',
+      dark: 'github-dark',
+    },
+  },
 } as const;
 
 export default siteMetadata;

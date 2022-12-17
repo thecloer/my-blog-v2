@@ -4,6 +4,7 @@ import type { BlogMdxMetaData } from '@/types/data.type';
 import Blog from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import AppWidthContainer from '@/containers/AppWidthContainer';
+import UtterancesComment from '@/components/UtterancesComment';
 import MdxComponent from '@/components/mdx/MdxComponent';
 import PostSidebar from '@/components/sidebar/PostSidebar';
 
@@ -20,6 +21,7 @@ const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
     <AppWidthContainer>
       <ContentWithSidebarLayout sidebar={<PostSidebar toc={mdxMeta.toc} />}>
         <MdxComponent mdxSource={mdxSource} />
+        <UtterancesComment />
       </ContentWithSidebarLayout>
     </AppWidthContainer>
   );
