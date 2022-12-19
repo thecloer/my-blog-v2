@@ -2,8 +2,8 @@ const siteMetadata = {
   author: 'Seokgyu Choi',
   title: "Thecloer's blog",
   description: 'A blog about web development, programming, and more.',
-  siteUrl: '',
-  ogImage: '',
+  siteUrl: 'https://www.thecloer.com',
+  ogImage: '/images/og/dev-memoji.png',
 
   email: 'chltjrrb97@gmail.com',
   github: 'https://github.com/thecloer',

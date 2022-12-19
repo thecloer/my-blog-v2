@@ -24,7 +24,7 @@ const CommonSEO: FC<CommonSEOProps> = ({ title, description, ogType, ogImage }) 
       <meta property='og:url' content={`${siteMetadata.siteUrl}${router.asPath}`} />
       <meta property='og:site_name' content={siteMetadata.title} />
       <meta property='og:type' content={ogType} />
-      <meta property='og:image' content={siteMetadata.ogImage} key={ogImage ?? siteMetadata.ogImage} />
+      <meta property='og:image' content={ogImage ?? siteMetadata.ogImage} />
       <meta property='og:image:width' content='1200' />
       <meta property='og:image:height' content='630' />
 
@@ -55,7 +55,12 @@ export const PostSEO: FC<PostSEOProps> = ({ title, description, tags, ogImage })
   const fullTitle = `${title} | ${siteMetadata.title}`;
   return (
     <>
-      <CommonSEO title={fullTitle} description={description} ogType='article' ogImage={ogImage} />
+      <CommonSEO
+        title={fullTitle}
+        description={description}
+        ogType='article'
+        ogImage={ogImage?.length ? ogImage : undefined}
+      />
       <Head>{tags && <meta name='keywords' content={tags.join(', ')} />}</Head>
     </>
   );

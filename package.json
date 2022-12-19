@@ -2,6 +2,7 @@
   "name": "v2_next-markdown-blog",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://www.thecloer.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
