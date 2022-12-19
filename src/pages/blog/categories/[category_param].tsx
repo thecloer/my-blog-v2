@@ -54,17 +54,18 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
+  const categories = Blog.getAllCategories();
+
   if (params === undefined)
     return {
       redirect: {
-        destination: urlPath.blog.categories.param(UNCATEGORIZED_POSTS),
+        destination: urlPath.blog.categories.param(categories[0]),
         permanent: false,
       },
     };
 
   const category = decodeURISlug(params.category_param);
   const posts = Blog.getFrontMattersByCategory(category);
-  const categories = Blog.getAllCategories();
 
   return {
     props: {
