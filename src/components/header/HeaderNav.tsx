@@ -20,7 +20,10 @@ const HeaderNav = () => {
     <nav className='hidden sm:flex sm:items-center'>
       {headerNavLinks.map(({ href, title }) =>
         isCurrentLink(href) ? (
-          <a className='cursor-default p-4 text-base font-semibold capitalize text-primary-500 dark:text-primary-400'>
+          <a
+            className='cursor-default p-4 text-base font-semibold capitalize text-primary-500 dark:text-primary-400'
+            key={title}
+          >
             {title}
           </a>
         ) : (
