@@ -13,7 +13,7 @@ const remarkExtractToc =
       const textContent = toString(node);
       tocRaw.push({
         text: textContent,
-        url: `#${slug(textContent)}}`,
+        url: `#${slug(textContent)}`,
         depth: node.depth,
       });
     });
