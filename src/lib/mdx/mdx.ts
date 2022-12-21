@@ -35,7 +35,7 @@ export const getMdxDataByPath = async (filePath: string) => {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []), //
         rehypeSlug,
-        rehypeAutolinkHeadings,
+        // rehypeAutolinkHeadings,
       ];
       return options;
     },
