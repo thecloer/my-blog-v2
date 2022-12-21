@@ -6,17 +6,20 @@ import { toString } from 'mdast-util-to-string';
 import { makeNestedToc } from '@/lib/converter';
 
 const remarkExtractToc =
-  ({ toc }: { toc: Toc }) =>
+  ({ toc, title }: { toc: Toc; title: string }) =>
   (tree: Content) => {
     const tocRaw: TocRaw = [];
     visit(tree, 'heading', (node, index, parent) => {
       const textContent = toString(node);
       tocRaw.push({
         text: textContent,
-        url: '#' + slug(textContent),
+        url: `#${slug(textContent)}}`,
         depth: node.depth,
       });
     });
+
+    if (tocRaw.at(0)?.depth !== 1) tocRaw.unshift({ text: title, url: `#${slug(title)}`, depth: 1 });
+
     toc.push(...makeNestedToc(tocRaw));
   };
 

@@ -29,7 +29,7 @@ export const getMdxDataByPath = async (filePath: string) => {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []), //
         // TODO: Plugin types 'unified'.Plugin vs 'unist-util-visit/complex-types.d.ts'.Visitor
-        [remarkExtractToc, { toc }],
+        [remarkExtractToc, { toc, title: frontmatter.title }],
         [remarkGfm, { singleTilde: false }],
       ];
       options.rehypePlugins = [
