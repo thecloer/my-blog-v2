@@ -2,9 +2,8 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BlogFrontMatterWithSlug } from '@/types/data.type';
 import siteMetadata from '@/config/siteMetadata';
-import urlPath from '@/config/urlPath';
 import { decodeURISlug, encodeURISlug } from '@/lib/utils/formatter';
-import Blog, { UNCATEGORIZED_POSTS } from '@/repositories/blog';
+import Blog from '@/repositories/blog';
 import ContentWithSidebarLayout from '@/layouts/ContentWithSidebarLayout';
 import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
 import AppWidthContainer from '@/containers/AppWidthContainer';
@@ -55,16 +54,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
   const categories = Blog.getAllCategories();
-
-  if (params === undefined)
-    return {
-      redirect: {
-        destination: urlPath.blog.categories.param(categories[0]),
-        permanent: false,
-      },
-    };
-
-  const category = decodeURISlug(params.category_param);
+  const category = decodeURISlug(params?.category_param ?? categories[0]);
   const posts = Blog.getFrontMattersByCategory(category);
 
   return {

@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
     ? {
         redirect: {
           destination: '/blog',
-          permanent: false,
+          permanent: true,
         },
       }
     : {
