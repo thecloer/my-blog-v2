@@ -28,7 +28,7 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
       </button>
 
       <div
-        className={`absolute top-0 -z-10 w-full rounded-md border-2 border-bgDark-400 bg-bgDark-100 px-5 pt-14 pb-5 shadow-lg dark:border-bgDark-600 dark:bg-bgDark-700 ${
+        className={`absolute top-0 -z-10 w-full rounded-md border-2 border-bgDark-400 bg-bgDark-100 px-5 pt-14 pb-5 shadow-lg dark:border-bgDark-600 dark:bg-bgDark-900 ${
           showChildren ? 'visible' : 'invisible'
         }`}
       >
