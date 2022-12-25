@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import AppLayout from '@/layouts/AppLayout';
 import siteMetadata from '@/config/siteMetadata';
 import '$/globals.css';
+import '$/prism.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

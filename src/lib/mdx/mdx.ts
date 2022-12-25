@@ -9,6 +9,7 @@ import remarkGfm from 'remark-gfm';
 import remarkExtractToc from './remark-extract-toc';
 // rehype plugins
 import rehypeSlug from 'rehype-slug';
+import rehypePrismPlusCustom from './rehype-prism-plus-custom';
 
 export const getMdxDataByPath = async (filePath: string) => {
   const source = readFileSync(filePath, 'utf8');
@@ -34,6 +35,7 @@ export const getMdxDataByPath = async (filePath: string) => {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []), //
         rehypeSlug,
+        [rehypePrismPlusCustom, { showLineNumbers: false, ignoreMissing: true }],
       ];
       return options;
     },
