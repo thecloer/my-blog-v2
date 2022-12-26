@@ -35,10 +35,20 @@ module.exports = {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.900'),
+              '&::before': {
+                content: '"#"',
+                color: theme('colors.gray.500'),
+                paddingRight: '0.5rem',
+              },
             },
             h3: {
               fontWeight: '600',
               color: theme('colors.gray.900'),
+              '&::before': {
+                content: '"-"',
+                color: theme('colors.gray.500'),
+                paddingRight: '0.5rem',
+              },
             },
             'h4,h5,h6': {
               color: theme('colors.gray.900'),
@@ -106,10 +116,16 @@ module.exports = {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.100'),
+              '&::before': {
+                color: theme('colors.gray.400'),
+              },
             },
             h3: {
               fontWeight: '600',
               color: theme('colors.gray.100'),
+              '&::before': {
+                color: theme('colors.gray.400'),
+              },
             },
             'h4,h5,h6': {
               color: theme('colors.gray.100'),
@@ -151,5 +167,8 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };
