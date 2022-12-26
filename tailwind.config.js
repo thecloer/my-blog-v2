@@ -4,7 +4,11 @@ const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}', './data/**/*.{mdx,tsx,ts}'],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './data/**/*.{mdx,tsx,ts}',
+    './dataComponents/**/*.{mdx,tsx,ts}',
+  ],
   darkMode: 'class',
   theme: {
     extend: {

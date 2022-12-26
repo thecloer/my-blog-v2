@@ -24,7 +24,7 @@ export const getMdxDataByPath = async (filePath: string) => {
   const { code: mdxSource, frontmatter } = await bundleMDX<BlogFrontMatter>({
     source,
     // mdx imports can be automatically source from the components cwd directory.
-    cwd: DATA_PATH.MDX_COMPONENTS_ROOT,
+    cwd: DATA_PATH.MDX_COMPONENTS,
     mdxOptions(options, frontmatter) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []), //
