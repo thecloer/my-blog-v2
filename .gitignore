@@ -40,7 +40,3 @@ next-env.d.ts
 
 # vscode
 .vscode
-
-# dummy data
-/data
-/public/data
