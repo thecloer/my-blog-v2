@@ -35,7 +35,7 @@ export const getMdxDataByPath = async (filePath: string) => {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []), //
         rehypeSlug,
-        [rehypePrismPlusCustom, { showLineNumbers: false, ignoreMissing: true }],
+        [rehypePrismPlusCustom, { showLineNumbers: true, ignoreMissing: true }],
       ];
       return options;
     },
