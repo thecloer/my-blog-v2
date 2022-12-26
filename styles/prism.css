@@ -1,3 +1,7 @@
+/* Plugins
+ * https://prismjs.com/plugins/
+ */
+
 code[class*='language-'],
 pre[class*='language-'] {
   background: none;
@@ -38,6 +42,12 @@ pre[class*='language-'] {
   --comment-dark: #6a9955;
   --variable-light: #0070c1;
   --variable-dark: #569cd6;
+  --tag-light: #800000;
+  --tag-dark: var(--variable-dark);
+  --attr-value-light: #0000ff;
+  --attr-value-dark: #ce9178;
+  --attr-name-light: #e50000;
+  --attr-name-dark: var(--text-dark);
 }
 
 /* Code blocks */
@@ -74,10 +84,12 @@ pre[class*='language-'] {
 .token.selector .parent,
 .token.tag,
 .token.tag .token.punctuation {
-  color: #006d6d;
+  @apply text-[var(--tag-light)] dark:text-[var(--tag-dark)];
 }
 
-.token.attr-name,
+.token.attr-name {
+  @apply text-[var(--attr-name-light)] dark:text-[var(--attr-name-dark)];
+}
 .token.boolean,
 .token.boolean.important,
 .token.number,
@@ -95,7 +107,9 @@ pre[class*='language-'] {
   @apply text-[var(--variable-light)] dark:text-[var(--variable-dark)];
 }
 
-.token.attr-value,
+.token.attr-value {
+  @apply text-[var(--attr-value-light)] dark:text-[var(--attr-value-dark)];
+}
 .token.inserted,
 .token.color,
 .token.selector .token.value,
@@ -203,121 +217,29 @@ pre[class*='language-'] {
   color: #006d6d;
 }
 
-/* overrides color-values for the Show Invisibles plugin
- * https://prismjs.com/plugins/show-invisibles/
- */
-.token.token.tab:not(:empty):before,
-.token.token.cr:before,
-.token.token.lf:before,
-.token.token.space:before {
-  color: #3c526d;
-}
-
-/* overrides color-values for the Toolbar plugin
- * https://prismjs.com/plugins/toolbar/
- */
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > a,
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > button {
-  color: #e3eaf2;
-  background: #005a8e;
-}
-
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > a:hover,
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > a:focus,
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > button:hover,
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > button:focus {
-  color: #e3eaf2;
-  background: #005a8eda;
-  text-decoration: none;
-}
-
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > span,
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > span:hover,
-div.code-toolbar > .toolbar.toolbar > .toolbar-item > span:focus {
-  color: #e3eaf2;
-  background: #3c526d;
-}
-
-/* overrides color-values for the Line Highlight plugin
- * http://prismjs.com/plugins/line-highlight/
- */
-.line-highlight.line-highlight {
-  background: #8da1b92f;
-  background: linear-gradient(to right, #8da1b92f 70%, #8da1b925);
-}
-
-.line-highlight.line-highlight:before,
-.line-highlight.line-highlight[data-end]:after {
-  background-color: #3c526d;
-  color: #e3eaf2;
-  box-shadow: 0 1px #8da1b9;
-}
-
-pre[id].linkable-line-numbers.linkable-line-numbers span.line-numbers-rows > span:hover:before {
-  background-color: #3c526d1f;
-}
-
-/* overrides color-values for the Line Numbers plugin
- * http://prismjs.com/plugins/line-numbers/
- */
-.line-numbers.line-numbers .line-numbers-rows {
-  border-right: 1px solid #8da1b97a;
-  background: #d0dae77a;
-}
-
-.line-numbers .line-numbers-rows > span:before {
-  color: #3c526dda;
-}
-
-/* overrides color-values for the Match Braces plugin
+/* overrides color-values for the Match Braces plugin 
  * https://prismjs.com/plugins/match-braces/
+ * TODO: make the rainbow-braces plugin
  */
 .rainbow-braces .token.token.punctuation.brace-level-1,
-.rainbow-braces .token.token.punctuation.brace-level-5,
-.rainbow-braces .token.token.punctuation.brace-level-9 {
-  color: #755f00;
+.rainbow-braces .token.token.punctuation.brace-level-4,
+.rainbow-braces .token.token.punctuation.brace-level-7,
+.rainbow-braces .token.token.punctuation.brace-level-11 {
+  @apply: text-[#0431fa] dark:text-[#ffd700];
 }
 
 .rainbow-braces .token.token.punctuation.brace-level-2,
-.rainbow-braces .token.token.punctuation.brace-level-6,
-.rainbow-braces .token.token.punctuation.brace-level-10 {
-  color: #af00af;
+.rainbow-braces .token.token.punctuation.brace-level-5,
+.rainbow-braces .token.token.punctuation.brace-level-8,
+.rainbow-braces .token.token.punctuation.brace-level-9,
+.rainbow-braces .token.token.punctuation.brace-level-12 {
+  @apply: text-[#319331] dark:text-[#da70d6];
 }
 
 .rainbow-braces .token.token.punctuation.brace-level-3,
-.rainbow-braces .token.token.punctuation.brace-level-7,
-.rainbow-braces .token.token.punctuation.brace-level-11 {
-  color: #005a8e;
-}
-
-.rainbow-braces .token.token.punctuation.brace-level-4,
-.rainbow-braces .token.token.punctuation.brace-level-8,
-.rainbow-braces .token.token.punctuation.brace-level-12 {
-  color: #7c00aa;
-}
-
-/* overrides color-values for the Diff Highlight plugin
- * https://prismjs.com/plugins/diff-highlight/
- */
-pre.diff-highlight > code .token.token.deleted:not(.prefix),
-pre > code.diff-highlight .token.token.deleted:not(.prefix) {
-  background-color: #c22f2e1f;
-}
-
-pre.diff-highlight > code .token.token.inserted:not(.prefix),
-pre > code.diff-highlight .token.token.inserted:not(.prefix) {
-  background-color: #116b001f;
-}
-
-/* overrides color-values for the Command Line plugin
- * https://prismjs.com/plugins/command-line/
- */
-.command-line .command-line-prompt {
-  border-right: 1px solid #8da1b97a;
-}
-
-.command-line .command-line-prompt > span:before {
-  color: #3c526dda;
+.rainbow-braces .token.token.punctuation.brace-level-6,
+.rainbow-braces .token.token.punctuation.brace-level-10 {
+  @apply: text-[#7b3814] dark:text-[#179fff];
 }
 
 /**
@@ -351,7 +273,6 @@ pre > code.diff-highlight .token.token.inserted:not(.prefix) {
 .highlight-line {
   margin-left: -14px;
   margin-right: -14px;
-  /* background-color: rgba(55, 65, 81, 0.5); Set highlight bg color */
   border-left: 4px solid rgb(59, 130, 246); /* Set highlight accent border color */
   @apply bg-[rgba(209,222,244,0.5)] dark:bg-[rgba(43,52,68,0.5)];
 }
@@ -362,6 +283,6 @@ pre > code.diff-highlight .token.token.inserted:not(.prefix) {
   text-align: right;
   margin-right: 14px;
   margin-left: -8px;
-  color: rgb(156, 163, 175); /* Line number color */
   content: attr(line);
+  @apply text-gray-400 dark:text-gray-500;
 }
