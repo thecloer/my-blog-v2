@@ -4,11 +4,7 @@ const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-    './data/**/*.{mdx,tsx,ts}',
-    './dataComponents/**/*.{mdx,tsx,ts}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx}', './data/**/*.{mdx,tsx,ts}', './dataComponents/**/*.{mdx,tsx,ts}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -34,6 +30,11 @@ module.exports = {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.900'),
+              '&::before': {
+                content: '"#"',
+                color: theme('colors.gray.500'),
+                paddingRight: '0.5rem',
+              },
             },
             h2: {
               fontWeight: '700',
@@ -99,6 +100,9 @@ module.exports = {
               color: theme('colors.gray.900'),
               borderLeftColor: theme('colors.gray.200'),
             },
+            p: {
+              textIndent: '0.5rem',
+            },
           },
         },
         dark: {
@@ -115,6 +119,9 @@ module.exports = {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.100'),
+              '&::before': {
+                color: theme('colors.gray.400'),
+              },
             },
             h2: {
               fontWeight: '700',
@@ -171,8 +178,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
-  ],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/line-clamp')],
 };
