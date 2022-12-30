@@ -1,12 +1,13 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { BlogMdxMetaData } from '@/types/data.type';
 import Link from 'next/link';
-import UtterancesComment from '@/components/UtterancesComment';
-import TagContainer from '@/components/tag/TagContainer';
-import MdxRenderer from '@/components/mdx/MdxRenderer';
 import urlPath from '@/config/urlPath';
 import { formatAsMinutes } from '@/lib/utils/formatter';
 import InlineSidebarWrapper from '@/containers/InlineSidebarWrapper';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import UtterancesComment from '@/components/UtterancesComment';
+import TagContainer from '@/components/tag/TagContainer';
+import MdxRenderer from '@/components/mdx/MdxRenderer';
 import NestedToc from '@/components/nestedToc/NestedToc';
 
 type Props = {
@@ -51,6 +52,7 @@ const MdxPostLayout: FC<PropsWithChildren<Props>> = ({
 
       <MdxRenderer mdxSource={mdxSource} />
 
+      <ScrollTopAndComment />
       <UtterancesComment className='mt-8' />
     </article>
   );

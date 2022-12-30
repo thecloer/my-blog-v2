@@ -28,7 +28,7 @@ const UtterancesComment: FC<Props> = ({ className }) => {
     utterances?.contentWindow?.postMessage({ type: 'set-theme', theme: commentTheme }, 'https://utteranc.es/client.js');
   }, [commentTheme]);
 
-  return <div ref={wrapperRef} className={className}></div>;
+  return <div id={siteMetadata.comment.id} ref={wrapperRef} className={className}></div>;
 };
 
 export default UtterancesComment;

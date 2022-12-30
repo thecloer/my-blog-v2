@@ -14,6 +14,7 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
 
   comment: {
+    id: 'cloer-comment',
     repo: 'thecloer/my-blog-v2-comment',
     theme: {
       light: 'github-light',
