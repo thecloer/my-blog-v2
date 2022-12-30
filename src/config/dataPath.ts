@@ -1,14 +1,14 @@
 import { join } from 'path';
 
-const ROOT = join(process.cwd(), 'data');
+const DATA = join(process.cwd(), 'data');
 const MDX_COMPONENTS = join(process.cwd(), 'dataComponents');
 
-const getDataPath = (folder: string) => join(ROOT, folder);
+const getDataPath = (folder: string) => join(DATA, folder);
 
 const DATA_PATH = {
-  ROOT,
-  BLOG: getDataPath('blog'),
   MDX_COMPONENTS,
+  DATA,
+  BLOG: getDataPath('blog'),
 } as const;
 
 export default DATA_PATH;
