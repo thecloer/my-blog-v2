@@ -14,10 +14,10 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
   const toggleShowChildren = () => setShowChildren((prevShow) => !prevShow);
 
   return (
-    <div className='relative z-10 mb-8 block lg:hidden' ref={inlineSidebarRef}>
+    <div className='mb-8 block lg:hidden' ref={inlineSidebarRef}>
       <button
         className={
-          'flex h-10 w-full items-center gap-2 rounded-md border-2 border-bgDark-400 bg-bgDark-300 px-3 text-lg font-medium dark:border-bgDark-600 dark:bg-bgDark-800'
+          'relative z-10 flex h-10 w-full items-center gap-2 rounded-md border-2 border-bgDark-400 bg-bgDark-300 px-3 text-lg font-medium dark:border-bgDark-600 dark:bg-bgDark-800'
         }
         onClick={toggleShowChildren}
       >
@@ -27,13 +27,15 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
         Menu
       </button>
 
-      <div
-        className={`absolute top-0 -z-10 w-full rounded-md border-2 border-bgDark-400 bg-bgDark-100 px-5 pt-14 pb-5 shadow-lg dark:border-bgDark-600 dark:bg-bgDark-900 ${
-          showChildren ? 'visible' : 'invisible'
-        }`}
-      >
-        {children}
-      </div>
+      {showChildren && (
+        <div
+          className={
+            'relative z-0 -mb-10 w-full -translate-y-10 rounded-md border-2 border-bgDark-400 bg-bgDark-100 px-5 pt-14 pb-5 shadow-lg dark:border-bgDark-600 dark:bg-bgDark-900'
+          }
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 };
