@@ -27,7 +27,7 @@ const MdxPostLayout: FC<PropsWithChildren<Props>> = ({
   const formattedReadingTime = formatAsMinutes(readingTime.minutes);
 
   return (
-    <article className='mx-auto max-w-[650px]'>
+    <article className='prose-w mx-auto'>
       <div className='mb-12 border-b-2 border-gray-200 pb-8 dark:border-gray-700'>
         {category === null || (
           <Link href={urlPath.blog.categories.param(category)}>

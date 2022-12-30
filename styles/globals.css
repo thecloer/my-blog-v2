@@ -31,3 +31,9 @@
     @apply cursor-pointer font-medium text-bgDark-600 hover:text-bgDark-900 dark:text-bgDark-400 dark:hover:text-bgDark-300;
   }
 }
+
+@layer utilities {
+  .prose-w {
+    @apply max-w-[750px];
+  }
+}

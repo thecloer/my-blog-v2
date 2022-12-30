@@ -6,7 +6,7 @@ const mdxCustomComponents: MDXComponents = {
   // TODO: pre,
 
   // mdxSource container
-  wrapper: ({ children }) => <div className='prose dark:prose-dark'>{children}</div>,
+  wrapper: ({ children }) => <div className='prose-w prose dark:prose-dark'>{children}</div>,
 };
 
 export default mdxCustomComponents;
