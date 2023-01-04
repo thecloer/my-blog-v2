@@ -59,7 +59,7 @@ module.exports = {
               color: theme('colors.gray.900'),
             },
             'h1,h2,h3,h4,h5,h6': {
-              scrollMarginTop: '6.5rem',
+              scrollMarginTop: 'var(--header-height)',
             },
             pre: {
               backgroundColor: theme('colors.gray.800'),
@@ -102,6 +102,18 @@ module.exports = {
             },
             p: {
               textIndent: '0.5rem',
+            },
+
+            '.footnotes': {
+              fontSize: theme('fontSize.sm'),
+              lineHeight: '1.5rem',
+              color: theme('colors.gray.600'),
+              p: {
+                margin: 0,
+              },
+            },
+            'a[data-footnote-backref],a[data-footnote-ref]': {
+              scrollMarginTop: 'var(--header-height)',
             },
           },
         },

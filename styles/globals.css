@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --header-height: 6.5rem;
+  }
+
   /* Firefox */
   * {
     scrollbar-width: thin;
