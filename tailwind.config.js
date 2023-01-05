@@ -57,6 +57,11 @@ module.exports = {
             },
             'h4,h5,h6': {
               color: theme('colors.gray.900'),
+              '&::before': {
+                content: '"-"',
+                color: theme('colors.gray.500'),
+                paddingRight: '0.5rem',
+              },
             },
             'h1,h2,h3,h4,h5,h6': {
               scrollMarginTop: 'var(--header-height)',
@@ -65,13 +70,14 @@ module.exports = {
               backgroundColor: theme('colors.gray.800'),
             },
             code: {
-              color: theme('colors.pink.500'),
+              color: theme('colors.pink.600'),
               backgroundColor: theme('colors.gray.100'),
               paddingLeft: '0.25em',
               paddingRight: '0.25em',
               paddingTop: '0.125em',
               paddingBottom: '0.125em',
               borderRadius: '0.25rem',
+              fontWeight: '500',
             },
             'code::before': {
               content: 'none',
@@ -157,6 +163,7 @@ module.exports = {
               backgroundColor: theme('colors.gray.800'),
             },
             code: {
+              color: theme('colors.pink.500'),
               backgroundColor: theme('colors.gray.800'),
             },
             details: {
