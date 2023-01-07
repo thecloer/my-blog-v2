@@ -5,7 +5,7 @@ const MdxImage: FC<ImageProps> = ({ title, src, alt, width = '100%', height = '1
   return (
     <p className='flex flex-col items-center'>
       <Image src={src} alt={alt} width={width} height={height} {...props} />
-      <span className='mt-2 text-sm text-bgDark-500'>{title}</span>
+      <span className='mt-2 text-sm text-bgDark-500 dark:text-bgDark-400'>{title}</span>
     </p>
   );
 };
