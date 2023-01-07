@@ -9,8 +9,10 @@ type Props = {
 
 const UtterancesComment: FC<Props> = ({ className }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const commentRef = useRef<HTMLIFrameElement>();
   const { theme } = useTheme();
   const commentTheme = theme === 'dark' ? siteMetadata.comment.theme.dark : siteMetadata.comment.theme.light;
+
   useEffect(() => {
     if (wrapperRef.current === null || wrapperRef.current.children.length > 0) return;
     const script = document.createElement('script');
@@ -20,12 +22,17 @@ const UtterancesComment: FC<Props> = ({ className }) => {
     script.setAttribute('repo', siteMetadata.comment.repo);
     script.setAttribute('issue-term', 'pathname');
     script.setAttribute('theme', commentTheme);
+    script.addEventListener('load', () => (commentRef.current = wrapperRef.current?.querySelector('iframe')!), {
+      once: true,
+    });
     wrapperRef.current.appendChild(script);
   }, [wrapperRef, commentTheme]);
 
   useEffect(() => {
-    const utterances = wrapperRef.current?.querySelector('iframe');
-    utterances?.contentWindow?.postMessage({ type: 'set-theme', theme: commentTheme }, 'https://utteranc.es/client.js');
+    commentRef.current?.contentWindow?.postMessage(
+      { type: 'set-theme', theme: commentTheme },
+      'https://utteranc.es/client.js'
+    );
   }, [commentTheme]);
 
   return <div id={siteMetadata.comment.id} ref={wrapperRef} className={className}></div>;
