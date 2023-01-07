@@ -8,20 +8,6 @@
   :root {
     --header-height: 6.5rem;
   }
-
-  /* Firefox */
-  * {
-    scrollbar-width: thin;
-  }
-
-  /* Chrome, Edge, and Safari */
-  ::-webkit-scrollbar {
-    width: 0.25rem;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    -webkit-border-radius: 1ex;
-  }
 }
 
 @layer components {
@@ -39,5 +25,25 @@
 @layer utilities {
   .prose-w {
     @apply max-w-[750px];
+  }
+  .scrollbar-thin {
+    --scrollbar-color-light: theme(colors.bgDark.300);
+    --scrollbar-color-dark: theme(colors.bgDark.500);
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-color-light) var(--scrollbar-color-light);
+    .dark & {
+      scrollbar-color: var(--scrollbar-color-dark) var(--scrollbar-color-dark);
+    }
+
+    /* Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      @apply h-1 w-1;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-[var(--scrollbar-color-light)] dark:bg-[var(--scrollbar-color-dark)];
+      -webkit-border-radius: 1ex;
+    }
   }
 }
