@@ -28,7 +28,7 @@
   }
   .scrollbar-thin {
     --scrollbar-color-light: theme(colors.bgDark.300);
-    --scrollbar-color-dark: theme(colors.bgDark.500);
+    --scrollbar-color-dark: theme(colors.bgDark.700);
 
     /* Firefox */
     scrollbar-width: thin;
