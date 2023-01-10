@@ -1,17 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Blog from '@/repositories/blog';
+import { parseSearchString } from '@/lib/utils/formatter';
 
 export default async function searchHandler(req: NextApiRequest, res: NextApiResponse) {
   const searchQuery = req.query.q;
   if (searchQuery === undefined) return res.status(400).json({ result: [] });
 
-  const term =
+  const searchTerm =
     typeof searchQuery === 'string'
-      ? decodeURIComponent(searchQuery)
-      : searchQuery.map((query) => decodeURIComponent(query));
+      ? parseSearchString(searchQuery)
+      : searchQuery.map((query) => parseSearchString(query)).flat();
 
-  // TODO: search slice string by space and trim
-  const result = Blog.search(term);
+  const result = Blog.search(searchTerm);
 
   return res.status(200).json({ result });
 }
