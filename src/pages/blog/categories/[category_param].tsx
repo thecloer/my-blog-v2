@@ -11,7 +11,7 @@ import PageTitle from '@/containers/PageTitle';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import CategoriesSidebar from '@/components/sidebar/CategoriesSidebar';
 import { PageSEO } from '@/components/SEO';
-import NoPost from '@/components/SimpleView/NoPost';
+import NoPost from '@/components/simpleViews/NoPost';
 
 type Props = {
   category: string;

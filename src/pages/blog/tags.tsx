@@ -12,7 +12,7 @@ import AppWidthContainer from '@/containers/AppWidthContainer';
 import PostListWithPagination from '@/components/PostListWithPagination';
 import MultiTagSelect from '@/components/tag/MultiTagSelect';
 import { PageSEO } from '@/components/SEO';
-import NoTag from '@/components/SimpleView/NoTag';
+import NoTag from '@/components/simpleViews/NoTag';
 
 type Props = {
   allPosts: BlogFrontMatterWithSlug[];

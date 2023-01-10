@@ -16,7 +16,7 @@ import { PageSEO } from '@/components/SEO';
 import BlogSidebar from '@/components/sidebar/BlogSidebar';
 import Pagination from '@/components/pagination/Pagination';
 import PostList from '@/components/PostList';
-import NoPost from '@/components/SimpleView/NoPost';
+import NoPost from '@/components/simpleViews/NoPost';
 
 type Props = {
   allPostNumber: number;
