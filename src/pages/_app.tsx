@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
 import AppLayout from '@/layouts/AppLayout';
 import siteMetadata from '@/config/siteMetadata';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import '$/globals.css';
 import '$/prism.css';
 
@@ -11,6 +12,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <ThemeProvider attribute='class' defaultTheme={siteMetadata.theme}>
       <Head>
         <meta content='width=device-width, initial-scale=1' name='viewport' />
+        <GoogleAnalytics />
       </Head>
       <AppLayout>
         <Component {...pageProps} />

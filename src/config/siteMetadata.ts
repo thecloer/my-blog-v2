@@ -13,6 +13,8 @@ const siteMetadata = {
 
   theme: 'system', // system, dark or light
 
+  ga_id: process.env.GA_ID,
+
   comment: {
     id: 'cloer-comment',
     repo: 'thecloer/my-blog-v2-comment',
