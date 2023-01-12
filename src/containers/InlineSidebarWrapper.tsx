@@ -19,6 +19,7 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className='mb-8 block lg:hidden' ref={inlineSidebarRef}>
       <button
+        aria-label='toggle sidebar'
         className={
           'relative z-10 flex h-10 w-full items-center gap-2 rounded-md border-2 border-bgDark-400 bg-bgDark-300 px-3 text-lg font-medium dark:border-bgDark-600 dark:bg-bgDark-800'
         }

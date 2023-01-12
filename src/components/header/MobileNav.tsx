@@ -39,6 +39,7 @@ const MobileNav = () => {
       >
         <div className='flex justify-end py-6'>
           <button
+            aria-label='Close Menu'
             type='button'
             onClick={onToggleNav}
             className='-mr-3 py-3 px-3 hover:text-primary-500 hover:dark:text-primary-400'

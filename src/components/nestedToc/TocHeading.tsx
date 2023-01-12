@@ -23,7 +23,7 @@ const TocHeading: FC<Props> = ({ heading }) => {
         </Link>
         {heading.children.length > 0 ? (
           <div className='flex'>
-            <button className='nested-collapse-line' />
+            <div className='nested-collapse-line' />
             {showChildren ? <NestedToc toc={heading.children} /> : null}
           </div>
         ) : null}
@@ -51,7 +51,11 @@ const TocHeading: FC<Props> = ({ heading }) => {
 
         {showChildren ? (
           <div className='flex'>
-            <button className='nested-collapse-line' onClick={() => setShowChildren(false)} />
+            <button
+              className='nested-collapse-line'
+              onClick={() => setShowChildren(false)}
+              aria-label='close nested table of contents'
+            />
             <NestedToc toc={heading.children} />
           </div>
         ) : null}

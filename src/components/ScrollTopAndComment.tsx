@@ -18,6 +18,7 @@ const ScrollTopAndComment = ({}) => {
   return (
     <div className='fixed right-8 bottom-8 z-10 hidden flex-col gap-3 sm:flex'>
       <button
+        aria-label='scroll to the top'
         onClick={scrollToTop}
         className='flex items-center justify-center rounded-full bg-bgDark-200 p-2 text-bgDark-500 hover:bg-bgDark-300 dark:bg-bgDark-700 dark:text-bgDark-400 hover:dark:bg-bgDark-600'
       >
@@ -30,6 +31,7 @@ const ScrollTopAndComment = ({}) => {
         </svg>
       </button>
       <button
+        aria-label='scroll to the comment'
         onClick={scrollToComment}
         className='flex items-center justify-center rounded-full bg-bgDark-200 p-2 text-bgDark-500 hover:bg-bgDark-300 dark:bg-bgDark-700 dark:text-bgDark-400 hover:dark:bg-bgDark-600'
       >

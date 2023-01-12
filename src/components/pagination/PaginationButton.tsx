@@ -11,6 +11,7 @@ interface Props {
 const PaginationButton: FC<Props> = ({ type, pageNum, onClick }) => {
   return (
     <button
+      aria-label='pagination button'
       onClick={() => onClick(pageNum, type)}
       className={`flex h-9 w-9 items-center justify-center text-lg leading-none hover:bg-primary-400 dark:hover:bg-primary-500
           ${

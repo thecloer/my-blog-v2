@@ -34,7 +34,7 @@ const PostItem: FC<Props> = ({ post: { slug, date, description, category, tags, 
         <div className='flex grow flex-col'>
           {category && (
             <Link href={urlPath.blog.categories.param(category)} passHref>
-              <a className='cursor-pointer text-sm font-medium text-bgDark-400 dark:text-bgDark-500'>{category}</a>
+              <a className='cursor-pointer text-sm font-medium text-bgDark-500 dark:text-bgDark-400'>{category}</a>
             </Link>
           )}
 
