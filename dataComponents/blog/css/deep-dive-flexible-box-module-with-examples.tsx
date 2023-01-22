@@ -1,11 +1,8 @@
-import type { CSSProperties, FC, MouseEventHandler, PropsWithChildren } from 'react';
+import type { FC, MouseEventHandler, PropsWithChildren } from 'react';
+import type { PassingProps } from 'dataComponents/common/common.type';
 import { useState } from 'react';
 
 // types
-type PassingProps = {
-  className?: string;
-  style?: CSSProperties;
-};
 type OptionsValue = string | number;
 type ControllerOption<T extends OptionsValue> = { text: string; value: T };
 type AttributeOptionMap<T extends OptionsValue> = Record<
@@ -20,14 +17,6 @@ const makeOptionId = (fieldName: string, optionValue: OptionsValue) =>
 /**
  * Common components
  */
-
-// SandBox
-const SandBox: FC<PropsWithChildren<PassingProps>> = ({ children, className = '', style }) => (
-  <div className={`my-6 ${className}`} style={style}>
-    {children}
-  </div>
-);
-
 // Controller
 const Controller = <T extends OptionsValue>({
   name,
@@ -153,7 +142,7 @@ export const Display = () => {
   const [className, setClassName] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={className}>
         {FLEX_ITEMS.map((item, i) => (
           <FlexItem key={i} className={i === 0 && className !== 'block' ? 'w-16' : undefined}>
@@ -166,7 +155,7 @@ export const Display = () => {
         options={options}
         onChange={(selectedOption) => setClassName(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -181,7 +170,7 @@ export const Direction = () => {
   const [className, setClassName] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex ${className}`}>
         {FLEX_ITEMS.map((item, i) => (
           <FlexItem key={i}>{item}</FlexItem>
@@ -192,7 +181,7 @@ export const Direction = () => {
         options={options}
         onChange={(selectedOption) => setClassName(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -206,7 +195,7 @@ export const Wrap = () => {
   const [className, setClassName] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex w-60 ${className}`}>
         {FLEX_ITEMS.map((item, i) => (
           <FlexItem key={i}>{item}</FlexItem>
@@ -217,7 +206,7 @@ export const Wrap = () => {
         options={options}
         onChange={(selectedOption) => setClassName(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -234,7 +223,7 @@ export const JustifyContent = () => {
   const [className, setClassName] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex ${className}`}>
         {FLEX_ITEMS.slice(0, 3).map((item, i) => (
           <FlexItem key={i}>{item}</FlexItem>
@@ -245,7 +234,7 @@ export const JustifyContent = () => {
         options={options}
         onChange={(selectedOption) => setClassName(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -259,7 +248,7 @@ export const SpaceBetweenAroundEvenly = () => {
   const [mode, setMode] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className='flex'>
         {mode === 'between' ? null : <Gap className='my-2 mx-1' />}
         <FlexItem className='mx-0'>{FLEX_ITEMS[0]}</FlexItem>
@@ -286,7 +275,7 @@ export const SpaceBetweenAroundEvenly = () => {
         options={options}
         onChange={(selectedOption) => setMode(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -306,7 +295,7 @@ export const AlignModule = () => {
   const [justifyContent, setJustifyContent] = useState(JustifyContents[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex ${direction}`} style={{ justifyContent }}>
         <FlexItem>{FLEX_ITEMS[0]}</FlexItem>
         <FlexItem>{FLEX_ITEMS[1]}</FlexItem>
@@ -329,7 +318,7 @@ export const AlignModule = () => {
           onChange={(selectedOption) => setJustifyContent(selectedOption.value)}
         />
       </div>
-    </SandBox>
+    </>
   );
 };
 
@@ -345,7 +334,7 @@ export const AlignItems = () => {
   const [className, setClassName] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex h-40 ${className}`}>
         {FLEX_ITEMS.map((item, i) => (
           <FlexItem key={i} className={i === 1 ? 'pt-4 text-3xl font-medium' : i === 2 ? 'text-sm' : ''}>
@@ -358,7 +347,7 @@ export const AlignItems = () => {
         options={options}
         onChange={(selectedOption) => setClassName(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -375,7 +364,7 @@ export const AlignContent = () => {
   const [className, setClassName] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex h-80 flex-wrap ${className}`}>
         {FLEX_ITEMS.map((item, i) => (
           <FlexItem key={i} className='w-[calc(50%-0.5rem)]'>
@@ -388,7 +377,7 @@ export const AlignContent = () => {
         options={options}
         onChange={(selectedOption) => setClassName(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -416,7 +405,7 @@ export const FlexBasis = () => {
   const [wordBreak, setWordBreak] = useState(wordBreakOptions[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className={`flex ${flexWrap}`}>
         {['AAAAAAA', 'BBBB', 'CCCCCCCCCCC'].map((item, i) => (
           <FlexItem key={i} className={`${basis} ${wordBreak}`}>
@@ -456,7 +445,7 @@ export const FlexBasis = () => {
           className='rounded bg-bgDark-50 py-2 px-4 shadow dark:bg-bgDark-800'
         />
       </div>
-    </SandBox>
+    </>
   );
 };
 
@@ -477,7 +466,7 @@ export const FlexGrow = () => {
   const [selectedValue, setSelectedValue] = useState(options[0].value);
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className='flex'>
         {FLEX_ITEMS.slice(0, 3).map((item, i) => {
           const grow = valueGrowMap[selectedValue][i];
@@ -495,7 +484,7 @@ export const FlexGrow = () => {
         options={options}
         onChange={(selectedOption) => setSelectedValue(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -532,7 +521,7 @@ export const FlexShrink = () => {
   };
 
   return (
-    <SandBox>
+    <>
       <div onMouseDown={dragHandler}>
         <div className='relative inline-block'>
           <div className='absolute -right-2 top-0 bottom-0 w-4 hover:cursor-ew-resize'></div>
@@ -553,7 +542,7 @@ export const FlexShrink = () => {
         options={options}
         onChange={(selectedOption) => setSelectedValue(selectedOption.value)}
       />
-    </SandBox>
+    </>
   );
 };
 
@@ -567,7 +556,7 @@ export const AlignSelf = () => {
   ];
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className='flex h-40'>
         {items.map(({ text, value }, i) => (
           <FlexItem key={i} className={value}>
@@ -575,7 +564,7 @@ export const AlignSelf = () => {
           </FlexItem>
         ))}
       </FlexContainer>
-    </SandBox>
+    </>
   );
 };
 
@@ -590,7 +579,7 @@ export const Order = () => {
   ];
 
   return (
-    <SandBox>
+    <>
       <FlexContainer className='flex'>
         {items.map(({ text, value }, i) => (
           <FlexItem key={i} className={value}>
@@ -598,6 +587,6 @@ export const Order = () => {
           </FlexItem>
         ))}
       </FlexContainer>
-    </SandBox>
+    </>
   );
 };
