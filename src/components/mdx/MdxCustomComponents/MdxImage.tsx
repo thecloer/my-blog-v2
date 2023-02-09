@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import Image, { type ImageProps } from 'next/image';
 
-const MdxImage: FC<ImageProps> = ({ title, src, alt, width = '100%', height = '100%', ...props }) => {
+const MdxImage: FC<ImageProps> = ({ title, src, alt = title, width = '100%', height = '100%', ...props }) => {
   return (
     <p className='flex flex-col items-center'>
       <Image src={src} alt={alt} width={width} height={height} {...props} />
