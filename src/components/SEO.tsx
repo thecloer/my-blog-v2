@@ -52,11 +52,10 @@ type PostSEOProps = {
   ogImage: string;
 };
 export const PostSEO: FC<PostSEOProps> = ({ title, description, tags, ogImage }) => {
-  const fullTitle = `${title} | ${siteMetadata.title}`;
   return (
     <>
       <CommonSEO
-        title={fullTitle}
+        title={title}
         description={description}
         ogType='article'
         ogImage={ogImage?.length ? ogImage : undefined}

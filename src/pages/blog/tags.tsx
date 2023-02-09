@@ -47,7 +47,7 @@ const TagsPage: NextPage<Props> = ({ allPosts, allTags }) => {
 
   return (
     <>
-      <PageSEO title={`Tags | ${siteMetadata.title} | ${siteMetadata.author}`} description='Blog posts tags' />
+      <PageSEO title={`Tags | ${siteMetadata.title}`} description='Blog posts tags' />
       <AppWidthContainer>
         <ContentWithSidebarLayout
           sidebar={<MultiTagSelect options={allTags} selectedTags={selectedTags} onChange={setSelectedTags} />}

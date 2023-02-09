@@ -21,7 +21,7 @@ const BlogPostPage: NextPage<Props> = ({ mdxSource, mdxMeta }) => {
   return (
     <>
       <PostSEO
-        title={`${mdxMeta.title} | ${siteMetadata.title} | ${siteMetadata.author}`}
+        title={mdxMeta.title}
         tags={mdxMeta.tags}
         ogImage={mdxMeta.thumbnail}
         description={mdxMeta.description}

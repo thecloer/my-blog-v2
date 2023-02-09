@@ -26,10 +26,7 @@ interface Params extends ParsedUrlQuery {
 const CategoryPage: NextPage<Props> = ({ category, posts, categories }) => {
   return (
     <>
-      <PageSEO
-        title={`${category} | ${siteMetadata.title} | ${siteMetadata.author}`}
-        description={`Blog category ${category}`}
-      />
+      <PageSEO title={`${category} | ${siteMetadata.title}`} description={`Blog category ${category}`} />
 
       <AppWidthContainer>
         <ContentWithSidebarLayout sidebar={<CategoriesSidebar categories={categories} selectedCategory={category} />}>

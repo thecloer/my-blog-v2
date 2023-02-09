@@ -59,7 +59,7 @@ const BlogPage: NextPage<Props> = ({ allPostNumber, posts, currentPage, lastPage
 
   return (
     <>
-      <PageSEO title={`All Posts | ${siteMetadata.title} | ${siteMetadata.author}`} description='Blog posts' />
+      <PageSEO title={`All Posts | ${siteMetadata.title}`} description='Blog posts' />
 
       <AppWidthContainer>
         <ContentWithSidebarLayout
