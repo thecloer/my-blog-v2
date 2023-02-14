@@ -2,6 +2,8 @@ import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react';
 import useIntersection from '@/hooks/useIntersection';
 import { DownArrow, RightArrow } from '@/lib/svgs';
 
+const INLINE_SIDEBAR_COLLAPSE_TIME = 2000; // FIXME:
+
 const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
   const [showChildren, setShowChildren] = useState(false);
   const inlineSidebarRef = useRef<HTMLDivElement>(null);
@@ -11,7 +13,10 @@ const InlineSidebarWrapper: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     if (isIntersecting && timerRef.current) clearTimeout(timerRef.current);
     else if (!isIntersecting && showChildren)
-      timerRef.current = setTimeout(() => (setShowChildren(false), (timerRef.current = undefined)), 2000);
+      timerRef.current = setTimeout(
+        () => (setShowChildren(false), (timerRef.current = undefined)),
+        INLINE_SIDEBAR_COLLAPSE_TIME
+      );
   }, [isIntersecting, showChildren]);
 
   const toggleShowChildren = () => setShowChildren((prevShow) => !prevShow);

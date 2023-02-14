@@ -25,7 +25,10 @@ export type TagInfo = {
   count: number;
 };
 
-export type BlogFrontMatter = CommonFrontMatter & { category: string | null };
+export type BlogFrontMatter = CommonFrontMatter & {
+  category: string | null;
+  language: 'ko' | 'en'; // TODO: i18n support
+};
 
 /**
  * @property `slug` - file name in `data/blog/` without extension include nested paths.

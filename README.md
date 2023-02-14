@@ -106,3 +106,5 @@ series: string | null
 - [ ] i18n(en, ko)
 - [ ] Projects
 - [ ] About me
+- [ ] Migrate to Nextjs 13
+- [ ] Nextjs 13 + [@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation)

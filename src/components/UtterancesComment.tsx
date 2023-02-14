@@ -6,7 +6,7 @@ import siteMetadata from '@/config/siteMetadata';
 type Props = {
   className?: string;
 };
-
+// FIXME: comment bug
 const UtterancesComment: FC<Props> = ({ className }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const commentRef = useRef<HTMLIFrameElement>();
@@ -29,10 +29,7 @@ const UtterancesComment: FC<Props> = ({ className }) => {
   }, [wrapperRef, commentTheme]);
 
   useEffect(() => {
-    commentRef.current?.contentWindow?.postMessage(
-      { type: 'set-theme', theme: commentTheme },
-      'https://utteranc.es/client.js'
-    );
+    commentRef.current?.contentWindow?.postMessage({ type: 'set-theme', theme: commentTheme }, 'https://utteranc.es/client.js');
   }, [commentTheme]);
 
   return <div id={siteMetadata.comment.id} ref={wrapperRef} className={className}></div>;
