@@ -7,9 +7,11 @@ import readingTime from 'reading-time';
 // remark plugins
 import remarkGfm from 'remark-gfm';
 import remarkExtractToc from './remark-extract-toc';
+import remarkMath from 'remark-math';
 // rehype plugins
 import rehypeSlug from 'rehype-slug';
 import rehypePrismPlusCustom from './rehype-prism-plus-custom';
+import rehypeKatex from 'rehype-katex';
 
 export const getMdxDataByPath = async (filePath: string) => {
   const source = readFileSync(filePath, 'utf8');
@@ -31,11 +33,13 @@ export const getMdxDataByPath = async (filePath: string) => {
         // TODO: Plugin types 'unified'.Plugin vs 'unist-util-visit/complex-types.d.ts'.Visitor
         [remarkExtractToc, { toc, title: frontmatter.title }],
         [remarkGfm, { singleTilde: false }],
+        remarkMath,
       ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []), //
         rehypeSlug,
         [rehypePrismPlusCustom, { showLineNumbers: true, ignoreMissing: true }],
+        rehypeKatex, // Katex syntax: https://katex.org/docs/supported.html
       ];
       return options;
     },
