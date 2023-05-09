@@ -6,6 +6,7 @@ import { hoistItem, sortByFrontMatterDateDESC } from '@/lib/utils/sorter';
 import { blogSearchFilter, isMdxFile } from '@/lib/utils/helper';
 import { getMdxDataByPath } from '@/lib/mdx/mdx';
 
+// export const ALL_POSTS = 'All Posts';
 export const UNCATEGORIZED_POSTS = 'Uncategorized Posts';
 
 class Blog {
@@ -35,6 +36,7 @@ class Blog {
           ? this._categoryMap.get(category)!.push(frontMatter)
           : this._categoryMap.set(category, [frontMatter]);
     });
+    // this._categoryMap.set(ALL_POSTS, this._frontMatters);
 
     // TODO: RSS
   }
@@ -46,20 +48,14 @@ class Blog {
     return Blog.instance._frontMatters.sort(sortFunc);
   }
 
-  static getFrontMattersByTag(
-    tag: string | string[],
-    sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC
-  ) {
+  static getFrontMattersByTag(tag: string | string[], sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC) {
     if (typeof tag === 'string') return Blog.instance._tagMap.get(tag)?.sort(sortFunc) ?? [];
 
     const frontMatters = [...new Set(tag.map((t) => Blog.instance._tagMap.get(t) ?? []).flat())];
     return frontMatters.sort(sortFunc);
   }
 
-  static getFrontMattersByCategory(
-    category: string,
-    sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC
-  ) {
+  static getFrontMattersByCategory(category: string, sortFunc: SortFunc<BlogFrontMatterWithSlug> = sortByFrontMatterDateDESC) {
     return Blog.instance._categoryMap.get(category)?.sort(sortFunc) ?? [];
   }
 
@@ -72,7 +68,7 @@ class Blog {
   }
 
   static getAllCategories() {
-    return hoistItem(Array.from(Blog.instance._categoryMap.keys()), UNCATEGORIZED_POSTS);
+    return hoistItem(Array.from(Blog.instance._categoryMap.keys()), [UNCATEGORIZED_POSTS]); // TODO: update [ALL_POSTS, UNCATEGORIZED_POSTS]
   }
 
   static async getMdxDataBySlug(slug: string) {
@@ -82,10 +78,10 @@ class Blog {
     return await getMdxDataByPath(filePath);
   }
 
-  static search(term: string): BlogFrontMatterWithSlug[];
-  static search(terms: string[]): BlogFrontMatterWithSlug[];
-  static search(term: string | string[]): BlogFrontMatterWithSlug[];
-  static search(searchString: string | string[]) {
+  static searchByTerm(term: string): BlogFrontMatterWithSlug[];
+  static searchByTerm(terms: string[]): BlogFrontMatterWithSlug[];
+  static searchByTerm(term: string | string[]): BlogFrontMatterWithSlug[];
+  static searchByTerm(searchString: string | string[]) {
     return typeof searchString === 'string'
       ? Blog.instance._frontMatters.filter(blogSearchFilter(searchString.toLowerCase()))
       : Blog.instance._frontMatters.filter((frontMatter) =>

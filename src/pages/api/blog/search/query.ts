@@ -11,7 +11,7 @@ export default async function searchHandler(req: NextApiRequest, res: NextApiRes
       ? parseSearchString(searchQuery)
       : searchQuery.map((query) => parseSearchString(query)).flat();
 
-  const result = Blog.search(searchTerm);
+  const result = Blog.searchByTerm(searchTerm);
 
   return res.status(200).json({ result });
 }
