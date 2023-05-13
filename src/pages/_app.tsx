@@ -6,6 +6,7 @@ import siteMetadata from '@/config/siteMetadata';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import '$/globals.css';
 import '$/prism.css';
+import 'katex/dist/katex.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
