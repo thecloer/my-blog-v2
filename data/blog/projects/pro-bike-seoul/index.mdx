@@ -1,0 +1,148 @@
+---
+title: '프로따릉러'
+description: '서울시 공유자전거 따릉이 경로 추천 시스템'
+date: '2023-03-19'
+thumbnail: images/logos/pro-bike-seoul-logo-500.jpg
+category: Project
+tags: [Typescript, nestjs, reactjs, typeORM, postGIS, docker, AWS, Nginx, Valhalla, Open Source]
+language: ko
+---
+
+import SandBox from './common/SandBox';
+
+<div className='flex gap-2'>
+  <a href='https://github.com/thecloer/pro-bike-seoul-client' target='_blank'>
+    <button className='rounded bg-indigo-500 px-2 text-white'>Frontend github</button>
+  </a>
+  <a href='https://github.com/thecloer/pro-bike-seoul-server' target='_blank'>
+    <button className='rounded bg-indigo-500 px-2 text-white'>Backend github</button>
+  </a>
+  <a href='https://probikeseoul.thecloer.com' target='_blank'>
+    <button className='rounded bg-indigo-500 px-2 text-white'>Product</button>
+  </a>
+</div>
+
+`프로따릉러`는 서울시 공유자전거 따릉이 경로 추천 시스템입니다. 따릉이 대여소 정보를 제공하며 경로 탐색 시 출발지와 목적지 주변 대여소를 기반으로 경로를 추천해줍니다.
+서비스는 [이곳](https://probikeseoul.thecloer.com)에서 이용할 수 있습니다.
+
+`따릉이`는 서울시에서 운영하는 공공자전거 서비스입니다. 따릉이의 이용자 수는 매년 빠르게 증가하고 있고 2021년 기준 가입자 330만명, 이용건수 3천 300만건입니다. 이는 서울시 인구 1/3이에 해당하며 이러한 증가 추세에 맞춰 서울시는 따릉이 사업을 확대하고 있습니다. 또한 따릉이는 친환경 이동수단으로 대중교통과의 환승을 도입하는 등 사용이 장려되고있는 사업입니다. 하지만 이러한 정책적 지원과 별개로 따릉이 사용의 편의를 위한 서비스는 부족하다고 생각됩니다.
+
+## Problem
+
+현재 사용자가 따릉이를 이용할 때 경로 탐색 과정을 살펴보면 다음과 같습니다.
+
+1. 따릉이 앱에서 출발지 근처 대여소를 찾고 잔여 자전거가 있는 대여소를 선택한다.
+2. 지도 앱에서 목적지 근처 대여소를 검색하고 반납할 대여소를 선택한다.
+3. 대여소간 자전거 이동 경로를 검색한다.
+
+위 과정은 우리가 대중교통이나 자동차의 경로를 검색할 때와는 차이가 있습니다. 두개의 앱을 사용자가 직접 조합해서 사용해야 하며 어떤 대여소를 용할지 사용자가 육안으로 보고 선택해야 합니다.
+이런 불편이 발생하는 이유는 따릉이 앱은 경로탐색을 지원하지 않고, 지도 앱은 대여소 정보를 제공하지 않기 때문입니다. 따릉이도 대중교통과 같이 출발지와 목적지의 입력만으로 경로 탐색을 할 수 있으면 좋겠다는 생각에 이 프로젝트를 시작하게 되었습니다.
+
+- 대여소의 자전거 잔여량 확인과 경로 탐색을 모두 제공하는 서비스의 부재
+- 경로탐색시 출발지와 목적지의 대여소를 직접 선택해야하는 불편함
+
+## Service
+
+위와 같은 문제를 해결하고자 `프로따릉러`는 다음과 같은 기능을 제공합니다.
+
+### 기본 정보
+
+<Image
+  src='/data/blog/projects/pro-bike-seoul/screen1.png'
+  width='476px'
+  height='432px'
+  title='기본 화면'
+  className='rounded-lg'
+/>
+#### 지도
+
+클릭 혹은 터치로 지역 이동, 선택이 가능합니다.
+
+#### 현재 위치
+
+실시간위치를 추적하여 추천 경로와 현재 위치를 비교 가능합니다.
+
+#### 위치 검색
+
+키워드로 원하는 위치를 검색할 수 있습니다. 따릉이는 서울시 사업으로 범위가 한정되어 있기 때문에 검색은 서울시 내로 제한했습니다.
+
+### 대여소 정보
+
+<Image
+  src='/data/blog/projects/pro-bike-seoul/screen2.png'
+  width='476px'
+  height='432px'
+  title='주변 대여소 정보'
+  className='rounded-lg'
+/>
+#### 주변 대여소 검색
+
+클릭/터치 혹은 검색으로 선택된 지역 근처 대여소를 확인 할 수 있습니다. 대여소를 출발지 혹은 도착지로 선택할 수
+있습니다.
+
+#### 잔여 자전거 수 확인
+
+대여소의 실시간 자전거 대여현황을 확인할 수 있습니다.
+
+### 경로추천
+
+<Image
+  src='/data/blog/projects/pro-bike-seoul/screen3.png'
+  width='476px'
+  height='432px'
+  title='경로 추천'
+  className='rounded-lg'
+/>
+
+#### 경로탐색
+
+출발지와 목적지만으로 경로를 탐색이 가능합니다. 자전거 도로 우선 추천 경로를 제공합니다. 예상 소요시간과 거리, 네비게이션 메세지를 제공합니다.
+
+## Architecture
+
+<Image
+  src='/data/blog/projects/pro-bike-seoul/architecture.png'
+  width='1386px'
+  height='886px'
+  title='서비스 구조'
+  className='rounded-lg'
+/>
+
+- `클라이언트`는 싱글 페이지 어플리케이션이 가장 적합하다고 생각하여 React를 사용했습니다.
+- AWS EC2에 프리티어로 배포했기 때문에 혹시 모를 트래픽에 대비하여 NginX를 `리버스 프록시 서버`로 사용했습니다. NginX는 서버 앞단에서 빌드된 페이지 호스팅하며 요청 비율을 제한합니다.
+- `메인 서버`는 로직에 집중하기 위해 클라이언트와 같은 언어인 Typescript를 사용하며 자유도가 높은 Express에 비해 구조가 짜여있는 NestJS로 선택했습니다.
+- `데이터베이스`는 공간 데이터의 처리와 연산을 쉽게 하기 위해 PostgreSQL과 플러그인 PostGIS를 사용했습니다.
+- 라우팅 서버(Valhalla engine)과 데이터베이스는 쉽게 관리하기 위해 도커를 사용하여 배포했습니다.
+- 배포는 AWS EC2에서 우분투환경으로 직접 구축했습니다.
+
+## Source
+
+### Data
+
+대여소 정보에서 가장 중요한 정보는 대여소의 경위도 좌표와 대여 가능한 자전거의 실시간 대수입니다.
+서울시 공공데이터 포털에서 제공하는 [따릉이 대여소 마스터 정보](https://data.seoul.go.kr/dataList/OA-21235/S/1/datasetView.do)와 [공공자전거 실시간 대여정보](https://data.seoul.go.kr/dataList/OA-15493/A/1/datasetView.do)를 조합하여 사용했습니다.  
+실시간 대여정보의 경우 API 형태로 제공되며 인덱스 범위로 요청하고 한번에 최대 1000개로 제한되어 있습니다. 따라서 원하는 대여소의 실시간 대여정보를 가져오기 위해서는 2700개 정도의 대여소 정보를 3번의 요청으로 나누어 가져온 뒤 원하는 대여소를 찾아야 합니다. 이 부분에 대해서는 [다른 글](/blog/posts/projects/pro-bike-seoul/data-preprocessing-stations)에서 다루도록 하겠습니다.
+
+### Routing Engine
+
+가장 중요한 기능인 경로탐색은 [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page)기반 오픈소스 라우팅 엔진 [Valhalla Routing Engine](https://github.com/valhalla/valhalla)을 사용했습니다.  
+많은 서비스에서 경로탐색을 API로 제공하지만 대부분의 경로탐색 API는 사용량에 제한이 있고 자전거 경로를 제공하지 않아 실 서비스에서 사용하기엔 힘들다고 생각했습니다. 따라서 오픈소스 라우팅 엔진을 직접 서버 내에서 사용하기로 했습니다.  
+서비스 지역이 서울이기 때문에 OpenStreetMap에서 제공하는 [대한민국 OSM 데이터](https://download.geofabrik.de/asia/south-korea.html)에서 서울시의 데이터를 추출하여 사용했습니다.  
+주황색으로 보이는 부분은 자전거 전용 도로입니다. 경로탐색과정에서 가중치를 부여받습니다.
+
+<Image
+  src='/data/blog/projects/pro-bike-seoul/seoul-osm-pbf-cycleway.png'
+  width='558px'
+  height='324px'
+  title='서울 OSM 데이터 추출'
+  className='rounded-lg'
+/>
+## Blog posts
+
+프로젝트를 진행하며 고민했던 것들에 대해 추후 작성하여 링크를 걸어두겠습니다.
+
+### Frontend
+
+### Backend
+
+### Deployment
