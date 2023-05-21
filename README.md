@@ -1,6 +1,6 @@
-# Blog version 2.0.0
+# Thecloer's Blog version 2.0.0
 
-Personal blog about dev study. Support mdx
+My personal blog about dev study. Supports mdx
 
 ## file structure
 
@@ -86,6 +86,24 @@ console.log(testString); //highlighted
 ```
 ````
 
+5. katex
+
+syntax: https://katex.org/docs/supported.html
+
+```
+$$
+\begin{aligned}
+\dot{x} & = \sigma(y-x) \\
+\dot{y} & = \rho x - y - xz \\
+\dot{z} & = -\beta z + xy
+\end{aligned}
+$$
+
+$f(x) = \int_{-\infty}^\infty
+    \hat f(\xi)\,e^{2 \pi i \xi x}
+    \,d\xi$
+```
+
 ### Front Matter
 
 - Blog
@@ -108,3 +126,7 @@ series: string | null
 - [ ] About me
 - [ ] Migrate to Nextjs 13
 - [ ] Nextjs 13 + [@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation)
+
+```
+
+```
